@@ -24,9 +24,9 @@ interface ProductCardProps {
  */
 export function ProductCard({ product, labels }: ProductCardProps) {
   return (
-    <article className="flex w-44 shrink-0 flex-col overflow-hidden sm:w-48">
+    <article className="flex w-full shrink-0 flex-col overflow-hidden sm:w-44 md:w-48">
       {/* Product image */}
-      <div className="flex aspect-square items-center justify-center rounded-xl bg-white p-4 shadow-sm">
+      <div className="flex aspect-square items-center justify-center rounded-lg bg-white p-3 shadow-sm sm:rounded-xl sm:p-4">
         <img
           src={product.imageUrl}
           alt={product.name}
@@ -36,11 +36,11 @@ export function ProductCard({ product, labels }: ProductCardProps) {
       </div>
 
       {/* Price & stock */}
-      <div className="mt-2 px-1">
-        <p className="font-semibold text-foreground">
+      <div className="mt-1.5 px-0.5 sm:mt-2 sm:px-1">
+        <p className="text-sm font-semibold text-foreground sm:text-base">
           {product.currency} {product.price.toFixed(2)}
         </p>
-        <p className="text-sm text-foreground/60">
+        <p className="text-xs text-foreground/60 sm:text-sm">
           {labels.stock}: {product.stock}
         </p>
       </div>

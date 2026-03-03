@@ -14,8 +14,9 @@
   --font-italic: "RubikItalic", Arial, Helvetica, sans-serif;
 
   /* Palette — Light theme */
-  --background: #ede9fe;
+  --background: #f4f2ff;
   --foreground: #1e1b2e;
+  --foreground-muted: #767579;
   --primary: #7c3aed;
   --primary-foreground: #ffffff;
   --accent: #ef4444;
@@ -25,13 +26,14 @@
   --border: #ddd6fe;
 
   /* Category section palettes */
-  --category-purple-bg: #c4b5fd;
-  --category-purple-btn: #6d28d9;
-  --category-earth-bg: #c9ada7;
-  --category-earth-btn: #5c3d2e;
+  --category-purple-bg: #9c7eff;
+  --category-purple-btn: #430fa3;
+  --category-earth-bg: #dec3c3;
+  --category-earth-btn: #845151;
 
   /* Navbar */
-  --navbar-bg: #ffffff;
+  --navbar-bg: #d8d1ff;
+  --navbar-sub-bg: #bcadff;
   --navbar-fg: #1e1b2e;
 }
 
@@ -39,6 +41,7 @@
   /* Map CSS variables to Tailwind 4 design tokens */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-foreground-muted: var(--foreground-muted);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-accent: var(--accent);
@@ -47,6 +50,7 @@
   --color-card-foreground: var(--card-foreground);
   --color-border: var(--border);
   --color-navbar-bg: var(--navbar-bg);
+  --color-navbar-sub-bg: var(--navbar-sub-bg);
   --color-navbar-fg: var(--navbar-fg);
   --color-category-purple-bg: var(--category-purple-bg);
   --color-category-purple-btn: var(--category-purple-btn);
@@ -63,25 +67,62 @@
 
 /* ───────────────────────────────────────────────────────────
    Dark Theme Overrides
+   Uses `.dark` class on <html> so it can be toggled via JS.
+   Falls back to system preference when no class is set.
    ─────────────────────────────────────────────────────────── */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #1a1625;
-    --foreground: #f1f5f9;
-    --primary: #8b5cf6;
-    --primary-foreground: #ffffff;
-    --accent: #ef4444;
-    --accent-foreground: #ffffff;
-    --card: #1e1b2e;
-    --card-foreground: #f1f5f9;
-    --border: #2e2744;
-    --category-purple-bg: #2e2155;
-    --category-purple-btn: #7c3aed;
-    --category-earth-bg: #3d2e2a;
-    --category-earth-btn: #a67c5b;
-    --navbar-bg: #1e1b2e;
-    --navbar-fg: #f1f5f9;
+:root.dark,
+:root:not(.light):not(.dark) {
+  @media (prefers-color-scheme: dark) {
+    & {
+      /* Base surfaces */
+      --background: #0f0d1a;
+      --foreground: #e8e4f0;
+      --foreground-muted: #837d91;
+      --primary: #a78bfa;
+      --primary-foreground: #ffffff;
+      --accent: #ef4444;
+      --accent-foreground: #ffffff;
+      --card: #ffffff;
+      --card-foreground: #1e1b2e;
+      --border: #2a2245;
+
+      /* Category sections — deep, rich tones */
+      --category-purple-bg: #1f1554;
+      --category-purple-btn: #7c3aed;
+      --category-earth-bg: #3b2420;
+      --category-earth-btn: #c4956a;
+
+      /* Navbar — layered dark surfaces */
+      --navbar-bg: #161229;
+      --navbar-sub-bg: #2a1f5e;
+      --navbar-fg: #e8e4f0;
+    }
   }
+}
+
+:root.dark {
+  /* Base surfaces */
+  --background: #0f0d1a;
+  --foreground: #e8e4f0;
+  --foreground-muted: #837d91;
+  --primary: #a78bfa;
+  --primary-foreground: #ffffff;
+  --accent: #ef4444;
+  --accent-foreground: #ffffff;
+  --card: #ffffff;
+  --card-foreground: #1e1b2e;
+  --border: #2a2245;
+
+  /* Category sections — deep, rich tones */
+  --category-purple-bg: #1f1554;
+  --category-purple-btn: #7c3aed;
+  --category-earth-bg: #3b2420;
+  --category-earth-btn: #c4956a;
+
+  /* Navbar — layered dark surfaces */
+  --navbar-bg: #161229;
+  --navbar-sub-bg: #2a1f5e;
+  --navbar-fg: #e8e4f0;
 }
 
 /* ───────────────────────────────────────────────────────────

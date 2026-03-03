@@ -17,16 +17,28 @@ High-scale car parts e-commerce architecture designed for extreme maintainabilit
 ## Architecture & Patterns
 We follow a hybrid of **Screaming** and **Hexagonal Architecture** to ensure the core business logic remains framework-agnostic.
 
-### 1. Screaming Architecture (Business Intent)
+### 1. Screaming Architecture
 Directories must be organized by domain, not technical type:
 * `/src/modules/catalog`: All logic related to car parts.
 * `/src/modules/auth`: (Phase 2) Identity management.
 
-### 2. Hexagonal Architecture (Fronteras Técnicas)
+### 2. Hexagonal Architecture
 Within each module:
 * **Domain Layer**: Pure TypeScript. Zero dependencies. Contains Entities (e.g., `Part.ts`) and Repository Interfaces.
 * **Application Layer**: Use cases and orchestration.
 * **Infrastructure Layer**: Adapters for external services (Supabase, Fetch API, Mocks).
+
+### 3. UX Design Patterns
+* **Mobile-First**: Design for mobile screens first, then scale up.
+* **Hierarchical Navigation**: Clear, intuitive navigation with breadcrumb support.
+* **Progressive Disclosure**: Show only necessary information, with options to expand for details.
+* **Consistent UI**: Use a shared component library for buttons, cards, forms, etc., ensuring a cohesive look and feel across the app.
+* **Atomic Design**: Build UI with reusable components (Atoms, Molecules, Organisms).
+* **Performance-First**: Prioritize server components and optimize bundle size.
+* **Accessibility**: Follow WCAG guidelines, use semantic HTML, and ensure keyboard navigation.
+* **Internationalization**: All text must be translatable, using i18n dictionaries and `[locale]` routing.
+* **Font Optimization**: Use `font-display: swap` and preload critical fonts for performance.
+* **Icon Optimization**: Use SVG sprites to minimize HTTP requests and optimize rendering.
 
 ## Coding Standards
 * **Language**: All code, variable names, and JSDoc documentation must be in **ENGLISH**.

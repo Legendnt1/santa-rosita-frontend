@@ -21,27 +21,15 @@ export function SearchBar({ placeholder }: SearchBarProps) {
         type="search"
         name="q"
         placeholder={placeholder}
-        className="flex-1 bg-transparent px-5 py-3 text-sm text-foreground outline-none placeholder:text-foreground/40"
+        className="flex-1 bg-transparent px-3 py-2 text-sm text-foreground outline-none placeholder:text-foreground-muted sm:px-5 sm:py-3 dark:text-background"
       />
       <button
         type="submit"
-        className="flex items-center justify-center bg-primary px-6 text-primary-foreground transition-colors hover:bg-primary/90"
+        className="flex items-center justify-center bg-primary px-4 text-primary-foreground transition-colors hover:bg-primary/90 sm:px-6"
         aria-label="Search"
       >
-        {/* Magnifying glass icon (inline SVG) */}
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2.5}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"
-          />
+        <svg className="h-5 w-5 sm:h-5.5 sm:w-5.5" aria-hidden="true">
+          <use href="/assets/icons/icons.svg#search" />
         </svg>
       </button>
     </form>

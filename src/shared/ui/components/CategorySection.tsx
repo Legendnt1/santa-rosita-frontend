@@ -56,27 +56,27 @@ export function CategorySection({
 
   return (
     <section
-      className={`${styles.wrapper} mx-auto my-6 max-w-6xl overflow-hidden rounded-2xl`}
+      className={`${styles.wrapper} mx-auto my-4 max-w-6xl overflow-hidden rounded-2xl sm:my-6`}
     >
       <div className="flex flex-col md:flex-row">
         {/* ── Info panel ─────────────────────────────────── */}
-        <div className="flex flex-col justify-center gap-3 px-8 py-8 md:w-60">
-          <h2 className="font-bold text-xl leading-tight text-foreground">
+        <div className="flex flex-col justify-center gap-2 px-4 py-5 sm:gap-3 sm:px-8 sm:py-8 md:w-60">
+          <h2 className="font-bold text-lg leading-tight text-foreground sm:text-xl">
             {labels.title}
           </h2>
-          <p className="text-sm leading-snug text-foreground/70">
+          <p className="text-xs leading-snug text-foreground/70 sm:text-sm">
             {labels.description}
           </p>
           <button
             type="button"
-            className={`${styles.button} mt-2 w-fit cursor-pointer rounded-full px-8 py-2.5 font-semibold text-sm transition-all`}
+            className={`${styles.button} mt-1 w-fit cursor-pointer rounded-full px-6 py-2 font-semibold text-xs transition-all sm:mt-2 sm:px-8 sm:py-2.5 sm:text-sm`}
           >
             {labels.searchButton}
           </button>
         </div>
 
         {/* ── Product cards ──────────────────────────────── */}
-        <div className="flex flex-1 gap-4 overflow-x-auto px-6 py-6">
+        <div className="grid grid-cols-2 gap-3 px-4 pb-5 sm:flex sm:flex-1 sm:gap-4 sm:overflow-x-auto sm:px-6 sm:py-6">
           {products.map((product) => (
             <ProductCard
               key={product.id}

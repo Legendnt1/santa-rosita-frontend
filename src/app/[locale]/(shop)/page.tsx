@@ -37,7 +37,7 @@ export default async function ShopHomePage({
     <>
       <Navbar dict={dict} locale={locale} />
 
-      <main className="px-4 pb-12">
+      <main className="px-3 pb-8 sm:px-4 sm:pb-12">
         {categoryProducts.map(({ category, products }) => {
           const catalogEntry = dict.catalog[category.slug];
 
