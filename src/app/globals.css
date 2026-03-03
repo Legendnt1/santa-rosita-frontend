@@ -1,0 +1,147 @@
+@import "tailwindcss";
+
+/* ───────────────────────────────────────────────────────────
+   CSS Variables Definition
+   ─────────────────────────────────────────────────────────── */
+:root {
+  /* Font Families */
+  --font-sans: "Rubik", Arial, Helvetica, sans-serif;
+  --font-regular: "Rubik", Arial, Helvetica, sans-serif;
+  --font-medium: "RubikMedium", Arial, Helvetica, sans-serif;
+  --font-semibold: "RubikSemiBold", Arial, Helvetica, sans-serif;
+  --font-bold: "RubikBold", Arial, Helvetica, sans-serif;
+  --font-extrabold: "RubikExtraBold", Arial, Helvetica, sans-serif;
+  --font-italic: "RubikItalic", Arial, Helvetica, sans-serif;
+
+  /* Palette — Light theme */
+  --background: #ede9fe;
+  --foreground: #1e1b2e;
+  --primary: #7c3aed;
+  --primary-foreground: #ffffff;
+  --accent: #ef4444;
+  --accent-foreground: #ffffff;
+  --card: #ffffff;
+  --card-foreground: #1e1b2e;
+  --border: #ddd6fe;
+
+  /* Category section palettes */
+  --category-purple-bg: #c4b5fd;
+  --category-purple-btn: #6d28d9;
+  --category-earth-bg: #c9ada7;
+  --category-earth-btn: #5c3d2e;
+
+  /* Navbar */
+  --navbar-bg: #ffffff;
+  --navbar-fg: #1e1b2e;
+}
+
+@theme inline {
+  /* Map CSS variables to Tailwind 4 design tokens */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-border: var(--border);
+  --color-navbar-bg: var(--navbar-bg);
+  --color-navbar-fg: var(--navbar-fg);
+  --color-category-purple-bg: var(--category-purple-bg);
+  --color-category-purple-btn: var(--category-purple-btn);
+  --color-category-earth-bg: var(--category-earth-bg);
+  --color-category-earth-btn: var(--category-earth-btn);
+
+  /* Font weights mapped to Tailwind tokens */
+  --font-sans: var(--font-sans);
+  --font-medium: var(--font-medium);
+  --font-semibold: var(--font-semibold);
+  --font-bold: var(--font-bold);
+  --font-extrabold: var(--font-extrabold);
+}
+
+/* ───────────────────────────────────────────────────────────
+   Dark Theme Overrides
+   ─────────────────────────────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #1a1625;
+    --foreground: #f1f5f9;
+    --primary: #8b5cf6;
+    --primary-foreground: #ffffff;
+    --accent: #ef4444;
+    --accent-foreground: #ffffff;
+    --card: #1e1b2e;
+    --card-foreground: #f1f5f9;
+    --border: #2e2744;
+    --category-purple-bg: #2e2155;
+    --category-purple-btn: #7c3aed;
+    --category-earth-bg: #3d2e2a;
+    --category-earth-btn: #a67c5b;
+    --navbar-bg: #1e1b2e;
+    --navbar-fg: #f1f5f9;
+  }
+}
+
+/* ───────────────────────────────────────────────────────────
+   Base Styles
+   ─────────────────────────────────────────────────────────── */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ───────────────────────────────────────────────────────────
+   @font-face Definitions — Rubik family
+   ─────────────────────────────────────────────────────────── */
+@font-face {
+  font-family: Rubik;
+  src: url("/assets/fonts/rubik-regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: RubikMedium;
+  src: url("/assets/fonts/rubik-medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: RubikSemiBold;
+  src: url("/assets/fonts/rubik-semibold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: RubikBold;
+  src: url("/assets/fonts/rubik-bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: RubikExtraBold;
+  src: url("/assets/fonts/rubik-extrabold.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: RubikItalic;
+  src: url("/assets/fonts/rubik-italic.woff2") format("woff2");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}

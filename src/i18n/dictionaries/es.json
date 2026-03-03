@@ -1,0 +1,27 @@
+{
+  "common": {
+    "searchPlaceholder": "Buscar repuestos...",
+    "searchButton": "Buscar",
+    "stock": "C",
+    "currency": "PEN"
+  },
+  "navbar": {
+    "categories": "Categorías",
+    "newProducts": "Nuevos productos",
+    "discounts": "Descuentos"
+  },
+  "catalog": {
+    "motorsAndTransmission": {
+      "title": "Motores y transmisión",
+      "description": "Pistones, embragues, piezas de transmisión..."
+    },
+    "brakeSystem": {
+      "title": "Sistema de frenos",
+      "description": "Líquido de frenos, mordazas"
+    }
+  },
+  "meta": {
+    "title": "Corporación Santa Rosita — Repuestos Multimarca",
+    "description": "Tienda de repuestos automotrices multimarca"
+  }
+}

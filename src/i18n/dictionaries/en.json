@@ -1,0 +1,27 @@
+{
+  "common": {
+    "searchPlaceholder": "Search parts...",
+    "searchButton": "Search",
+    "stock": "Qty",
+    "currency": "PEN"
+  },
+  "navbar": {
+    "categories": "Categories",
+    "newProducts": "New products",
+    "discounts": "Discounts"
+  },
+  "catalog": {
+    "motorsAndTransmission": {
+      "title": "Motors & Transmission",
+      "description": "Pistons, clutches, transmission parts..."
+    },
+    "brakeSystem": {
+      "title": "Brake System",
+      "description": "Brake fluid, calipers"
+    }
+  },
+  "meta": {
+    "title": "Corporación Santa Rosita — Multi-brand Auto Parts",
+    "description": "Multi-brand automotive parts store"
+  }
+}

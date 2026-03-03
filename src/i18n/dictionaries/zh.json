@@ -1,0 +1,27 @@
+{
+  "common": {
+    "searchPlaceholder": "搜索零件...",
+    "searchButton": "搜索",
+    "stock": "数量",
+    "currency": "PEN"
+  },
+  "navbar": {
+    "categories": "类别",
+    "newProducts": "新产品",
+    "discounts": "折扣"
+  },
+  "catalog": {
+    "motorsAndTransmission": {
+      "title": "发动机与变速箱",
+      "description": "活塞、离合器、传动部件..."
+    },
+    "brakeSystem": {
+      "title": "制动系统",
+      "description": "制动液、卡钳"
+    }
+  },
+  "meta": {
+    "title": "Corporación Santa Rosita — 多品牌汽车零件",
+    "description": "多品牌汽车零件商店"
+  }
+}
