@@ -42,17 +42,6 @@ interface FilterSidebarProps {
 }
 
 /**
- * Star rating icon used for the rating filter.
- */
-function StarIcon({ filled }: { filled: boolean }) {
-  return (
-    <svg className={`h-4 w-4 ${filled ? "text-amber-400" : "text-border"}`}>
-      <use href="/assets/icons/icons.svg#star-full" />
-    </svg>
-  );
-}
-
-/**
  * Collapsible section wrapper for filter groups.
  */
 function FilterSection({
@@ -116,6 +105,9 @@ export function FilterSidebar({
 
   // Mobile sidebar toggle
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  // Hover state for the interactive star rating
+  const [hoverRating, setHoverRating] = useState(0);
 
   /**
    * Builds a new URL with updated query params and navigates to it.
@@ -275,28 +267,42 @@ export function FilterSidebar({
 
       {/* ── Rating ───────────────────────────────────────── */}
       <FilterSection title={labels.rating}>
-        <div className="flex flex-col gap-1.5">
-          {[4, 3, 2, 1].map((rating) => (
-            <button
-              key={rating}
-              type="button"
-              onClick={() => handleRatingChange(rating)}
-              className={`flex items-center gap-1.5 rounded-md px-2 py-1 text-sm transition-colors ${
-                currentFilters.minRating === rating
-                  ? "bg-primary/10 ring-1 ring-primary/30"
-                  : "hover:bg-primary/5"
-              }`}
-            >
-              <span className="flex items-center">
-                {Array.from({ length: 5 }, (_, i) => (
-                  <StarIcon key={i} filled={i < rating} />
-                ))}
-              </span>
-              <span className="text-xs text-foreground-muted">
-                {labels.ratingUp}
-              </span>
-            </button>
-          ))}
+        <div className="flex flex-col items-center gap-2 py-1">
+          <div
+            className="flex gap-1"
+            onMouseLeave={() => setHoverRating(0)}
+          >
+            {[1, 2, 3, 4, 5].map((star) => {
+              const activeRating = hoverRating || currentFilters.minRating || 0;
+              const filled = star <= activeRating;
+
+              return (
+                <button
+                  key={star}
+                  type="button"
+                  onClick={() => handleRatingChange(star)}
+                  onMouseEnter={() => setHoverRating(star)}
+                  className="group cursor-pointer p-0.5 transition-transform duration-300 ease-out"
+                  aria-label={`${star} ${labels.ratingUp}`}
+                >
+                  <svg
+                    className={`h-7 w-7 transition-colors duration-300 ease-out ${
+                      filled
+                        ? "text-amber-400 drop-shadow-[0_1px_2px_rgba(251,191,36,0.4)]"
+                        : "text-border group-hover:text-amber-200"
+                    }`}
+                  >
+                    <use href="/assets/icons/icons.svg#star-full" />
+                  </svg>
+                </button>
+              );
+            })}
+          </div>
+          {currentFilters.minRating && (
+            <span className="text-xs text-foreground-muted">
+              {currentFilters.minRating} {labels.ratingUp}
+            </span>
+          )}
         </div>
       </FilterSection>
 

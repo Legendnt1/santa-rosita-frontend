@@ -44,7 +44,7 @@ export function ResultsHeader({
           </li>
           <li aria-hidden="true">
             <svg className="h-3 w-3 text-foreground-muted/50">
-              <use href="#icon-chevron-right" />
+              <use href="/assets/icons/icons.svg#chevron-right" />
             </svg>
           </li>
           <li>
@@ -54,7 +54,7 @@ export function ResultsHeader({
           </li>
           <li aria-hidden="true">
             <svg className="h-3 w-3 text-foreground-muted/50">
-              <use href="#icon-chevron-right" />
+              <use href="/assets/icons/icons.svg#chevron-right" />
             </svg>
           </li>
           <li>
