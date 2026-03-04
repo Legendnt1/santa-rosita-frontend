@@ -46,13 +46,8 @@ interface FilterSidebarProps {
  */
 function StarIcon({ filled }: { filled: boolean }) {
   return (
-    <svg
-      className={`h-4 w-4 ${filled ? "text-amber-400" : "text-foreground-muted/30"}`}
-      viewBox="0 0 20 20"
-      fill="currentColor"
-      aria-hidden="true"
-    >
-      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+    <svg className={`h-4 w-4 ${filled ? "text-amber-400" : "text-border"}`}>
+      <use href="/assets/icons/icons.svg#star-full" />
     </svg>
   );
 }
@@ -81,14 +76,8 @@ function FilterSection({
         {title}
         <svg
           className={`h-4 w-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
-          viewBox="0 0 20 20"
-          fill="currentColor"
         >
-          <path
-            fillRule="evenodd"
-            d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-            clipRule="evenodd"
-          />
+          <use href="/assets/icons/icons.svg#chevron-down" />
         </svg>
       </button>
       {isOpen && <div className="mt-1">{children}</div>}
@@ -372,11 +361,8 @@ export function FilterSidebar({
         onClick={() => setMobileOpen(!mobileOpen)}
         className="flex w-full items-center justify-center gap-2 rounded-lg border border-border bg-card px-4 py-2.5 text-sm font-medium text-card-foreground shadow-sm transition-colors hover:bg-primary/5 lg:hidden"
       >
-        <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-          <path
-            fillRule="evenodd"
-            d="M2.628 1.601C5.028 1.206 7.49 1 10 1s4.973.206 7.372.601a.75.75 0 01.628.74v2.288a2.25 2.25 0 01-.659 1.59l-4.682 4.683a2.25 2.25 0 00-.659 1.59v3.037c0 .684-.31 1.33-.844 1.757l-1.937 1.55A.75.75 0 018 18.25v-5.757a2.25 2.25 0 00-.659-1.591L2.659 6.22A2.25 2.25 0 012 4.629V2.34a.75.75 0 01.628-.74z"
-            clipRule="evenodd"
+        <svg className="h-4 w-4" >
+          <use href="/assets/icons/icons.svg#filter"
           />
         </svg>
         {labels.title}
@@ -407,10 +393,8 @@ export function FilterSidebar({
               >
                 <svg
                   className="h-5 w-5"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
                 >
-                  <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+                  <use href="/assets/icons/icons.svg#x" />
                 </svg>
               </button>
             </div>

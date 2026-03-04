@@ -1,4 +1,5 @@
 import type { Product } from "@/modules/catalog/domain/entities/Product";
+import Link from "next/link";
 
 /**
  * Props for the ProductGrid server component.
@@ -49,36 +50,21 @@ function StarRating({
           <svg
             key={`f${i}`}
             className="h-3.5 w-3.5 text-amber-400"
-            viewBox="0 0 20 20"
-            fill="currentColor"
           >
-            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+            <use href="/assets/icons/icons.svg#star-full" />
           </svg>
         ))}
         {hasHalf && (
-          <svg className="h-3.5 w-3.5 text-amber-400" viewBox="0 0 20 20">
-            <defs>
-              <linearGradient id="halfStar">
-                <stop offset="50%" stopColor="currentColor" />
-                <stop offset="50%" stopColor="transparent" />
-              </linearGradient>
-            </defs>
-            <path
-              fill="url(#halfStar)"
-              stroke="currentColor"
-              strokeWidth="0.5"
-              d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-            />
+          <svg className="h-3.5 w-3.5 text-amber-400">
+            <use href="/assets/icons/icons.svg#star-half" />
           </svg>
         )}
         {Array.from({ length: emptyStars }, (_, i) => (
           <svg
             key={`e${i}`}
             className="h-3.5 w-3.5 text-foreground-muted/25"
-            viewBox="0 0 20 20"
-            fill="currentColor"
           >
-            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+            <use href="/assets/icons/icons.svg#star-empty" />
           </svg>
         ))}
       </span>
@@ -178,13 +164,8 @@ function ListingProductCard({
           <p className="text-[11px] text-foreground-muted">
             <svg
               className="mr-0.5 inline h-3 w-3 text-emerald-500"
-              viewBox="0 0 20 20"
-              fill="currentColor"
             >
-              <path
-                fillRule="evenodd"
-                d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                clipRule="evenodd"
+              <use href="/assets/icons/icons.svg#check"
               />
             </svg>
             {deliveryText}
@@ -220,24 +201,16 @@ export function ProductGrid({
       <div className="flex flex-col items-center justify-center rounded-xl border border-border/40 bg-card/50 px-6 py-16 text-center">
         <svg
           className="mb-4 h-16 w-16 text-foreground-muted/30"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-          />
+          <use href="/assets/icons/icons.svg#search" />
         </svg>
         <p className="text-sm text-foreground-muted">{labels.noResults}</p>
-        <a
+        <Link
           href={`/${locale}/catalog/${categorySlug}`}
           className="mt-3 text-sm font-medium text-primary transition-colors hover:text-primary/80"
         >
           {labels.clearFilters}
-        </a>
+        </Link>
       </div>
     );
   }
