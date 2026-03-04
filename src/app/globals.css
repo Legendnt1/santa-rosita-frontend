@@ -15,6 +15,7 @@
 
   /* Palette — Light theme */
   --background: #f4f2ff;
+  --background-sarch-bar: #e9d5ff;
   --foreground: #1e1b2e;
   --foreground-muted: #767579;
   --primary: #7c3aed;
@@ -40,6 +41,7 @@
 @theme inline {
   /* Map CSS variables to Tailwind 4 design tokens */
   --color-background: var(--background);
+  --color-background-search-bar: var(--background-search-bar);
   --color-foreground: var(--foreground);
   --color-foreground-muted: var(--foreground-muted);
   --color-primary: var(--primary);
@@ -76,7 +78,8 @@
     & {
       /* Base surfaces */
       --background: #0f0d1a;
-      --foreground: #e8e4f0;
+      --background-search-bar: #7c3aed;
+      --foreground: #8d8996;
       --foreground-muted: #837d91;
       --primary: #a78bfa;
       --primary-foreground: #ffffff;
@@ -103,6 +106,7 @@
 :root.dark {
   /* Base surfaces */
   --background: #0f0d1a;
+  --background-search-bar: #7c3aed;
   --foreground: #e8e4f0;
   --foreground-muted: #837d91;
   --primary: #a78bfa;

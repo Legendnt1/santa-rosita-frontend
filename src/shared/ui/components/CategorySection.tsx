@@ -1,25 +1,26 @@
-import type { Category, CategoryTheme } from '@/modules/catalog/domain/entities/Category';
-import type { Product } from '@/modules/catalog/domain/entities/Product';
-import { ProductCard } from './ProductCard';
+import type {
+  Category,
+  CategoryTheme,
+} from "@/modules/catalog/domain/entities/Category";
+import type { Product } from "@/modules/catalog/domain/entities/Product";
+import { ProductCard } from "./ProductCard";
 
 /**
  * Theme-specific style maps for each CategoryTheme.
  * The mockup uses light-tinted full-width backgrounds with dark text
  * and a solid pill-shaped button per category.
  */
-const themeStyles: Record<
-  CategoryTheme,
-  { wrapper: string; button: string }
-> = {
-  purple: {
-    wrapper: 'bg-category-purple-bg',
-    button: 'bg-category-purple-btn text-white hover:opacity-90',
-  },
-  earth: {
-    wrapper: 'bg-category-earth-bg',
-    button: 'bg-category-earth-btn text-white hover:opacity-90',
-  },
-};
+const themeStyles: Record<CategoryTheme, { wrapper: string; button: string }> =
+  {
+    purple: {
+      wrapper: "bg-category-purple-bg",
+      button: "bg-category-purple-btn text-white hover:opacity-90",
+    },
+    earth: {
+      wrapper: "bg-category-earth-bg",
+      button: "bg-category-earth-btn text-white hover:opacity-90",
+    },
+  };
 
 /**
  * Props for the CategorySection server component.
@@ -29,6 +30,8 @@ interface CategorySectionProps {
   category: Category;
   /** Products to display in this section (typically 4) */
   products: Product[];
+  /** Current locale code for building links */
+  locale: string;
   /** Localized labels injected from the page */
   labels: {
     title: string;
@@ -50,6 +53,7 @@ interface CategorySectionProps {
 export function CategorySection({
   category,
   products,
+  locale,
   labels,
 }: CategorySectionProps) {
   const styles = themeStyles[category.theme];
@@ -67,12 +71,12 @@ export function CategorySection({
           <p className="text-xs leading-snug text-foreground/70 sm:text-sm">
             {labels.description}
           </p>
-          <button
-            type="button"
-            className={`${styles.button} mt-1 w-fit cursor-pointer rounded-full px-6 py-2 font-semibold text-xs transition-all sm:mt-2 sm:px-8 sm:py-2.5 sm:text-sm`}
+          <a
+            href={`/${locale}/catalog/${category.slug}`}
+            className={`${styles.button} mt-1 inline-block w-fit rounded-full px-6 py-2 font-semibold text-xs transition-all sm:mt-2 sm:px-8 sm:py-2.5 sm:text-sm`}
           >
             {labels.searchButton}
-          </button>
+          </a>
         </div>
 
         {/* ── Product cards ──────────────────────────────── */}

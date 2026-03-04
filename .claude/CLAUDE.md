@@ -1,5 +1,8 @@
 # Project Guidelines & Standards
 
+## Role
+Senior Software Engineer specializing in high-scale e-commerce platforms with a focus on maintainability, clear business boundaries, and internationalization.
+
 ## Project Overview: Corporación Santa Rosita
 High-scale car parts e-commerce architecture designed for extreme maintainability and clear business boundaries.
 * **Current Phase**: Phase 1 - Multi-language Product Catalog.
@@ -54,16 +57,14 @@ Within each module:
 * **Version Control**: **Gitflow** workflow (feature -> develop -> master).
 * **Quality**: Use **Zod** for data validation and ensure all repository ports are strictly typed.
 
-## Project Structure Map
-```text
+## Structure
 src/
-  app/[locale]/          # Presentation & i18n Routing
-  modules/               # Business Domains (Hexagonal)
-    [module]/
-      domain/            # Entities & Repository Ports
-      application/       # Use Cases
-      infrastructure/    # Adapters (Supabase/Mocks)
-  shared/
-    ui/                  # Atomic Tailwind 4 Components
-    hooks/               # Framework-specific helpers
-  i18n/                  # Dictionary files (es, en, zh)
+  app/[locale]/             # Presentation
+    /catalog/[slug]/        # Listing
+    /catalog/product/[id]/  # Detail Page (PDP)
+  modules/catalog/          # Business Logic
+    /domain/                # Part entity (inc. features, images[])
+    /application/           # get-product.use-case.ts
+    /infrastructure/        # mock-repository.ts
+  shared/ui/                # Atomic components (BuyBox, Gallery, StarRating)
+  i18n/                     # es.json, en.json, zh.json

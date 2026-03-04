@@ -20,6 +20,63 @@
       "description": "制动液、卡钳"
     }
   },
+  "listing": {
+    "resultsCount": "{count} 个结果",
+    "noResults": "没有找到符合筛选条件的产品。",
+    "clearFilters": "清除所有筛选",
+    "breadcrumbHome": "首页",
+    "breadcrumbCatalog": "目录",
+    "filters": {
+      "title": "筛选",
+      "price": "价格",
+      "priceMin": "最低",
+      "priceMax": "最高",
+      "rating": "客户评分",
+      "ratingUp": "及以上",
+      "brand": "品牌",
+      "availability": "库存状态",
+      "inStockOnly": "仅显示有货",
+      "apply": "应用",
+      "clear": "清除"
+    },
+    "sort": {
+      "label": "排序方式",
+      "relevance": "相关性",
+      "priceAsc": "价格：从低到高",
+      "priceDesc": "价格：从高到低",
+      "ratingDesc": "平均客户评分",
+      "newest": "最新上架"
+    },
+    "product": {
+      "reviews": "{count} 条评论",
+      "delivery": "预计 {date} 送达",
+      "outOfStock": "缺货",
+      "addToCart": "加入购物车"
+    }
+  },
+  "pdp": {
+    "breadcrumbProduct": "产品详情",
+    "aboutThisItem": "关于此商品",
+    "reviews": "{count} 条评价",
+    "inStock": "有货",
+    "outOfStock": "暂时无货",
+    "onlyXLeft": "仅剩 {count} 件 — 请尽快订购。",
+    "price": "价格",
+    "listPrice": "标价",
+    "youSave": "节省",
+    "quantity": "数量",
+    "addToCart": "加入购物车",
+    "buyNow": "立即购买",
+    "deliverTo": "配送至 利马 — Lima 15001",
+    "delivery": "免费配送 {date}",
+    "secureTransaction": "安全交易",
+    "soldBy": "卖家",
+    "storeName": "Corporación Santa Rosita",
+    "brand": "品牌",
+    "returnPolicy": "30天免费退货",
+    "breadcrumbHome": "首页",
+    "breadcrumbCatalog": "目录"
+  },
   "meta": {
     "title": "Corporación Santa Rosita — 多品牌汽车零件",
     "description": "多品牌汽车零件商店"

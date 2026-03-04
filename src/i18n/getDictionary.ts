@@ -25,6 +25,63 @@ export interface Dictionary {
     discounts: string;
   };
   catalog: Record<string, CategoryDictionary>;
+  listing: {
+    resultsCount: string;
+    noResults: string;
+    clearFilters: string;
+    breadcrumbHome: string;
+    breadcrumbCatalog: string;
+    filters: {
+      title: string;
+      price: string;
+      priceMin: string;
+      priceMax: string;
+      rating: string;
+      ratingUp: string;
+      brand: string;
+      availability: string;
+      inStockOnly: string;
+      apply: string;
+      clear: string;
+    };
+    sort: {
+      label: string;
+      relevance: string;
+      priceAsc: string;
+      priceDesc: string;
+      ratingDesc: string;
+      newest: string;
+    };
+    product: {
+      reviews: string;
+      delivery: string;
+      outOfStock: string;
+      addToCart: string;
+    };
+  };
+  pdp: {
+    breadcrumbProduct: string;
+    aboutThisItem: string;
+    reviews: string;
+    inStock: string;
+    outOfStock: string;
+    onlyXLeft: string;
+    price: string;
+    listPrice: string;
+    youSave: string;
+    quantity: string;
+    addToCart: string;
+    buyNow: string;
+    deliverTo: string;
+    delivery: string;
+    secureTransaction: string;
+    soldBy: string;
+    storeName: string;
+    brand: string;
+    returnPolicy: string;
+    breadcrumbHome: string;
+    breadcrumbCatalog: string;
+  };
   meta: {
     title: string;
     description: string;

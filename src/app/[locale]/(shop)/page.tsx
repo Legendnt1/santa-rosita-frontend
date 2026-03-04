@@ -46,6 +46,7 @@ export default async function ShopHomePage({
               key={category.id}
               category={category}
               products={products}
+              locale={locale}
               labels={{
                 title: catalogEntry?.title ?? category.slug,
                 description: catalogEntry?.description ?? '',

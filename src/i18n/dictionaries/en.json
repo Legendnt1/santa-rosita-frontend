@@ -20,6 +20,63 @@
       "description": "Brake fluid, calipers"
     }
   },
+  "listing": {
+    "resultsCount": "{count} results",
+    "noResults": "No products found matching your filters.",
+    "clearFilters": "Clear all filters",
+    "breadcrumbHome": "Home",
+    "breadcrumbCatalog": "Catalog",
+    "filters": {
+      "title": "Filters",
+      "price": "Price",
+      "priceMin": "Min",
+      "priceMax": "Max",
+      "rating": "Customer Rating",
+      "ratingUp": "& up",
+      "brand": "Brand",
+      "availability": "Availability",
+      "inStockOnly": "In stock only",
+      "apply": "Apply",
+      "clear": "Clear"
+    },
+    "sort": {
+      "label": "Sort by",
+      "relevance": "Relevance",
+      "priceAsc": "Price: Low to High",
+      "priceDesc": "Price: High to Low",
+      "ratingDesc": "Avg. Customer Rating",
+      "newest": "Newest Arrivals"
+    },
+    "product": {
+      "reviews": "{count} reviews",
+      "delivery": "Delivery by {date}",
+      "outOfStock": "Out of stock",
+      "addToCart": "Add to cart"
+    }
+  },
+  "pdp": {
+    "breadcrumbProduct": "Product Detail",
+    "aboutThisItem": "About this item",
+    "reviews": "{count} ratings",
+    "inStock": "In Stock",
+    "outOfStock": "Currently unavailable",
+    "onlyXLeft": "Only {count} left in stock — order soon.",
+    "price": "Price",
+    "listPrice": "List Price",
+    "youSave": "You save",
+    "quantity": "Qty",
+    "addToCart": "Add to Cart",
+    "buyNow": "Buy Now",
+    "deliverTo": "Deliver to Lima — Lima 15001",
+    "delivery": "FREE delivery {date}",
+    "secureTransaction": "Secure transaction",
+    "soldBy": "Sold by",
+    "storeName": "Corporación Santa Rosita",
+    "brand": "Brand",
+    "returnPolicy": "Free 30-day returns",
+    "breadcrumbHome": "Home",
+    "breadcrumbCatalog": "Catalog"
+  },
   "meta": {
     "title": "Corporación Santa Rosita — Multi-brand Auto Parts",
     "description": "Multi-brand automotive parts store"

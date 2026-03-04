@@ -21,7 +21,7 @@ export function SearchBar({ placeholder }: SearchBarProps) {
         type="search"
         name="q"
         placeholder={placeholder}
-        className="flex-1 bg-transparent px-3 py-2 text-sm text-foreground outline-none placeholder:text-foreground-muted sm:px-5 sm:py-3 dark:text-background"
+        className="flex-1 bg-background-search-bar px-3 py-2 text-sm text-foreground outline-none placeholder:text-foreground-muted sm:px-5 sm:py-3"
       />
       <button
         type="submit"

@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { usePathname } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
-import { locales, type Locale } from '@/i18n/config';
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
+import { locales, type Locale } from "@/i18n/config";
 
 /**
  * Human-readable labels and flag emojis for each supported locale.
  */
 const LOCALE_META: Record<Locale, { label: string; flag: string }> = {
-  es: { label: 'Español', flag: '🇪🇸' },
-  en: { label: 'English', flag: '🇺🇸' },
-  zh: { label: '中文', flag: '🇨🇳' },
+  es: { label: "Español", flag: "🇪🇸" },
+  en: { label: "English", flag: "🇺🇸" },
+  zh: { label: "中文", flag: "🇨🇳" },
 };
 
 /**
@@ -36,13 +36,13 @@ export function LanguageSwitcher({ locale }: { locale: string }) {
       }
     }
     function handleKey(e: KeyboardEvent) {
-      if (e.key === 'Escape') setOpen(false);
+      if (e.key === "Escape") setOpen(false);
     }
-    document.addEventListener('mousedown', handleClick);
-    document.addEventListener('keydown', handleKey);
+    document.addEventListener("mousedown", handleClick);
+    document.addEventListener("keydown", handleKey);
     return () => {
-      document.removeEventListener('mousedown', handleClick);
-      document.removeEventListener('keydown', handleKey);
+      document.removeEventListener("mousedown", handleClick);
+      document.removeEventListener("keydown", handleKey);
     };
   }, [open]);
 
@@ -82,8 +82,8 @@ export function LanguageSwitcher({ locale }: { locale: string }) {
                 role="menuitem"
                 className={`flex items-center gap-2.5 px-4 py-2.5 text-sm transition-colors ${
                   isActive
-                    ? 'bg-primary/10 font-semibold text-primary'
-                    : 'text-card-foreground hover:bg-primary/5'
+                    ? "bg-primary/10 font-semibold text-primary"
+                    : "text-card-foreground hover:bg-primary/5"
                 }`}
               >
                 <span className="text-base leading-none">{meta.flag}</span>
