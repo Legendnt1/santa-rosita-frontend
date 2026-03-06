@@ -1,5 +1,14 @@
 import type { Product } from "@/modules/catalog/domain/entities/Product";
+import {
+  getEffectivePrice,
+  hasDiscount as checkDiscount,
+  getDiscountPercent,
+  formatPrice,
+  formatDeliveryText,
+} from "@/shared/utils/price";
 import Link from "next/link";
+import { Icon } from "./Icon";
+import { StarRating } from "./StarRating";
 
 /**
  * Props for the ProductGrid server component.
@@ -24,56 +33,6 @@ interface ProductGridProps {
 }
 
 /**
- * Star rating display for product cards.
- */
-function StarRating({
-  rating,
-  reviewCount,
-  reviewsLabel,
-}: {
-  rating: number;
-  reviewCount: number;
-  reviewsLabel: string;
-}) {
-  const fullStars = Math.floor(rating);
-  const hasHalf = rating - fullStars >= 0.25 && rating - fullStars < 0.75;
-  const emptyStars = 5 - fullStars - (hasHalf ? 1 : 0);
-  const text = reviewsLabel.replace("{count}", String(reviewCount));
-
-  return (
-    <div className="flex items-center gap-1">
-      <span
-        className="flex items-center"
-        aria-label={`${rating} out of 5 stars`}
-      >
-        {Array.from({ length: fullStars }, (_, i) => (
-          <svg
-            key={`f${i}`}
-            className="h-3.5 w-3.5 text-amber-400"
-          >
-            <use href="/assets/icons/icons.svg#star-full" />
-          </svg>
-        ))}
-        {hasHalf && (
-          <svg className="h-3.5 w-3.5 text-amber-400">
-            <use href="/assets/icons/icons.svg#star-half" />
-          </svg>
-        )}
-        {Array.from({ length: emptyStars }, (_, i) => (
-          <svg
-            key={`e${i}`}
-            className="h-3.5 w-3.5 text-foreground-muted/25"
-          >
-            <use href="/assets/icons/icons.svg#star-empty" />
-          </svg>
-        ))}
-      </span>
-      <span className="text-xs text-foreground-muted">({text})</span>
-    </div>
-  );
-}
-
-/**
  * High-density product card for the listing grid.
  * Shows image, price (with optional discount), rating, brand, and delivery info.
  */
@@ -86,10 +45,10 @@ function ListingProductCard({
   labels: ProductGridProps["labels"];
   locale: string;
 }) {
-  const effectivePrice = product.discountPrice ?? product.price;
-  const hasDiscount = product.discountPrice !== undefined;
+  const effectivePrice = getEffectivePrice(product);
+  const productHasDiscount = checkDiscount(product);
   const isOutOfStock = product.stock <= 0;
-  const deliveryText = labels.delivery.replace("{date}", product.deliveryDate);
+  const deliveryText = formatDeliveryText(labels.delivery, product.deliveryDate);
 
   return (
     <article className="group flex flex-col overflow-hidden rounded-xl border border-border/40 bg-card shadow-sm transition-all duration-200 hover:border-primary/30 hover:shadow-md">
@@ -103,13 +62,9 @@ function ListingProductCard({
         />
 
         {/* Discount badge */}
-        {hasDiscount && (
+        {productHasDiscount && (
           <span className="absolute left-2 top-2 rounded-md bg-accent px-2 py-0.5 text-[10px] font-bold text-accent-foreground">
-            -
-            {Math.round(
-              ((product.price - product.discountPrice!) / product.price) * 100,
-            )}
-            %
+            -{getDiscountPercent(product)}%
           </span>
         )}
 
@@ -150,11 +105,11 @@ function ListingProductCard({
         {/* Price */}
         <div className="mt-auto flex items-baseline gap-2 pt-1">
           <span className="font-bold text-base text-card-foreground">
-            {product.currency} {effectivePrice.toFixed(2)}
+            {formatPrice(product.currency, effectivePrice)}
           </span>
-          {hasDiscount && (
+          {productHasDiscount && (
             <span className="text-xs text-foreground-muted line-through">
-              {product.currency} {product.price.toFixed(2)}
+              {formatPrice(product.currency, product.price)}
             </span>
           )}
         </div>
@@ -162,12 +117,7 @@ function ListingProductCard({
         {/* Delivery info */}
         {!isOutOfStock && (
           <p className="text-[11px] text-foreground-muted">
-            <svg
-              className="mr-0.5 inline h-3 w-3 text-emerald-500"
-            >
-              <use href="/assets/icons/icons.svg#check"
-              />
-            </svg>
+            <Icon name="check" className="mr-0.5 inline h-3 w-3 text-emerald-500" />
             {deliveryText}
           </p>
         )}
@@ -199,11 +149,7 @@ export function ProductGrid({
   if (products.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center rounded-xl border border-border/40 bg-card/50 px-6 py-16 text-center">
-        <svg
-          className="mb-4 h-16 w-16 text-foreground-muted/30"
-        >
-          <use href="/assets/icons/icons.svg#search" />
-        </svg>
+        <Icon name="search" className="mb-4 h-16 w-16 text-foreground-muted/30" />
         <p className="text-sm text-foreground-muted">{labels.noResults}</p>
         <Link
           href={`/${locale}/catalog/${categorySlug}`}

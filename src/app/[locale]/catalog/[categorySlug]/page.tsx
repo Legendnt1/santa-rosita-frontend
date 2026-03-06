@@ -1,7 +1,7 @@
 import type { Locale } from '@/i18n/config';
 import type { FilterCriteria, SortOption } from '@/modules/catalog/domain/entities/FilterCriteria';
 import { getDictionary } from '@/i18n/getDictionary';
-import { InMemoryCatalogRepository } from '@/modules/catalog/infrastructure/adapters/InMemoryCatalogRepository';
+import { catalogRepository } from '@/modules/catalog/infrastructure/catalog-repository.instance';
 import { Navbar } from '@/shared/ui/components/Navbar';
 import { ResultsHeader } from '@/shared/ui/components/ResultsHeader';
 import { FilterSidebar } from '@/shared/ui/components/FilterSidebar'; 
@@ -76,17 +76,16 @@ export default async function ProductListingPage({
   const resolvedSearchParams = await searchParams;
 
   const dict = await getDictionary(locale as Locale);
-  const repository = new InMemoryCatalogRepository();
 
-  // ── Validate category ─────────────────────────────────────
-  const category = await repository.getCategoryBySlug(categorySlug);
+  // ── Validate category ─────────────────────────────────
+  const category = await catalogRepository.getCategoryBySlug(categorySlug);
   if (!category) notFound();
 
   // ── Build filters & fetch data in parallel ────────────────
   const filters = parseSearchParams(resolvedSearchParams, categorySlug);
   const [products, brands] = await Promise.all([
-    repository.findByFilters(filters),
-    repository.getBrandsByCategory(categorySlug),
+    catalogRepository.findByFilters(filters),
+    catalogRepository.getBrandsByCategory(categorySlug),
   ]);
 
   const categoryTitle =
@@ -104,7 +103,6 @@ export default async function ProductListingPage({
           totalResults={products.length}
           labels={{
             home: dict.listing.breadcrumbHome,
-            catalog: dict.listing.breadcrumbCatalog,
             resultsCount: dict.listing.resultsCount,
           }}
         />

@@ -1,6 +1,6 @@
 import type { Locale } from '@/i18n/config';
 import { getDictionary } from '@/i18n/getDictionary';
-import { InMemoryCatalogRepository } from '@/modules/catalog/infrastructure/adapters/InMemoryCatalogRepository';
+import { catalogRepository } from '@/modules/catalog/infrastructure/catalog-repository.instance';
 import { Navbar } from '@/shared/ui/components/Navbar';
 import { CategorySection } from '@/shared/ui/components/CategorySection';
 
@@ -23,13 +23,12 @@ export default async function ShopHomePage({
   const dict = await getDictionary(locale as Locale);
 
   // ── Data fetching (adapter can be swapped via DI) ───────
-  const repository = new InMemoryCatalogRepository();
-  const categories = await repository.getCategories();
+  const categories = await catalogRepository.getCategories();
 
   const categoryProducts = await Promise.all(
     categories.map(async (category) => ({
       category,
-      products: await repository.getProductsByCategory(category.id, 4),
+      products: await catalogRepository.getProductsByCategory(category.id, 4),
     }))
   );
 

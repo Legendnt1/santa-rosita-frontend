@@ -13,6 +13,7 @@ High-scale car parts e-commerce architecture designed for extreme maintainabilit
 * **Library**: React 19.2.4 (Focus on Server Components).
 * **Styling**: Tailwind CSS 4.2.1 (Using `@theme inline` and CSS variables).
 * **Language**: TypeScript 5.9.3 (Strict Mode).
+* **State global**: Zustand (Minimal, only if necessary).
 * **i18n**: Spanish (`es`), English (`en`), Chinese (`zh`) via `[locale]` route segments.
 * **Fonts**: Local "Rubik" family stored in `public/assets/fonts/`.
 * **Icons**: Local SVG sprite in `public/assets/icons/icons.svg`.

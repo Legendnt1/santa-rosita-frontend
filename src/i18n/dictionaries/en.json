@@ -25,7 +25,6 @@
     "noResults": "No products found matching your filters.",
     "clearFilters": "Clear all filters",
     "breadcrumbHome": "Home",
-    "breadcrumbCatalog": "Catalog",
     "filters": {
       "title": "Filters",
       "price": "Price",
@@ -74,8 +73,7 @@
     "storeName": "Corporación Santa Rosita",
     "brand": "Brand",
     "returnPolicy": "Free 30-day returns",
-    "breadcrumbHome": "Home",
-    "breadcrumbCatalog": "Catalog"
+    "breadcrumbHome": "Home"
   },
   "meta": {
     "title": "Corporación Santa Rosita — Multi-brand Auto Parts",

@@ -25,7 +25,6 @@
     "noResults": "No se encontraron productos con los filtros aplicados.",
     "clearFilters": "Limpiar todos los filtros",
     "breadcrumbHome": "Inicio",
-    "breadcrumbCatalog": "Catálogo",
     "filters": {
       "title": "Filtros",
       "price": "Precio",
@@ -74,8 +73,7 @@
     "storeName": "Corporación Santa Rosita",
     "brand": "Marca",
     "returnPolicy": "Devoluciones gratis por 30 días",
-    "breadcrumbHome": "Inicio",
-    "breadcrumbCatalog": "Catálogo"
+    "breadcrumbHome": "Inicio"
   },
   "meta": {
     "title": "Corporación Santa Rosita — Repuestos Multimarca",

@@ -1,3 +1,5 @@
+import { Icon } from "./Icon";
+
 /**
  * Props for the SearchBar server component.
  */
@@ -28,9 +30,7 @@ export function SearchBar({ placeholder }: SearchBarProps) {
         className="flex items-center justify-center bg-primary px-4 text-primary-foreground transition-colors hover:bg-primary/90 sm:px-6"
         aria-label="Search"
       >
-        <svg className="h-5 w-5 sm:h-5.5 sm:w-5.5" aria-hidden="true">
-          <use href="/assets/icons/icons.svg#search" />
-        </svg>
+        <Icon name="search" className="h-5 w-5 sm:h-5.5 sm:w-5.5" label="Search" />
       </button>
     </form>
   );

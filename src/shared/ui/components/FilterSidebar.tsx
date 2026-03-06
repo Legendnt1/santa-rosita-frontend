@@ -3,6 +3,7 @@
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { useCallback, useState } from "react";
 import type { FilterCriteria } from "@/modules/catalog/domain/entities/FilterCriteria";
+import { Icon } from "./Icon";
 
 /**
  * Props for the FilterSidebar client component.
@@ -63,11 +64,10 @@ function FilterSection({
         className="flex w-full items-center justify-between py-2 text-sm font-semibold text-foreground transition-colors hover:text-primary"
       >
         {title}
-        <svg
+        <Icon
+          name="chevron-down"
           className={`h-4 w-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
-        >
-          <use href="/assets/icons/icons.svg#chevron-down" />
-        </svg>
+        />
       </button>
       {isOpen && <div className="mt-1">{children}</div>}
     </div>
@@ -285,15 +285,14 @@ export function FilterSidebar({
                   className="group cursor-pointer p-0.5 transition-transform duration-300 ease-out"
                   aria-label={`${star} ${labels.ratingUp}`}
                 >
-                  <svg
+                  <Icon
+                    name="star-full"
                     className={`h-7 w-7 transition-colors duration-300 ease-out ${
                       filled
                         ? "text-amber-400 drop-shadow-[0_1px_2px_rgba(251,191,36,0.4)]"
                         : "text-border group-hover:text-amber-200"
                     }`}
-                  >
-                    <use href="/assets/icons/icons.svg#star-full" />
-                  </svg>
+                  />
                 </button>
               );
             })}
@@ -367,10 +366,7 @@ export function FilterSidebar({
         onClick={() => setMobileOpen(!mobileOpen)}
         className="flex w-full items-center justify-center gap-2 rounded-lg border border-border bg-card px-4 py-2.5 text-sm font-medium text-card-foreground shadow-sm transition-colors hover:bg-primary/5 lg:hidden"
       >
-        <svg className="h-4 w-4" >
-          <use href="/assets/icons/icons.svg#filter"
-          />
-        </svg>
+        <Icon name="filter" className="h-4 w-4" />
         {labels.title}
         {hasActiveFilters && (
           <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
@@ -397,11 +393,7 @@ export function FilterSidebar({
                 className="flex h-8 w-8 items-center justify-center rounded-full text-foreground-muted transition-colors hover:bg-primary/10"
                 aria-label="Close"
               >
-                <svg
-                  className="h-5 w-5"
-                >
-                  <use href="/assets/icons/icons.svg#x" />
-                </svg>
+                <Icon name="x" className="h-5 w-5" />
               </button>
             </div>
             {sidebarContent}

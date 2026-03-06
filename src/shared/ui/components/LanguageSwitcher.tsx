@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { locales, type Locale } from "@/i18n/config";
+import { Icon } from "./Icon";
 
 /**
  * Human-readable labels and flag emojis for each supported locale.
@@ -59,9 +60,7 @@ export function LanguageSwitcher({ locale }: { locale: string }) {
         aria-expanded={open}
         aria-haspopup="true"
       >
-        <svg className="h-5 w-5 sm:h-5.5 sm:w-5.5" aria-hidden="true">
-          <use href="/assets/icons/icons.svg#world" />
-        </svg>
+        <Icon name="world" className="h-5 w-5 sm:h-5.5 sm:w-5.5" />
       </button>
 
       {/* Dropdown menu */}

@@ -2,6 +2,7 @@ import type { Dictionary } from "@/i18n/getDictionary";
 import { SearchBar } from "./SearchBar";
 import { ThemeToggle } from "./ThemeToggle";
 import { LanguageSwitcher } from "./LanguageSwitcher";
+import { Icon } from "./Icon";
 
 /**
  * Props for the Navbar server component.
@@ -47,9 +48,7 @@ export function Navbar({ dict, locale }: NavbarProps) {
               className="flex h-8 w-8 items-center justify-center rounded-full text-navbar-fg transition-all duration-200 hover:bg-primary/15 hover:scale-110 active:scale-95 sm:h-9 sm:w-9"
               aria-label="Account"
             >
-              <svg className="h-5 w-5 sm:h-5.5 sm:w-5.5" aria-hidden="true">
-                <use href="/assets/icons/icons.svg#user" />
-              </svg>
+              <Icon name="user" className="h-5 w-5 sm:h-5.5 sm:w-5.5" />
             </button>
 
             {/* Cart */}
@@ -58,9 +57,7 @@ export function Navbar({ dict, locale }: NavbarProps) {
               className="relative flex h-8 w-8 items-center justify-center rounded-full text-navbar-fg transition-all duration-200 hover:bg-primary/15 hover:scale-110 active:scale-95 sm:h-9 sm:w-9"
               aria-label="Cart"
             >
-              <svg className="h-5 w-5 sm:h-5.5 sm:w-5.5" aria-hidden="true">
-                <use href="/assets/icons/icons.svg#shopping-cart" />
-              </svg>
+              <Icon name="shopping-cart" className="h-5 w-5 sm:h-5.5 sm:w-5.5" />
               {/* Badge */}
               <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-accent text-[10px] font-bold text-accent-foreground">
                 0
@@ -79,9 +76,7 @@ export function Navbar({ dict, locale }: NavbarProps) {
       <nav className="border-t border-border bg-navbar-sub-bg overflow-x-auto">
         <div className="mx-auto flex max-w-6xl items-center gap-4 px-3 py-2 text-xs font-medium text-navbar-fg whitespace-nowrap sm:gap-6 sm:px-4 sm:text-sm">
           <a href="#" className="flex items-center gap-1 transition-colors hover:text-primary">
-            <svg className="h-4 w-4 sm:h-4.5 sm:w-4.5" aria-hidden="true">
-              <use href="/assets/icons/icons.svg#menu-2" />
-            </svg>
+            <Icon name="menu-2" className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
             {dict.navbar.categories}
           </a>
           <a href="#" className="transition-colors hover:text-primary">

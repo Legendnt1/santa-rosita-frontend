@@ -30,7 +30,6 @@ export interface Dictionary {
     noResults: string;
     clearFilters: string;
     breadcrumbHome: string;
-    breadcrumbCatalog: string;
     filters: {
       title: string;
       price: string;
@@ -80,7 +79,6 @@ export interface Dictionary {
     brand: string;
     returnPolicy: string;
     breadcrumbHome: string;
-    breadcrumbCatalog: string;
   };
   meta: {
     title: string;

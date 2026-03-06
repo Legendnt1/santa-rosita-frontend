@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Icon } from "./Icon";
 
 /**
  * Client-side theme toggle button.
@@ -57,13 +58,9 @@ export function ThemeToggle() {
       }
     >
       {theme === "dark" ? (
-        <svg className="h-5 w-5 sm:h-5.5 sm:w-5.5" aria-hidden="true">
-          <use href="/assets/icons/icons.svg#sun" />
-        </svg>
+        <Icon name="sun" className="h-5 w-5 sm:h-5.5 sm:w-5.5" />
       ) : (
-        <svg className="h-5 w-5 sm:h-5.5 sm:w-5.5" aria-hidden="true">
-          <use href="/assets/icons/icons.svg#moon" />
-        </svg>
+        <Icon name="moon" className="h-5 w-5 sm:h-5.5 sm:w-5.5" />
       )}
     </button>
   );

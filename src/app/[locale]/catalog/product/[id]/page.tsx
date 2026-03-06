@@ -1,57 +1,23 @@
 import type { Locale } from '@/i18n/config';
 import { getDictionary } from '@/i18n/getDictionary';
 import { GetProductById } from '@/modules/catalog/application/get-product-by-id.use-case';
-import { InMemoryCatalogRepository } from '@/modules/catalog/infrastructure/adapters/InMemoryCatalogRepository';
+import { catalogRepository } from '@/modules/catalog/infrastructure/catalog-repository.instance';
 import { Navbar } from '@/shared/ui/components/Navbar';
 import { ImageGallery } from '@/shared/ui/components/ImageGallery';
 import { BuyBox } from '@/shared/ui/components/BuyBox';
+import { Breadcrumb } from '@/shared/ui/components/Breadcrumb';
+import { BreadcrumbSetter } from '@/shared/ui/components/BreadcrumbSetter';
+import type { BreadcrumbItem } from '@/shared/stores/breadcrumb-store';
+import {
+  getEffectivePrice,
+  hasDiscount as checkDiscount,
+  getDiscountPercent,
+  formatPrice,
+} from '@/shared/utils/price';
 import { notFound } from 'next/navigation';
+import { StarRating } from '@/shared/ui/components/StarRating';
 
-/**
- * Star rating display used in the product info column.
- */
-function StarRating({
-  rating,
-  reviewCount,
-  reviewsLabel,
-}: {
-  rating: number;
-  reviewCount: number;
-  reviewsLabel: string;
-}) {
-  const fullStars = Math.floor(rating);
-  const hasHalf = rating - fullStars >= 0.25 && rating - fullStars < 0.75;
-  const emptyStars = 5 - fullStars - (hasHalf ? 1 : 0);
-  const text = reviewsLabel.replace('{count}', String(reviewCount));
 
-  return (
-    <div className="flex flex-wrap items-center gap-1.5">
-      <span className="font-semibold text-sm text-card-foreground">
-        {rating.toFixed(1)}
-      </span>
-      <span className="flex items-center" aria-label={`${rating} out of 5 stars`}>
-        {Array.from({ length: fullStars }, (_, i) => (
-          <svg key={`f${i}`} className="h-4 w-4 text-amber-400">
-            <use href="/assets/icons/icons.svg#star-full" />
-          </svg>
-        ))}
-        {hasHalf && (
-          <svg className="h-4 w-4 text-amber-400" >
-            <use href="/assets/icons/icons.svg#star-half" />
-          </svg>
-        )}
-        {Array.from({ length: emptyStars }, (_, i) => (
-          <svg key={`e${i}`} className="h-4 w-4 text-foreground-muted/25">
-            <use href="/assets/icons/icons.svg#star-empty" />
-          </svg>
-        ))}
-      </span>
-      <a href="#reviews" className="text-sm text-primary hover:underline">
-        {text}
-      </a>
-    </div>
-  );
-}
 
 /**
  * Product Detail Page (PDP).
@@ -71,8 +37,7 @@ export default async function ProductDetailPage({
   const { locale, id } = await params;
 
   // ── Parallel data fetching ────────────────────────────────
-  const repository = new InMemoryCatalogRepository();
-  const useCase = new GetProductById(repository);
+  const useCase = new GetProductById(catalogRepository);
 
   const [dict, product] = await Promise.all([
     getDictionary(locale as Locale),
@@ -82,16 +47,24 @@ export default async function ProductDetailPage({
   if (!product) notFound();
 
   // ── Resolve category for breadcrumb ───────────────────────
-  const categories = await repository.getCategories();
-  const category = categories.find((c) => c.id === product.categoryId);
+  const categories = await catalogRepository.getCategories();
+  const category = categories.find((c: { id: string }) => c.id === product.categoryId);
   const categoryTitle = category
     ? (dict.catalog[category.slug]?.title ?? category.slug)
     : '';
   const categorySlug = category?.slug ?? '';
 
   const pdp = dict.pdp;
-  const effectivePrice = product.discountPrice ?? product.price;
-  const hasDiscount = product.discountPrice !== undefined;
+  const effectivePrice = getEffectivePrice(product);
+  const productHasDiscount = checkDiscount(product);
+
+  const breadcrumbItems: BreadcrumbItem[] = [
+    { label: pdp.breadcrumbHome, href: `/${locale}` },
+    ...(category
+      ? [{ label: categoryTitle, href: `/${locale}/catalog/${categorySlug}` }]
+      : []),
+    { label: pdp.breadcrumbProduct },
+  ];
 
   return (
     <>
@@ -99,45 +72,10 @@ export default async function ProductDetailPage({
 
       <main className="mx-auto max-w-7xl px-3 py-4 sm:px-4 sm:py-6 lg:px-6">
         {/* ── Breadcrumbs ──────────────────────────────────── */}
-        <nav aria-label="Breadcrumb" className="mb-4">
-          <ol className="flex flex-wrap items-center gap-1.5 text-xs text-foreground-muted sm:text-sm">
-            <li>
-              <a
-                href={`/${locale}`}
-                className="transition-colors hover:text-primary"
-              >
-                {pdp.breadcrumbHome}
-              </a>
-            </li>
-            <li aria-hidden="true">
-              <svg className="h-3 w-3 text-foreground-muted/50">
-                <use href="/assets/icons/icons.svg#chevron-right" />
-              </svg>
-            </li>
-            {category && (
-              <>
-                <li>
-                  <a
-                    href={`/${locale}/catalog/${categorySlug}`}
-                    className="transition-colors hover:text-primary"
-                  >
-                    {categoryTitle}
-                  </a>
-                </li>
-                <li aria-hidden="true">
-                  <svg className="h-3 w-3 text-foreground-muted/50">
-                    <use href="/assets/icons/icons.svg#chevron-right" />
-                  </svg>
-                </li>
-              </>
-            )}
-            <li>
-              <span className="font-medium text-foreground">
-                {pdp.breadcrumbProduct}
-              </span>
-            </li>
-          </ol>
-        </nav>
+        <div className="mb-4">
+          <BreadcrumbSetter items={breadcrumbItems} />
+          <Breadcrumb />
+        </div>
 
         {/* ── 3-column PDP layout ─────────────────────────── */}
         <div className="flex flex-col gap-6 lg:flex-row lg:gap-8">
@@ -177,20 +115,20 @@ export default async function ProductDetailPage({
             {/* Price block (visible on mobile, hidden on lg where BuyBox shows it) */}
             <div className="lg:hidden">
               <div className="flex items-baseline gap-2">
-                {hasDiscount && (
+                {productHasDiscount && (
                   <span className="rounded bg-accent px-1.5 py-0.5 text-xs font-bold text-accent-foreground">
-                    -{Math.round(((product.price - product.discountPrice!) / product.price) * 100)}%
+                    -{getDiscountPercent(product)}%
                   </span>
                 )}
                 <span className="text-2xl font-bold text-foreground">
-                  {product.currency} {effectivePrice.toFixed(2)}
+                  {formatPrice(product.currency, effectivePrice)}
                 </span>
               </div>
-              {hasDiscount && (
+              {productHasDiscount && (
                 <p className="mt-0.5 text-sm text-foreground-muted">
                   {pdp.listPrice}:{' '}
                   <span className="line-through">
-                    {product.currency} {product.price.toFixed(2)}
+                    {formatPrice(product.currency, product.price)}
                   </span>
                 </p>
               )}

@@ -1,3 +1,6 @@
+import { Breadcrumb } from "./Breadcrumb";
+import { BreadcrumbSetter } from "./BreadcrumbSetter";
+
 /**
  * Renders the breadcrumb navigation and result count header
  * for the product listing page.
@@ -13,7 +16,6 @@ interface ResultsHeaderProps {
   /** Localized labels */
   labels: {
     home: string;
-    catalog: string;
     resultsCount: string;
   };
 }
@@ -31,37 +33,13 @@ export function ResultsHeader({
 
   return (
     <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-      {/* Breadcrumbs */}
-      <nav aria-label="Breadcrumb">
-        <ol className="flex items-center gap-1.5 text-xs text-foreground-muted sm:text-sm">
-          <li>
-            <a
-              href={`/${locale}`}
-              className="transition-colors hover:text-primary"
-            >
-              {labels.home}
-            </a>
-          </li>
-          <li aria-hidden="true">
-            <svg className="h-3 w-3 text-foreground-muted/50">
-              <use href="/assets/icons/icons.svg#chevron-right" />
-            </svg>
-          </li>
-          <li>
-            <span className="transition-colors hover:text-primary">
-              {labels.catalog}
-            </span>
-          </li>
-          <li aria-hidden="true">
-            <svg className="h-3 w-3 text-foreground-muted/50">
-              <use href="/assets/icons/icons.svg#chevron-right" />
-            </svg>
-          </li>
-          <li>
-            <span className="font-medium text-foreground">{categoryTitle}</span>
-          </li>
-        </ol>
-      </nav>
+      <BreadcrumbSetter
+        items={[
+          { label: labels.home, href: `/${locale}` },
+          { label: categoryTitle },
+        ]}
+      />
+      <Breadcrumb />
 
       {/* Result count */}
       <p className="text-xs text-foreground-muted sm:text-sm">

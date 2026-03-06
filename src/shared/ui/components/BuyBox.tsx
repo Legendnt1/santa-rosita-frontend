@@ -1,4 +1,14 @@
 import type { Product } from "@/modules/catalog/domain/entities/Product";
+import {
+  getEffectivePrice,
+  hasDiscount as checkDiscount,
+  getSavingsAmount,
+  getDiscountPercent,
+  formatPrice,
+  formatDeliveryText,
+} from "@/shared/utils/price";
+import { Icon } from "./Icon";
+import { StockBadge } from "./StockBadge";
 
 /**
  * Props for the BuyBox server component.
@@ -27,39 +37,6 @@ interface BuyBoxProps {
 }
 
 /**
- * Renders the stock availability badge.
- */
-function StockBadge({
-  stock,
-  labels,
-}: {
-  stock: number;
-  labels: BuyBoxProps["labels"];
-}) {
-  if (stock <= 0) {
-    return (
-      <span className="text-sm font-semibold text-accent">
-        {labels.outOfStock}
-      </span>
-    );
-  }
-
-  if (stock <= 5) {
-    return (
-      <span className="text-sm font-semibold text-amber-600">
-        {labels.onlyXLeft.replace("{count}", String(stock))}
-      </span>
-    );
-  }
-
-  return (
-    <span className="text-sm font-semibold text-emerald-600">
-      {labels.inStock}
-    </span>
-  );
-}
-
-/**
  * Amazon-inspired Buy Box — right-column panel on the PDP.
  * Shows price, stock, delivery info, and action buttons.
  *
@@ -68,39 +45,35 @@ function StockBadge({
  * React 19 Server Component — zero client JS.
  */
 export function BuyBox({ product, labels }: BuyBoxProps) {
-  const effectivePrice = product.discountPrice ?? product.price;
-  const hasDiscount = product.discountPrice !== undefined;
+  const effectivePrice = getEffectivePrice(product);
+  const productHasDiscount = checkDiscount(product);
   const isOutOfStock = product.stock <= 0;
-  const deliveryText = labels.delivery.replace("{date}", product.deliveryDate);
-  const savingsAmount = hasDiscount
-    ? product.price - product.discountPrice!
-    : 0;
-  const savingsPercent = hasDiscount
-    ? Math.round((savingsAmount / product.price) * 100)
-    : 0;
+  const deliveryText = formatDeliveryText(labels.delivery, product.deliveryDate);
+  const savingsAmount = getSavingsAmount(product);
+  const savingsPercent = getDiscountPercent(product);
 
   return (
     <div className="flex flex-col gap-4 rounded-xl border border-border/50 bg-card p-4 shadow-sm sm:p-5">
       {/* ── Price ────────────────────────────────────────── */}
       <div>
-        {hasDiscount && (
+        {productHasDiscount && (
           <div className="mb-1 flex items-center gap-2">
             <span className="text-xs text-foreground-muted">
               {labels.listPrice}:
             </span>
             <span className="text-sm text-foreground-muted line-through">
-              {product.currency} {product.price.toFixed(2)}
+              {formatPrice(product.currency, product.price)}
             </span>
           </div>
         )}
         <div className="flex items-baseline gap-1">
           <span className="text-2xl font-bold text-card-foreground sm:text-3xl">
-            {product.currency} {effectivePrice.toFixed(2)}
+            {formatPrice(product.currency, effectivePrice)}
           </span>
         </div>
-        {hasDiscount && (
+        {productHasDiscount && (
           <p className="mt-1 text-sm text-emerald-600">
-            {labels.youSave}: {product.currency} {savingsAmount.toFixed(2)} (
+            {labels.youSave}: {formatPrice(product.currency, savingsAmount)} (
             {savingsPercent}%)
           </p>
         )}
@@ -109,22 +82,25 @@ export function BuyBox({ product, labels }: BuyBoxProps) {
       {/* ── Delivery ─────────────────────────────────────── */}
       <div className="flex flex-col gap-1.5 border-t border-border/30 pt-3">
         <p className="text-sm text-card-foreground">
-          <svg className="mr-1 inline h-3.5 w-3.5 text-emerald-500">
-            <use href="/assets/icons/icons.svg#check" />
-          </svg>
+          <Icon name="check" className="mr-1 inline h-3.5 w-3.5 text-emerald-500" />
           {deliveryText}
         </p>
         <p className="flex items-center gap-1 text-xs text-foreground-muted">
-          <svg className="h-3.5 w-3.5">
-            <use href="/assets/icons/icons.svg#map-pin" />
-          </svg>
+          <Icon name="map-pin" className="h-3.5 w-3.5" />
           {labels.deliverTo}
         </p>
       </div>
 
       {/* ── Stock ────────────────────────────────────────── */}
       <div className="border-t border-border/30 pt-3">
-        <StockBadge stock={product.stock} labels={labels} />
+        <StockBadge
+          stock={product.stock}
+          labels={{
+            inStock: labels.inStock,
+            outOfStock: labels.outOfStock,
+            onlyXLeft: labels.onlyXLeft,
+          }}
+        />
       </div>
 
       {/* ── Quantity selector ────────────────────────────── */}
@@ -175,9 +151,7 @@ export function BuyBox({ product, labels }: BuyBoxProps) {
       {/* ── Trust signals ────────────────────────────────── */}
       <div className="flex flex-col gap-1.5 border-t border-border/30 pt-3 text-xs text-foreground-muted">
         <p className="flex items-center gap-1.5">
-          <svg className="h-3.5 w-3.5 text-foreground-muted/70">
-            <use href="/assets/icons/icons.svg#lock" />
-          </svg>
+          <Icon name="lock" className="h-3.5 w-3.5 text-foreground-muted/70" />
           {labels.secureTransaction}
         </p>
         <p>
@@ -185,9 +159,7 @@ export function BuyBox({ product, labels }: BuyBoxProps) {
           <span className="font-medium text-primary">{labels.storeName}</span>
         </p>
         <p className="flex items-center gap-1.5">
-          <svg className="h-3.5 w-3.5 text-foreground-muted/70">
-            <use href="/assets/icons/icons.svg#refresh" />
-          </svg>
+          <Icon name="refresh" className="h-3.5 w-3.5 text-foreground-muted/70" />
           {labels.returnPolicy}
         </p>
       </div>

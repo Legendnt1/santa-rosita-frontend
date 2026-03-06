@@ -1,4 +1,5 @@
 import type { Product } from '@/modules/catalog/domain/entities/Product';
+import { formatPrice } from '@/shared/utils/price';
 
 /**
  * Props for the ProductCard server component.
@@ -38,7 +39,7 @@ export function ProductCard({ product, labels }: ProductCardProps) {
       {/* Price & stock */}
       <div className="mt-1.5 px-0.5 sm:mt-2 sm:px-1">
         <p className="text-sm font-semibold text-foreground sm:text-base">
-          {product.currency} {product.price.toFixed(2)}
+          {formatPrice(product.currency, product.price)}
         </p>
         <p className="text-xs text-foreground/60 sm:text-sm">
           {labels.stock}: {product.stock}
