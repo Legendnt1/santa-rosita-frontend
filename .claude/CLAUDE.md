@@ -53,11 +53,6 @@ Within each module:
 * **Dependencies**: Maintain a "Lean" approach. Avoid external state management unless strictly necessary.
 * **Styling**: Use the CSS variables defined in `globals.css` (e.g., `var(--color-primary)`).
 
-## Workflow & Tools
-* **Environment**: Windows machine using **Warp Terminal**.
-* **Version Control**: **Gitflow** workflow (feature -> develop -> master).
-* **Quality**: Use **Zod** for data validation and ensure all repository ports are strictly typed.
-
 ## Structure
 src/
   app/[locale]/             # Presentation
@@ -69,3 +64,6 @@ src/
     /infrastructure/        # mock-repository.ts
   shared/ui/                # Atomic components (BuyBox, Gallery, StarRating)
   i18n/                     # es.json, en.json, zh.json
+
+## Final Considerations
+* **Run build or Dev**: Do not execute 'build' or 'dev' commands for every change of code.

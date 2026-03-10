@@ -1,4 +1,5 @@
-const SPRITE_PATH = "/assets/icons/icons.svg";
+import { SPRITE_ICONS_PATH } from "@/shared/utils/paths";
+
 
 interface IconProps {
   /** Icon ID from the SVG sprite (e.g. "search", "star-full") */
@@ -25,7 +26,7 @@ export function Icon({ name, className, label }: IconProps) {
       aria-label={label}
       role={label ? "img" : undefined}
     >
-      <use href={`${SPRITE_PATH}#${name}`} />
+      <use href={`${SPRITE_ICONS_PATH}#${name}`} />
     </svg>
   );
 }

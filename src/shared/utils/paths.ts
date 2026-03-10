@@ -1,0 +1,1 @@
+export const SPRITE_ICONS_PATH = "/assets/icons/icons.svg";
