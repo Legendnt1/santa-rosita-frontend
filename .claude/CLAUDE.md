@@ -66,4 +66,4 @@ src/
   i18n/                     # es.json, en.json, zh.json
 
 ## Final Considerations
-* **Run build or Dev**: Do not execute 'build' or 'dev' commands for every change of code.
+* **Running commands**: Do not execute 'build' or 'dev' commands for every change of code.
