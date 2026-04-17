@@ -2,22 +2,12 @@ import type { Locale } from '@/i18n/config';
 import type { FilterCriteria, SortOption } from '@/modules/catalog/domain/entities/FilterCriteria';
 import { getDictionary } from '@/i18n/getDictionary';
 import { catalogRepository } from '@/modules/catalog/infrastructure/catalog-repository.instance';
+import { QP, VALID_SORTS } from '@/shared/config/catalog-query-params';
 import { Navbar } from '@/shared/ui/components/Navbar';
 import { ResultsHeader } from '@/shared/ui/components/ResultsHeader';
-import { FilterSidebar } from '@/shared/ui/components/FilterSidebar'; 
-import { ProductGrid } from '@/shared/ui/components/ProductGrid'; 
+import { FilterSidebar } from '@/shared/ui/components/FilterSidebar';
+import { ProductGrid } from '@/shared/ui/components/ProductGrid';
 import { notFound } from 'next/navigation';
-
-/**
- * Valid sort values used for query-param validation.
- */
-const VALID_SORTS: ReadonlySet<string> = new Set([
-  'relevance',
-  'price-asc',
-  'price-desc',
-  'rating-desc',
-  'newest',
-]);
 
 /**
  * Parses and validates the URL search params into a strongly-typed FilterCriteria.
@@ -27,13 +17,13 @@ function parseSearchParams(
   searchParams: Record<string, string | string[] | undefined>,
   categorySlug: string
 ): FilterCriteria {
-  const minPrice = Number(searchParams.minPrice);
-  const maxPrice = Number(searchParams.maxPrice);
-  const minRating = Number(searchParams.minRating);
-  const sortRaw = String(searchParams.sort ?? 'relevance');
-  const inStock = searchParams.inStock === '1';
+  const minPrice = Number(searchParams[QP.MIN_PRICE]);
+  const maxPrice = Number(searchParams[QP.MAX_PRICE]);
+  const minRating = Number(searchParams[QP.MIN_RATING]);
+  const sortRaw = String(searchParams[QP.SORT] ?? 'relevance');
+  const inStock = searchParams[QP.IN_STOCK] === '1';
 
-  const brandsRaw = searchParams.brands;
+  const brandsRaw = searchParams[QP.BRANDS];
   const brands =
     typeof brandsRaw === 'string'
       ? brandsRaw.split(',').filter(Boolean)
@@ -131,7 +121,7 @@ export default async function ProductListingPage({
                 reviews: dict.listing.product.reviews,
                 delivery: dict.listing.product.delivery,
                 outOfStock: dict.listing.product.outOfStock,
-                addToCart: dict.listing.product.addToCart,
+                viewProduct: dict.listing.product.viewProduct,
                 stock: dict.common.stock,
               }}
               locale={locale}

@@ -43,22 +43,13 @@ export function Navbar({ dict, locale }: NavbarProps) {
             <ThemeToggle />
 
             {/* Account */}
-            <button
-              type="button"
-              className="flex h-8 w-8 items-center justify-center rounded-full text-navbar-fg transition-all duration-200 hover:bg-primary/15 hover:scale-110 active:scale-95 sm:h-9 sm:w-9"
-              aria-label="Account"
-            >
+            <button type="button" className="btn-icon" aria-label="Account">
               <Icon name="user" className="h-5 w-5 sm:h-5.5 sm:w-5.5" />
             </button>
 
             {/* Cart */}
-            <button
-              type="button"
-              className="relative flex h-8 w-8 items-center justify-center rounded-full text-navbar-fg transition-all duration-200 hover:bg-primary/15 hover:scale-110 active:scale-95 sm:h-9 sm:w-9"
-              aria-label="Cart"
-            >
+            <button type="button" className="btn-icon relative" aria-label="Cart">
               <Icon name="shopping-cart" className="h-5 w-5 sm:h-5.5 sm:w-5.5" />
-              {/* Badge */}
               <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-accent text-[10px] font-bold text-accent-foreground">
                 0
               </span>

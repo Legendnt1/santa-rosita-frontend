@@ -55,7 +55,7 @@ export function LanguageSwitcher({ locale }: { locale: string }) {
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
-        className="flex h-8 w-8 items-center justify-center rounded-full text-navbar-fg transition-all duration-200 hover:bg-primary/15 hover:scale-110 active:scale-95 sm:h-9 sm:w-9"
+        className="btn-icon"
         aria-label="Change language"
         aria-expanded={open}
         aria-haspopup="true"
@@ -66,7 +66,7 @@ export function LanguageSwitcher({ locale }: { locale: string }) {
       {/* Dropdown menu */}
       {open && (
         <div
-          className="absolute right-0 top-full z-50 mt-2 min-w-36 overflow-hidden rounded-xl border border-border bg-card shadow-lg animate-in fade-in slide-in-from-top-1"
+          className="animate-scale-in absolute right-0 top-full z-50 mt-2 min-w-36 overflow-hidden rounded-xl border border-border bg-card shadow-lg"
           role="menu"
         >
           {locales.map((loc) => {

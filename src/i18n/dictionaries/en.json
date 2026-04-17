@@ -11,11 +11,11 @@
     "discounts": "Discounts"
   },
   "catalog": {
-    "motorsAndTransmission": {
+    "motors_and_transmission": {
       "title": "Motors & Transmission",
       "description": "Pistons, clutches, transmission parts..."
     },
-    "brakeSystem": {
+    "brake_system": {
       "title": "Brake System",
       "description": "Brake fluid, calipers"
     }
@@ -51,7 +51,7 @@
       "reviews": "{count} reviews",
       "delivery": "Delivery by {date}",
       "outOfStock": "Out of stock",
-      "addToCart": "Add to cart"
+      "viewProduct": "View product"
     }
   },
   "pdp": {

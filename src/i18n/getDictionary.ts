@@ -56,7 +56,7 @@ export interface Dictionary {
       reviews: string;
       delivery: string;
       outOfStock: string;
-      addToCart: string;
+      viewProduct: string;
     };
   };
   pdp: {
