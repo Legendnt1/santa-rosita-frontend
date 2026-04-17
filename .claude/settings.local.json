@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -E \"\\\\.\\(tsx?|jsx?\\)$\")",
+      "Bash(grep -E \"\\\\.\\(tsx?|json\\)$\")",
+      "Bash(xargs grep *)",
+      "Bash(npx tsc *)",
+      "Bash(gh pr create --title 'refactor: URL query params snake_case + UI/animation overhaul + dark mode contrast' --body ' *)",
+      "Bash(where gh *)",
+      "Bash(winget list *)",
+      "Bash(powershell -Command \"& 'C:\\\\Program Files\\\\GitHub CLI\\\\gh.exe' --version\")",
+      "Bash(powershell -Command \"Get-Command gh -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Source\")",
+      "Bash(cmd /c \"gh --version\")",
+      "Bash(cmd /c \"where gh\")"
+    ]
+  }
+}
