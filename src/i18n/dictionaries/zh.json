@@ -25,6 +25,7 @@
     "noResults": "没有找到符合筛选条件的产品。",
     "clearFilters": "清除所有筛选",
     "breadcrumbHome": "首页",
+    "breadcrumbCatalog": "目录",
     "filters": {
       "title": "筛选",
       "price": "价格",
@@ -73,7 +74,8 @@
     "storeName": "Corporación Santa Rosita",
     "brand": "品牌",
     "returnPolicy": "30天免费退货",
-    "breadcrumbHome": "首页"
+    "breadcrumbHome": "首页",
+    "breadcrumbCatalog": "目录"
   },
   "meta": {
     "title": "Corporación Santa Rosita — 多品牌汽车零件",
