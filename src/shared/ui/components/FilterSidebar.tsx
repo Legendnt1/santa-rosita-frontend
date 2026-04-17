@@ -3,6 +3,7 @@
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { useCallback, useState } from "react";
 import type { FilterCriteria } from "@/modules/catalog/domain/entities/FilterCriteria";
+import { QP, SORT_VALUES } from "@/shared/config/catalog-query-params";
 import { Icon } from "./Icon";
 
 /**
@@ -130,26 +131,17 @@ export function FilterSidebar({
     [searchParams, router, pathname],
   );
 
-  /**
-   * Handles sort change.
-   */
   const handleSortChange = (sort: string) => {
-    updateParams({ sort: sort === "relevance" ? null : sort });
+    updateParams({ [QP.SORT]: sort === SORT_VALUES.RELEVANCE ? null : sort });
   };
 
-  /**
-   * Handles rating filter selection.
-   */
   const handleRatingChange = (rating: number) => {
     const current = currentFilters.minRating;
     updateParams({
-      minRating: current === rating ? null : String(rating),
+      [QP.MIN_RATING]: current === rating ? null : String(rating),
     });
   };
 
-  /**
-   * Handles brand toggle.
-   */
   const handleBrandToggle = (brand: string) => {
     const current = currentFilters.brands ? [...currentFilters.brands] : [];
     const index = current.findIndex(
@@ -163,26 +155,20 @@ export function FilterSidebar({
     }
 
     updateParams({
-      brands: current.length > 0 ? current.join(",") : null,
+      [QP.BRANDS]: current.length > 0 ? current.join(",") : null,
     });
   };
 
-  /**
-   * Handles availability toggle.
-   */
   const handleStockToggle = () => {
     updateParams({
-      inStock: currentFilters.inStockOnly ? null : "1",
+      [QP.IN_STOCK]: currentFilters.inStockOnly ? null : "1",
     });
   };
 
-  /**
-   * Applies the price range filter.
-   */
   const applyPriceFilter = () => {
     updateParams({
-      minPrice: minPrice || null,
-      maxPrice: maxPrice || null,
+      [QP.MIN_PRICE]: minPrice || null,
+      [QP.MAX_PRICE]: maxPrice || null,
     });
   };
 
@@ -195,7 +181,7 @@ export function FilterSidebar({
     router.push(`/${locale}/catalog/${categorySlug}`, { scroll: false });
   };
 
-  const currentSort = currentFilters.sort ?? "relevance";
+  const currentSort = currentFilters.sort ?? SORT_VALUES.RELEVANCE;
   const hasActiveFilters =
     currentFilters.minPrice !== undefined ||
     currentFilters.maxPrice !== undefined ||
@@ -210,12 +196,12 @@ export function FilterSidebar({
         <div className="flex flex-col gap-1">
           {(
             [
-              ["relevance", sortLabels.relevance],
-              ["price-asc", sortLabels.priceAsc],
-              ["price-desc", sortLabels.priceDesc],
-              ["rating-desc", sortLabels.ratingDesc],
-              ["newest", sortLabels.newest],
-            ] as const
+              [SORT_VALUES.RELEVANCE, sortLabels.relevance],
+              [SORT_VALUES.PRICE_ASC, sortLabels.priceAsc],
+              [SORT_VALUES.PRICE_DESC, sortLabels.priceDesc],
+              [SORT_VALUES.RATING_DESC, sortLabels.ratingDesc],
+              [SORT_VALUES.NEWEST, sortLabels.newest],
+            ] as [string, string][]
           ).map(([value, label]) => (
             <button
               key={value}
@@ -379,10 +365,10 @@ export function FilterSidebar({
       {mobileOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div
-            className="absolute inset-0 bg-black/40"
+            className="animate-fade-in absolute inset-0 bg-black/40"
             onClick={() => setMobileOpen(false)}
           />
-          <div className="absolute inset-y-0 left-0 w-80 max-w-[85vw] overflow-y-auto bg-background p-4 shadow-xl">
+          <div className="animate-slide-in-left absolute inset-y-0 left-0 w-80 max-w-[85vw] overflow-y-auto bg-background p-4 shadow-xl">
             <div className="mb-4 flex items-center justify-between">
               <h2 className="font-bold text-lg text-foreground">
                 {labels.title}

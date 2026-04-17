@@ -11,11 +11,11 @@
     "discounts": "Descuentos"
   },
   "catalog": {
-    "motorsAndTransmission": {
+    "motors_and_transmission": {
       "title": "Motores y transmisión",
       "description": "Pistones, embragues, piezas de transmisión..."
     },
-    "brakeSystem": {
+    "brake_system": {
       "title": "Sistema de frenos",
       "description": "Líquido de frenos, mordazas"
     }
@@ -50,7 +50,7 @@
       "reviews": "{count} reseñas",
       "delivery": "Entrega el {date}",
       "outOfStock": "Agotado",
-      "addToCart": "Agregar al carrito"
+      "viewProduct": "Ver producto"
     }
   },
   "pdp": {

@@ -78,15 +78,15 @@
     & {
       /* Base surfaces */
       --background: #0f0d1a;
-      --background-search-bar: #7c3aed;
-      --foreground: #8d8996;
-      --foreground-muted: #837d91;
+      --background-search-bar: #1a1550;
+      --foreground: #e8e4f0;
+      --foreground-muted: #9d98ac;
       --primary: #a78bfa;
       --primary-foreground: #ffffff;
       --accent: #ef4444;
       --accent-foreground: #ffffff;
-      --card: #ffffff;
-      --card-foreground: #1e1b2e;
+      --card: #1c1933;
+      --card-foreground: #e8e4f0;
       --border: #2a2245;
 
       /* Category sections — deep, rich tones */
@@ -108,13 +108,13 @@
   --background: #0f0d1a;
   --background-search-bar: #7c3aed;
   --foreground: #e8e4f0;
-  --foreground-muted: #837d91;
+  --foreground-muted: #9d98ac;
   --primary: #a78bfa;
   --primary-foreground: #ffffff;
   --accent: #ef4444;
   --accent-foreground: #ffffff;
-  --card: #ffffff;
-  --card-foreground: #1e1b2e;
+  --card: #1c1933;
+  --card-foreground: #e8e4f0;
   --border: #2a2245;
 
   /* Category sections — deep, rich tones */
@@ -189,4 +189,92 @@ body {
   font-weight: normal;
   font-style: italic;
   font-display: swap;
+}
+
+/* ───────────────────────────────────────────────────────────
+   Keyframe Animations
+   ─────────────────────────────────────────────────────────── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95) translateY(-6px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0); }
+}
+@keyframes slide-in-left {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(0); }
+}
+
+/* ───────────────────────────────────────────────────────────
+   Animation Utilities
+   ─────────────────────────────────────────────────────────── */
+@layer utilities {
+  .animate-fade-up       { animation: fade-up       0.35s ease-out both; }
+  .animate-fade-in       { animation: fade-in       0.25s ease-out both; }
+  .animate-scale-in      { animation: scale-in      0.2s  cubic-bezier(0.16, 1, 0.3, 1) both; }
+  .animate-slide-in-left { animation: slide-in-left 0.28s cubic-bezier(0.32, 0.72, 0, 1) both; }
+}
+
+/* ───────────────────────────────────────────────────────────
+   Product grid — entrance stagger by position
+   ─────────────────────────────────────────────────────────── */
+.product-grid > article:nth-child(1) { animation-delay:   0ms; }
+.product-grid > article:nth-child(2) { animation-delay:  55ms; }
+.product-grid > article:nth-child(3) { animation-delay: 110ms; }
+.product-grid > article:nth-child(4) { animation-delay: 165ms; }
+.product-grid > article:nth-child(5) { animation-delay: 220ms; }
+.product-grid > article:nth-child(6) { animation-delay: 275ms; }
+.product-grid > article:nth-child(7) { animation-delay: 330ms; }
+.product-grid > article:nth-child(8) { animation-delay: 385ms; }
+
+/* ───────────────────────────────────────────────────────────
+   Shared Component Classes
+   ─────────────────────────────────────────────────────────── */
+@layer components {
+  /* Navbar icon button — round, ghost, scale on hover */
+  .btn-icon {
+    @apply flex h-8 w-8 items-center justify-center rounded-full
+           text-navbar-fg transition-all duration-200
+           hover:bg-primary/15 hover:scale-110 active:scale-95
+           sm:h-9 sm:w-9;
+  }
+
+  /* Primary pill button */
+  .btn-primary {
+    @apply w-full rounded-full bg-primary px-4 py-2.5 text-sm
+           font-semibold text-primary-foreground transition-all duration-200
+           hover:opacity-90 hover:shadow-lg hover:shadow-primary/25
+           active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  /* Accent pill button */
+  .btn-accent {
+    @apply w-full rounded-full bg-accent px-4 py-2.5 text-sm
+           font-semibold text-accent-foreground transition-all duration-200
+           hover:opacity-90 hover:shadow-lg hover:shadow-accent/25
+           active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  /* Outline button — fills on hover (used in product grid) */
+  .btn-outline-primary {
+    @apply block w-full rounded-lg border border-primary/60 px-3 py-2
+           text-center text-xs font-semibold text-primary
+           transition-all duration-200
+           hover:bg-primary hover:text-primary-foreground
+           active:scale-[0.98];
+  }
+
+  /* Elevated card with lift-on-hover */
+  .card-interactive {
+    will-change: transform;
+    @apply rounded-xl border border-border/40 bg-card shadow-sm
+           transition-all duration-300
+           hover:border-primary/30 hover:shadow-lg hover:-translate-y-0.5;
+  }
 }

@@ -64,16 +64,16 @@ export function CategorySection({
     >
       <div className="flex flex-col md:flex-row">
         {/* ── Info panel ─────────────────────────────────── */}
-        <div className="flex flex-col justify-center gap-2 px-4 py-5 sm:gap-3 sm:px-8 sm:py-8 md:w-60">
-          <h2 className="font-bold text-lg leading-tight text-foreground sm:text-xl">
+        <div className="flex flex-col justify-center gap-3 px-5 py-6 sm:gap-4 sm:px-8 sm:py-10 md:w-64">
+          <h2 className="text-xl font-extrabold leading-tight text-foreground sm:text-2xl">
             {labels.title}
           </h2>
-          <p className="text-xs leading-snug text-foreground/70 sm:text-sm">
+          <p className="text-sm leading-relaxed text-foreground/75">
             {labels.description}
           </p>
           <a
             href={`/${locale}/catalog/${category.slug}`}
-            className={`${styles.button} mt-1 inline-block w-fit rounded-full px-6 py-2 font-semibold text-xs transition-all sm:mt-2 sm:px-8 sm:py-2.5 sm:text-sm`}
+            className={`${styles.button} mt-1 inline-block w-fit rounded-full px-6 py-2.5 text-sm font-semibold transition-all duration-200 hover:opacity-90 hover:shadow-md active:scale-[0.98] sm:mt-2`}
           >
             {labels.searchButton}
           </a>

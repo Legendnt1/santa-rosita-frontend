@@ -25,23 +25,26 @@ interface ProductCardProps {
  */
 export function ProductCard({ product, labels }: ProductCardProps) {
   return (
-    <article className="flex w-full shrink-0 flex-col overflow-hidden sm:w-44 md:w-48">
+    <article className="group flex w-full shrink-0 flex-col overflow-hidden sm:w-44 md:w-48">
       {/* Product image */}
-      <div className="flex aspect-square items-center justify-center rounded-lg bg-white p-3 shadow-sm sm:rounded-xl sm:p-4">
+      <div className="flex aspect-square items-center justify-center rounded-lg bg-white p-3 shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-md sm:rounded-xl sm:p-4">
         <img
           src={product.imageUrl}
           alt={product.name}
-          className="h-full w-full object-contain"
+          className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-105"
           loading="lazy"
         />
       </div>
 
-      {/* Price & stock */}
+      {/* Name, price & stock */}
       <div className="mt-1.5 px-0.5 sm:mt-2 sm:px-1">
-        <p className="text-sm font-semibold text-foreground sm:text-base">
+        <p className="line-clamp-2 text-xs font-medium leading-snug text-foreground sm:text-sm">
+          {product.name}
+        </p>
+        <p className="mt-1 text-sm font-bold text-foreground sm:text-base">
           {formatPrice(product.currency, product.price)}
         </p>
-        <p className="text-xs text-foreground/60 sm:text-sm">
+        <p className="text-[11px] text-foreground/60 sm:text-xs">
           {labels.stock}: {product.stock}
         </p>
       </div>

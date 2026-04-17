@@ -13,8 +13,8 @@ import type { CatalogRepository } from '../../domain/repository/CatalogRepositor
  */
 
 const MOCK_CATEGORIES: Category[] = [
-  { id: 'cat-1', slug: 'motorsAndTransmission', theme: 'purple' },
-  { id: 'cat-2', slug: 'brakeSystem', theme: 'earth' },
+  { id: 'cat-1', slug: 'motors_and_transmission', theme: 'purple' },
+  { id: 'cat-2', slug: 'brake_system', theme: 'earth' },
 ];
 
 const MOCK_PRODUCTS: Product[] = [
@@ -424,17 +424,17 @@ export class InMemoryCatalogRepository implements CatalogRepository {
 
     // Sort
     switch (filters.sort) {
-      case 'price-asc':
+      case 'price_asc':
         results.sort(
           (a, b) => (a.discountPrice ?? a.price) - (b.discountPrice ?? b.price)
         );
         break;
-      case 'price-desc':
+      case 'price_desc':
         results.sort(
           (a, b) => (b.discountPrice ?? b.price) - (a.discountPrice ?? a.price)
         );
         break;
-      case 'rating-desc':
+      case 'rating_desc':
         results.sort((a, b) => b.rating - a.rating);
         break;
       case 'newest':
