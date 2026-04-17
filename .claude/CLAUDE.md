@@ -16,7 +16,6 @@ High-scale car parts e-commerce architecture designed for extreme maintainabilit
 * **State global**: Zustand (Minimal, only if necessary).
 * **i18n**: Spanish (`es`), English (`en`), Chinese (`zh`) via `[locale]` route segments.
 * **Fonts**: Local "Rubik" family stored in `public/assets/fonts/`.
-* **Icons**: Local SVG sprite in `public/assets/icons/icons.svg`.
 
 ## Architecture & Patterns
 We follow a hybrid of **Screaming** and **Hexagonal Architecture** to ensure the core business logic remains framework-agnostic.
@@ -66,4 +65,5 @@ src/
   i18n/                     # es.json, en.json, zh.json
 
 ## Final Considerations
+* **Using icons**: Use performance-optimized icon component `Icon.tsx` that uses the SVG sprite for all icons. Avoid inline SVGs or external icon libraries.
 * **Running commands**: Do not execute 'build' or 'dev' commands for every change of code.
