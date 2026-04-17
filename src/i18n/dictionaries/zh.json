@@ -11,11 +11,11 @@
     "discounts": "折扣"
   },
   "catalog": {
-    "motorsAndTransmission": {
+    "motors_and_transmission": {
       "title": "发动机与变速箱",
       "description": "活塞、离合器、传动部件..."
     },
-    "brakeSystem": {
+    "brake_system": {
       "title": "制动系统",
       "description": "制动液、卡钳"
     }
@@ -50,7 +50,7 @@
       "reviews": "{count} 条评论",
       "delivery": "预计 {date} 送达",
       "outOfStock": "缺货",
-      "addToCart": "加入购物车"
+      "viewProduct": "查看产品"
     }
   },
   "pdp": {

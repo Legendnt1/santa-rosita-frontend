@@ -23,7 +23,7 @@ interface ProductGridProps {
     reviews: string;
     delivery: string;
     outOfStock: string;
-    addToCart: string;
+    viewProduct: string;
     stock: string;
   };
   /** Current locale */
@@ -51,60 +51,64 @@ function ListingProductCard({
   const deliveryText = formatDeliveryText(labels.delivery, product.deliveryDate);
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-xl border border-border/40 bg-card shadow-sm transition-all duration-200 hover:border-primary/30 hover:shadow-md">
+    <article className="card-interactive group flex flex-col overflow-hidden animate-fade-up">
       {/* Product image */}
-      <div className="relative flex aspect-square items-center justify-center bg-white p-4">
-        <img
-          src={product.imageUrl}
-          alt={product.name}
-          className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-105"
-          loading="lazy"
-        />
+      <Link href={`/${locale}/catalog/product/${product.id}`} tabIndex={-1} aria-hidden>
+        <div className="relative flex aspect-square items-center justify-center bg-white p-4">
+          <img
+            src={product.imageUrl}
+            alt={product.name}
+            className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-105"
+            loading="lazy"
+          />
 
-        {/* Discount badge */}
-        {productHasDiscount && (
-          <span className="absolute left-2 top-2 rounded-md bg-accent px-2 py-0.5 text-[10px] font-bold text-accent-foreground">
-            -{getDiscountPercent(product)}%
-          </span>
-        )}
-
-        {/* Out of stock overlay */}
-        {isOutOfStock && (
-          <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-[1px]">
-            <span className="rounded-md bg-foreground/80 px-3 py-1 text-xs font-bold text-white">
-              {labels.outOfStock}
+          {/* Discount badge */}
+          {productHasDiscount && (
+            <span className="absolute left-2 top-2 rounded-md bg-accent px-2 py-0.5 text-[10px] font-bold text-accent-foreground">
+              -{getDiscountPercent(product)}%
             </span>
-          </div>
-        )}
-      </div>
+          )}
+
+          {/* Out of stock overlay */}
+          {isOutOfStock && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-[1px]">
+              <span className="rounded-md bg-foreground/80 px-3 py-1 text-xs font-bold text-white">
+                {labels.outOfStock}
+              </span>
+            </div>
+          )}
+        </div>
+      </Link>
 
       {/* Product details */}
-      <div className="flex flex-1 flex-col gap-1.5 p-3">
+      <div className="flex flex-1 flex-col gap-1 p-3">
         {/* Brand */}
-        <span className="text-[10px] font-medium tracking-wider text-primary uppercase">
+        <span className="text-[10px] font-semibold tracking-widest text-primary uppercase">
           {product.brand}
         </span>
 
         {/* Name */}
-        <h3 className="line-clamp-2 text-sm font-medium leading-snug text-card-foreground">
-          <a
+        <h3 className="line-clamp-2 text-sm font-semibold leading-snug text-card-foreground">
+          <Link
             href={`/${locale}/catalog/product/${product.id}`}
             className="transition-colors hover:text-primary"
           >
             {product.name}
-          </a>
+          </Link>
         </h3>
 
         {/* Rating */}
-        <StarRating
-          rating={product.rating}
-          reviewCount={product.reviewCount}
-          reviewsLabel={labels.reviews}
-        />
+        <div className="mt-0.5">
+          <StarRating
+            rating={product.rating}
+            reviewCount={product.reviewCount}
+            reviewsLabel={labels.reviews}
+          />
+        </div>
 
         {/* Price */}
-        <div className="mt-auto flex items-baseline gap-2 pt-1">
-          <span className="font-bold text-base text-card-foreground">
+        <div className="mt-auto flex items-baseline gap-2 pt-2">
+          <span className="text-lg font-bold text-card-foreground">
             {formatPrice(product.currency, effectivePrice)}
           </span>
           {productHasDiscount && (
@@ -122,14 +126,10 @@ function ListingProductCard({
           </p>
         )}
 
-        {/* Add to cart button */}
-        <button
-          type="button"
-          disabled={isOutOfStock}
-          className="mt-2 w-full rounded-lg bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground transition-all hover:opacity-90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40"
-        >
-          {labels.addToCart}
-        </button>
+        {/* View product link — primary CTA */}
+        <Link href={`/${locale}/catalog/product/${product.id}`} className="btn-outline-primary mt-2.5">
+          {labels.viewProduct}
+        </Link>
       </div>
     </article>
   );
@@ -162,7 +162,7 @@ export function ProductGrid({
   }
 
   return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+    <div className="product-grid grid grid-cols-2 gap-3 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
       {products.map((product) => (
         <ListingProductCard
           key={product.id}

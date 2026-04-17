@@ -132,18 +132,10 @@ export function BuyBox({ product, labels }: BuyBoxProps) {
 
       {/* ── Action buttons ───────────────────────────────── */}
       <div className="flex flex-col gap-2">
-        <button
-          type="button"
-          disabled
-          className="w-full rounded-full bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition-all disabled:cursor-not-allowed disabled:opacity-50"
-        >
+        <button type="button" disabled className="btn-primary">
           {labels.addToCart}
         </button>
-        <button
-          type="button"
-          disabled
-          className="w-full rounded-full bg-accent px-4 py-2.5 text-sm font-semibold text-accent-foreground transition-all disabled:cursor-not-allowed disabled:opacity-50"
-        >
+        <button type="button" disabled className="btn-accent">
           {labels.buyNow}
         </button>
       </div>

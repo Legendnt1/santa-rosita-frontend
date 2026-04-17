@@ -3,9 +3,9 @@
  */
 export type SortOption =
   | 'relevance'
-  | 'price-asc'
-  | 'price-desc'
-  | 'rating-desc'
+  | 'price_asc'
+  | 'price_desc'
+  | 'rating_desc'
   | 'newest';
 
 /**

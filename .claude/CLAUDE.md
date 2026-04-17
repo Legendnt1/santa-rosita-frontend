@@ -65,5 +65,44 @@ src/
   shared/ui/                # Atomic components (BuyBox, Gallery, StarRating)
   i18n/                     # es.json, en.json, zh.json
 
+## Animation System (`globals.css`)
+All animations are defined in `globals.css` via `@keyframes` + `@layer utilities`. Do **not** use external animation plugins (e.g. `tailwindcss-animate`).
+
+### Animation utility classes
+| Class | Keyframe | Duration | Use case |
+|---|---|---|---|
+| `.animate-fade-up` | `fade-up` | 350ms ease-out | Card/section entrance from below |
+| `.animate-fade-in` | `fade-in` | 250ms ease-out | Image crossfade, backdrop overlay |
+| `.animate-scale-in` | `scale-in` | 200ms cubic-bezier(0.16,1,0.3,1) | Dropdown menus, popups |
+| `.animate-slide-in-left` | `slide-in-left` | 280ms cubic-bezier(0.32,0.72,0,1) | Mobile drawer/sidebar |
+
+### Product grid stagger
+Add the `.product-grid` class to the grid container. CSS `nth-child` selectors automatically delay each `article` child by 55ms increments (up to 8 items), creating a cascading entrance with zero JS.
+
+```html
+<div class="product-grid grid grid-cols-2 ...">
+  <article class="animate-fade-up">...</article>  <!-- delay 0ms   -->
+  <article class="animate-fade-up">...</article>  <!-- delay 55ms  -->
+  <article class="animate-fade-up">...</article>  <!-- delay 110ms -->
+</div>
+```
+
+### Shared component classes (`@layer components`)
+Reusable classes that replace long Tailwind strings. Always prefer these over repeating the utility chain.
+
+| Class | Description | Used in |
+|---|---|---|
+| `.btn-icon` | Round ghost icon button (navbar scale hover) | Navbar, ThemeToggle, LanguageSwitcher |
+| `.btn-primary` | Full-width rounded-full primary button | BuyBox |
+| `.btn-accent` | Full-width rounded-full accent/red button | BuyBox |
+| `.btn-outline-primary` | Outline block button, fills on hover | ProductGrid (Ver producto) |
+| `.card-interactive` | Card with border, shadow, and `hover:-translate-y-0.5` lift | ProductGrid listing cards |
+
+### Rules
+* New repeating UI patterns → add to `@layer components` in `globals.css`, not inline.
+* New entrance animations → add `@keyframes` + utility to `@layer utilities`.
+* `will-change: transform` is set on `.card-interactive` for GPU compositing. Add it manually to other elements only when a hover transform causes jank.
+* Image crossfade: use `key={src}` on the `<img>` element so React remounts it and re-triggers the `animate-fade-in` class.
+
 ## Final Considerations
 * **Running commands**: Do not execute 'build' or 'dev' commands for every change of code.

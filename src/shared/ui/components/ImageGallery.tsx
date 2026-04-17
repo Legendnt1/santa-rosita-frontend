@@ -56,9 +56,10 @@ export function ImageGallery({ images, productName }: ImageGalleryProps) {
       {/* ── Main image ───────────────────────────────────── */}
       <div className="flex flex-1 items-center justify-center rounded-xl border border-border/30 bg-white p-4 sm:p-8">
         <img
+          key={mainImage}
           src={mainImage}
           alt={productName}
-          className="max-h-85 w-full object-contain sm:max-h-110 transition-opacity duration-200"
+          className="max-h-85 w-full animate-fade-in object-contain sm:max-h-110"
         />
       </div>
     </div>
