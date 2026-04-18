@@ -52,7 +52,8 @@
       "delivery": "Delivery by {date}",
       "outOfStock": "Out of stock",
       "viewProduct": "View product"
-    }
+    },
+    "viewCategory": "View products"
   },
   "pdp": {
     "breadcrumbProduct": "Product Detail",
@@ -76,6 +77,23 @@
     "returnPolicy": "Free 30-day returns",
     "breadcrumbHome": "Home",
     "breadcrumbCatalog": "Catalog"
+  },
+  "cart": {
+    "title": "Cart",
+    "empty": "Your cart is empty",
+    "emptySubtitle": "Browse our catalog and add items to get started",
+    "continueShopping": "Continue shopping",
+    "remove": "Remove",
+    "orderSummary": "Order summary",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "shippingNote": "Calculated at checkout",
+    "total": "Total",
+    "checkout": "Proceed to checkout",
+    "clear": "Clear cart",
+    "qty": "Qty",
+    "items": "{count} items",
+    "addedToCart": "Added!"
   },
   "meta": {
     "title": "Corporación Santa Rosita — Multi-brand Auto Parts",

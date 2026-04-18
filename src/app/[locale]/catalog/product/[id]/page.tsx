@@ -168,6 +168,7 @@ export default async function ProductDetailPage({
                 youSave: pdp.youSave,
                 quantity: pdp.quantity,
                 addToCart: pdp.addToCart,
+                addedToCart: dict.cart.addedToCart,
                 buyNow: pdp.buyNow,
                 deliverTo: pdp.deliverTo,
                 delivery: pdp.delivery,

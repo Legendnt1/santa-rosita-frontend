@@ -277,4 +277,9 @@ body {
            transition-all duration-300
            hover:border-primary/30 hover:shadow-lg hover:-translate-y-0.5;
   }
+
+  /* Static card surface — no hover effects (order summary, cart rows) */
+  .card {
+    @apply rounded-xl border border-border/40 bg-card shadow-sm;
+  }
 }

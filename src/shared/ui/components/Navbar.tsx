@@ -2,6 +2,7 @@ import type { Dictionary } from "@/i18n/getDictionary";
 import { SearchBar } from "./SearchBar";
 import { ThemeToggle } from "./ThemeToggle";
 import { LanguageSwitcher } from "./LanguageSwitcher";
+import { CartButton } from "./CartButton";
 import { Icon } from "./Icon";
 
 /**
@@ -48,12 +49,7 @@ export function Navbar({ dict, locale }: NavbarProps) {
             </button>
 
             {/* Cart */}
-            <button type="button" className="btn-icon relative" aria-label="Cart">
-              <Icon name="shopping-cart" className="h-5 w-5 sm:h-5.5 sm:w-5.5" />
-              <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-accent text-[10px] font-bold text-accent-foreground">
-                0
-              </span>
-            </button>
+            <CartButton locale={locale} label="Cart" />
           </nav>
 
           {/* Search — full width below logo on mobile, inline on desktop */}

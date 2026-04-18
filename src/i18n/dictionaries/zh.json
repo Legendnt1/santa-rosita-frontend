@@ -52,7 +52,8 @@
       "delivery": "预计 {date} 送达",
       "outOfStock": "缺货",
       "viewProduct": "查看产品"
-    }
+    },
+    "viewCategory": "查看产品"
   },
   "pdp": {
     "breadcrumbProduct": "产品详情",
@@ -76,6 +77,23 @@
     "returnPolicy": "30天免费退货",
     "breadcrumbHome": "首页",
     "breadcrumbCatalog": "目录"
+  },
+  "cart": {
+    "title": "购物车",
+    "empty": "您的购物车为空",
+    "emptySubtitle": "浏览我们的目录并添加商品以开始购物",
+    "continueShopping": "继续购物",
+    "remove": "删除",
+    "orderSummary": "订单摘要",
+    "subtotal": "小计",
+    "shipping": "运费",
+    "shippingNote": "结账时计算",
+    "total": "合计",
+    "checkout": "前往结账",
+    "clear": "清空购物车",
+    "qty": "数量",
+    "items": "{count} 件商品",
+    "addedToCart": "已添加！"
   },
   "meta": {
     "title": "Corporación Santa Rosita — 多品牌汽车零件",

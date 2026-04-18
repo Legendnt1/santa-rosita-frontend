@@ -9,6 +9,7 @@ import {
 } from "@/shared/utils/price";
 import { Icon } from "./Icon";
 import { StockBadge } from "./StockBadge";
+import { AddToCartSection } from "./AddToCartSection";
 
 /**
  * Props for the BuyBox server component.
@@ -26,6 +27,7 @@ interface BuyBoxProps {
     youSave: string;
     quantity: string;
     addToCart: string;
+    addedToCart: string;
     buyNow: string;
     deliverTo: string;
     delivery: string;
@@ -103,42 +105,25 @@ export function BuyBox({ product, labels }: BuyBoxProps) {
         />
       </div>
 
-      {/* ── Quantity selector ────────────────────────────── */}
-      {!isOutOfStock && (
-        <div className="flex items-center gap-2">
-          <label
-            htmlFor="qty-select"
-            className="text-sm font-medium text-card-foreground"
-          >
-            {labels.quantity}:
-          </label>
-          <select
-            id="qty-select"
-            defaultValue="1"
-            disabled
-            className="rounded-md border border-border bg-background px-3 py-1.5 text-sm text-foreground disabled:cursor-not-allowed disabled:opacity-60"
-          >
-            {Array.from(
-              { length: Math.min(product.stock, 10) },
-              (_, i) => i + 1,
-            ).map((n) => (
-              <option key={n} value={n}>
-                {n}
-              </option>
-            ))}
-          </select>
-        </div>
-      )}
-
-      {/* ── Action buttons ───────────────────────────────── */}
-      <div className="flex flex-col gap-2">
-        <button type="button" disabled className="btn-primary">
-          {labels.addToCart}
-        </button>
-        <button type="button" disabled className="btn-accent">
-          {labels.buyNow}
-        </button>
-      </div>
+      {/* ── Add to cart ──────────────────────────────────── */}
+      <AddToCartSection
+        product={{
+          id: product.id,
+          name: product.name,
+          brand: product.brand,
+          imageUrl: product.images[0] ?? "",
+          price: product.price,
+          discountPrice: product.discountPrice,
+          currency: product.currency,
+          stock: product.stock,
+        }}
+        labels={{
+          quantity: labels.quantity,
+          addToCart: labels.addToCart,
+          addedToCart: labels.addedToCart,
+          buyNow: labels.buyNow,
+        }}
+      />
 
       {/* ── Trust signals ────────────────────────────────── */}
       <div className="flex flex-col gap-1.5 border-t border-border/30 pt-3 text-xs text-foreground-muted">

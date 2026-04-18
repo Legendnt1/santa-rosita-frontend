@@ -58,6 +58,7 @@ export interface Dictionary {
       outOfStock: string;
       viewProduct: string;
     };
+    viewCategory: string;
   };
   pdp: {
     breadcrumbProduct: string;
@@ -81,6 +82,23 @@ export interface Dictionary {
     returnPolicy: string;
     breadcrumbHome: string;
     breadcrumbCatalog: string;
+  };
+  cart: {
+    title: string;
+    empty: string;
+    emptySubtitle: string;
+    continueShopping: string;
+    remove: string;
+    orderSummary: string;
+    subtotal: string;
+    shipping: string;
+    shippingNote: string;
+    total: string;
+    checkout: string;
+    clear: string;
+    qty: string;
+    items: string;
+    addedToCart: string;
   };
   meta: {
     title: string;

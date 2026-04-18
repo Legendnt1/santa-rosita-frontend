@@ -52,7 +52,8 @@
       "delivery": "Entrega el {date}",
       "outOfStock": "Agotado",
       "viewProduct": "Ver producto"
-    }
+    },
+    "viewCategory": "Ver productos"
   },
   "pdp": {
     "breadcrumbProduct": "Detalle del producto",
@@ -76,6 +77,23 @@
     "returnPolicy": "Devoluciones gratis por 30 días",
     "breadcrumbHome": "Inicio",
     "breadcrumbCatalog": "Catálogo"
+  },
+  "cart": {
+    "title": "Carrito",
+    "empty": "Tu carrito está vacío",
+    "emptySubtitle": "Explora nuestro catálogo y agrega productos para comenzar",
+    "continueShopping": "Seguir comprando",
+    "remove": "Eliminar",
+    "orderSummary": "Resumen del pedido",
+    "subtotal": "Subtotal",
+    "shipping": "Envío",
+    "shippingNote": "Calculado al finalizar",
+    "total": "Total",
+    "checkout": "Proceder al pago",
+    "clear": "Vaciar carrito",
+    "qty": "Cant",
+    "items": "{count} artículos",
+    "addedToCart": "¡Agregado!"
   },
   "meta": {
     "title": "Corporación Santa Rosita — Repuestos Multimarca",
