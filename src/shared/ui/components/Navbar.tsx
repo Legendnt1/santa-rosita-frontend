@@ -1,8 +1,12 @@
 import type { Dictionary } from "@/i18n/getDictionary";
+import { getAuthToken } from "@/shared/lib/auth";
+import { authRepository } from "@/modules/auth/infrastructure/auth-repository.instance";
+import type { User } from "@/modules/auth/domain/entities/User";
 import { SearchBar } from "./SearchBar";
 import { ThemeToggle } from "./ThemeToggle";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { CartButton } from "./CartButton";
+import { UserMenu } from "./UserMenu";
 import { Icon } from "./Icon";
 
 /**
@@ -20,7 +24,16 @@ interface NavbarProps {
  * Logo | Search bar | Action icons | Sub-navigation links.
  * React 19 Server Component.
  */
-export function Navbar({ dict, locale }: NavbarProps) {
+export async function Navbar({ dict, locale }: NavbarProps) {
+  // Resolve current user server-side from the httpOnly JWT cookie.
+  let currentUser: User | null = null;
+  try {
+    const token = await getAuthToken();
+    if (token) currentUser = await authRepository.getProfile(token);
+  } catch {
+    currentUser = null;
+  }
+
   return (
     <header className="sticky top-0 z-50 w-full shadow-sm">
       {/* ── Upper bar ──────────────────────────────────────── */}
@@ -43,10 +56,16 @@ export function Navbar({ dict, locale }: NavbarProps) {
             {/* Theme toggle (client component) */}
             <ThemeToggle />
 
-            {/* Account */}
-            <button type="button" className="btn-icon" aria-label="Account">
-              <Icon name="user" className="h-5 w-5 sm:h-5.5 sm:w-5.5" />
-            </button>
+            {/* User menu — shows sign in/up or logged-in user with dropdown */}
+            <UserMenu
+              initialUser={currentUser}
+              locale={locale}
+              labels={{
+                signIn: dict.auth.signIn,
+                signUp: dict.auth.signUp,
+                logout: dict.auth.logout,
+              }}
+            />
 
             {/* Cart */}
             <CartButton locale={locale} label="Cart" />

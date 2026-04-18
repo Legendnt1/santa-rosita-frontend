@@ -15,7 +15,7 @@
 
   /* Palette — Light theme */
   --background: #f4f2ff;
-  --background-sarch-bar: #e9d5ff;
+  --background-search-bar: #e9d5ff;
   --foreground: #1e1b2e;
   --foreground-muted: #767579;
   --primary: #7c3aed;
@@ -106,7 +106,7 @@
 :root.dark {
   /* Base surfaces */
   --background: #0f0d1a;
-  --background-search-bar: #7c3aed;
+  --background-search-bar: #1a1550;
   --foreground: #e8e4f0;
   --foreground-muted: #9d98ac;
   --primary: #a78bfa;

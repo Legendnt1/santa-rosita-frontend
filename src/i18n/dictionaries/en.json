@@ -95,6 +95,32 @@
     "items": "{count} items",
     "addedToCart": "Added!"
   },
+  "auth": {
+    "loginTitle": "Sign in",
+    "loginSubtitle": "Welcome back to Santa Rosita",
+    "registerTitle": "Create account",
+    "registerSubtitle": "Join us and find the parts you need",
+    "name": "Full name",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "submit": "Sign in",
+    "submitRegister": "Create account",
+    "switchToRegister": "Don't have an account? Sign up",
+    "switchToLogin": "Already have an account? Sign in",
+    "forgotPassword": "Forgot password?",
+    "signIn": "Sign in",
+    "signUp": "Sign up",
+    "logout": "Sign out",
+    "errors": {
+      "invalidCredentials": "Invalid email or password.",
+      "emailTaken": "This email is already registered.",
+      "passwordMismatch": "Passwords do not match.",
+      "required": "Please fill in all required fields.",
+      "invalidEmail": "Please enter a valid email address.",
+      "unknown": "Something went wrong. Please try again."
+    }
+  },
   "meta": {
     "title": "Corporación Santa Rosita — Multi-brand Auto Parts",
     "description": "Multi-brand automotive parts store"

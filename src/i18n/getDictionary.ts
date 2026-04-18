@@ -100,6 +100,32 @@ export interface Dictionary {
     items: string;
     addedToCart: string;
   };
+  auth: {
+    loginTitle: string;
+    loginSubtitle: string;
+    registerTitle: string;
+    registerSubtitle: string;
+    name: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+    submit: string;
+    submitRegister: string;
+    switchToRegister: string;
+    switchToLogin: string;
+    forgotPassword: string;
+    signIn: string;
+    signUp: string;
+    logout: string;
+    errors: {
+      invalidCredentials: string;
+      emailTaken: string;
+      passwordMismatch: string;
+      required: string;
+      invalidEmail: string;
+      unknown: string;
+    };
+  };
   meta: {
     title: string;
     description: string;

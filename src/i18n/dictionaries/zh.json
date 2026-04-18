@@ -95,6 +95,32 @@
     "items": "{count} 件商品",
     "addedToCart": "已添加！"
   },
+  "auth": {
+    "loginTitle": "登录",
+    "loginSubtitle": "欢迎回到 Santa Rosita",
+    "registerTitle": "创建账户",
+    "registerSubtitle": "加入我们，找到您需要的零部件",
+    "name": "全名",
+    "email": "电子邮件",
+    "password": "密码",
+    "confirmPassword": "确认密码",
+    "submit": "登录",
+    "submitRegister": "创建账户",
+    "switchToRegister": "没有账户？立即注册",
+    "switchToLogin": "已有账户？立即登录",
+    "forgotPassword": "忘记密码？",
+    "signIn": "登录",
+    "signUp": "注册",
+    "logout": "退出登录",
+    "errors": {
+      "invalidCredentials": "邮箱或密码不正确。",
+      "emailTaken": "此邮箱已被注册。",
+      "passwordMismatch": "两次输入的密码不一致。",
+      "required": "请填写所有必填字段。",
+      "invalidEmail": "请输入有效的电子邮件地址。",
+      "unknown": "出现了一些问题，请重试。"
+    }
+  },
   "meta": {
     "title": "Corporación Santa Rosita — 多品牌汽车零件",
     "description": "多品牌汽车零件商店"
