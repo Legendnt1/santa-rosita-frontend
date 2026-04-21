@@ -35,6 +35,8 @@ export type IconName =
   | "user"
   | "world"
   | "x"
+  | "minus"
+  | "plus";
 
 interface IconProps extends Omit<SVGProps<SVGSVGElement>, "name"> {
   /** Icon ID from the SVG sprite. Ensures developers only use existing icons. */

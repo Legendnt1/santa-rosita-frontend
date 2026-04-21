@@ -17,6 +17,14 @@ const themeStyles: Record<string, { card: string; icon: string }> = {
     card: "border-category-earth-btn/20 hover:border-category-earth-btn/60 hover:shadow-category-earth-btn/10",
     icon: "text-category-earth-btn",
   },
+  sky: {
+    card: "border-category-sky-btn/20 hover:border-category-sky-btn/60 hover:shadow-category-sky-btn/10",
+    icon: "text-category-sky-btn",
+  },
+  forest: {
+    card: "border-category-forest-btn/20 hover:border-category-forest-btn/60 hover:shadow-category-forest-btn/10",
+    icon: "text-category-forest-btn",
+  },
 };
 
 export default async function CatalogIndexPage({ params }: CatalogIndexPageProps) {

@@ -20,6 +20,14 @@ const themeStyles: Record<CategoryTheme, { wrapper: string; button: string }> =
       wrapper: "bg-category-earth-bg",
       button: "bg-category-earth-btn text-white hover:opacity-90",
     },
+    sky: {
+      wrapper: "bg-category-sky-bg",
+      button: "bg-category-sky-btn text-white hover:opacity-90",
+    },
+    forest: {
+      wrapper: "bg-category-forest-bg",
+      button: "bg-category-forest-btn text-white hover:opacity-90",
+    },
   };
 
 /**

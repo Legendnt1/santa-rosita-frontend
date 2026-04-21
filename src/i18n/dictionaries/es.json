@@ -8,16 +8,74 @@
   "navbar": {
     "categories": "Categorías",
     "newProducts": "Nuevos productos",
-    "discounts": "Descuentos"
+    "discounts": "Descuentos",
+    "brands": "Marcas",
+    "seeAll": "Ver todo",
+    "groupPurple": "Mecánica",
+    "groupEarth": "Desgaste",
+    "groupSky": "Sistemas",
+    "groupForest": "Carrocería"
   },
   "catalog": {
-    "motors_and_transmission": {
-      "title": "Motores y transmisión",
-      "description": "Pistones, embragues, piezas de transmisión..."
+    "engine": {
+      "title": "Motor",
+      "description": "Motores, bujías, filtros, correas, inyectores y bombas"
     },
-    "brake_system": {
-      "title": "Sistema de frenos",
-      "description": "Líquido de frenos, mordazas"
+    "brakes": {
+      "title": "Frenos",
+      "description": "Pastillas, discos, líquido de frenos y mordazas"
+    },
+    "suspension": {
+      "title": "Suspensión",
+      "description": "Amortiguadores, resortes, rótulas y bujes"
+    },
+    "steering": {
+      "title": "Dirección",
+      "description": "Cremalleras, terminales, columnas y bombas hidráulicas"
+    },
+    "transmission": {
+      "title": "Transmisión",
+      "description": "Cajas de cambios, embragues, ejes y diferenciales"
+    },
+    "electrical_system": {
+      "title": "Sistema eléctrico",
+      "description": "Baterías, alternadores, fusibles, sensores y ECU"
+    },
+    "cooling": {
+      "title": "Refrigeración",
+      "description": "Radiadores, termostatos, ventiladores y mangueras"
+    },
+    "fuel_system": {
+      "title": "Combustible",
+      "description": "Bombas, inyectores, filtros y tanques de combustible"
+    },
+    "exterior_body": {
+      "title": "Carrocería exterior",
+      "description": "Capós, parachoques, puertas, guardafangos y vidrios"
+    },
+    "interior": {
+      "title": "Interior",
+      "description": "Asientos, tableros, consolas, tapicería y paneles"
+    },
+    "lighting": {
+      "title": "Iluminación",
+      "description": "Faros, luces traseras, direccionales y bombillos"
+    },
+    "exhaust": {
+      "title": "Escape",
+      "description": "Mofles, catalizadores, tubos y sensores de oxígeno"
+    },
+    "wheels_and_tires": {
+      "title": "Ruedas y neumáticos",
+      "description": "Llantas, rines, neumáticos y tuercas de rueda"
+    },
+    "lubrication_and_filters": {
+      "title": "Lubricación y filtros",
+      "description": "Aceites, filtros, empaques y enfriadores"
+    },
+    "accessories": {
+      "title": "Accesorios y misceláneos",
+      "description": "Limpiaparabrisas, bocinas, molduras, clips y tornillería"
     }
   },
   "listing": {

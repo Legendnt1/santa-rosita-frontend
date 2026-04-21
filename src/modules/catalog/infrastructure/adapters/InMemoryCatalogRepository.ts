@@ -13,12 +13,25 @@ import type { CatalogRepository } from '../../domain/repository/CatalogRepositor
  */
 
 const MOCK_CATEGORIES: Category[] = [
-  { id: 'cat-1', slug: 'motors_and_transmission', theme: 'purple' },
-  { id: 'cat-2', slug: 'brake_system', theme: 'earth' },
+  { id: 'cat-1',  slug: 'engine',                 theme: 'purple' },
+  { id: 'cat-2',  slug: 'brakes',                 theme: 'earth'  },
+  { id: 'cat-3',  slug: 'suspension',             theme: 'earth'  },
+  { id: 'cat-4',  slug: 'steering',               theme: 'purple' },
+  { id: 'cat-5',  slug: 'transmission',           theme: 'purple' },
+  { id: 'cat-6',  slug: 'electrical_system',      theme: 'sky'    },
+  { id: 'cat-7',  slug: 'cooling',                theme: 'sky'    },
+  { id: 'cat-8',  slug: 'fuel_system',            theme: 'sky'    },
+  { id: 'cat-9',  slug: 'exterior_body',          theme: 'forest' },
+  { id: 'cat-10', slug: 'interior',               theme: 'forest' },
+  { id: 'cat-11', slug: 'lighting',               theme: 'sky'    },
+  { id: 'cat-12', slug: 'exhaust',                theme: 'forest' },
+  { id: 'cat-13', slug: 'wheels_and_tires',       theme: 'forest' },
+  { id: 'cat-14', slug: 'lubrication_and_filters', theme: 'earth' },
+  { id: 'cat-15', slug: 'accessories',            theme: 'forest' },
 ];
 
 const MOCK_PRODUCTS: Product[] = [
-  // ── Motors & Transmission ──────────────────────────────────
+  // ── Transmission ───────────────────────────────────────────
   {
     id: 'prod-101',
     name: 'Automatic Transmission Assembly',
@@ -38,7 +51,7 @@ const MOCK_PRODUCTS: Product[] = [
       'Fits most 2018–2024 sedan and SUV models',
       '12-month manufacturer warranty included',
     ],
-    categoryId: 'cat-1',
+    categoryId: 'cat-5',
     rating: 4.5,
     reviewCount: 128,
     brand: 'Aisin',
@@ -85,7 +98,7 @@ const MOCK_PRODUCTS: Product[] = [
       'Balanced for smooth engagement and reduced vibration',
       'Compatible with standard and performance clutch discs',
     ],
-    categoryId: 'cat-1',
+    categoryId: 'cat-5',
     rating: 4.2,
     reviewCount: 56,
     brand: 'Valeo',
@@ -110,7 +123,7 @@ const MOCK_PRODUCTS: Product[] = [
       'Shot-peened teeth for extended fatigue life',
       'OE-spec tolerances for smooth, quiet operation',
     ],
-    categoryId: 'cat-1',
+    categoryId: 'cat-5',
     rating: 4.6,
     reviewCount: 89,
     brand: 'Eaton',
@@ -180,7 +193,7 @@ const MOCK_PRODUCTS: Product[] = [
       'OE-quality surface finish for consistent clutch grip',
       'Pre-balanced to ISO 1940 G6.3 standard',
     ],
-    categoryId: 'cat-1',
+    categoryId: 'cat-5',
     rating: 3.8,
     reviewCount: 34,
     brand: 'Valeo',
@@ -204,7 +217,7 @@ const MOCK_PRODUCTS: Product[] = [
       'Traps particles down to 30 microns',
       'Recommended with every ATF change',
     ],
-    categoryId: 'cat-1',
+    categoryId: 'cat-5',
     rating: 4.3,
     reviewCount: 156,
     brand: 'Aisin',
@@ -465,5 +478,11 @@ export class InMemoryCatalogRepository implements CatalogRepository {
   /** @inheritdoc */
   async getProductById(id: string): Promise<Product | null> {
     return MOCK_PRODUCTS.find((p) => p.id === id) ?? null;
+  }
+
+  /** @inheritdoc */
+  async getAllBrands(): Promise<string[]> {
+    const brands = MOCK_PRODUCTS.map((p) => p.brand);
+    return [...new Set(brands)].sort();
   }
 }

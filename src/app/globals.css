@@ -31,6 +31,10 @@
   --category-purple-btn: #430fa3;
   --category-earth-bg: #dec3c3;
   --category-earth-btn: #845151;
+  --category-sky-bg: #b8d9f8;
+  --category-sky-btn: #1a56a8;
+  --category-forest-bg: #bfe0d7;
+  --category-forest-btn: #1f6b54;
 
   /* Navbar */
   --navbar-bg: #d8d1ff;
@@ -58,6 +62,10 @@
   --color-category-purple-btn: var(--category-purple-btn);
   --color-category-earth-bg: var(--category-earth-bg);
   --color-category-earth-btn: var(--category-earth-btn);
+  --color-category-sky-bg: var(--category-sky-bg);
+  --color-category-sky-btn: var(--category-sky-btn);
+  --color-category-forest-bg: var(--category-forest-bg);
+  --color-category-forest-btn: var(--category-forest-btn);
 
   /* Font weights mapped to Tailwind tokens */
   --font-sans: var(--font-sans);
@@ -94,6 +102,10 @@
       --category-purple-btn: #7c3aed;
       --category-earth-bg: #3b2420;
       --category-earth-btn: #c4956a;
+      --category-sky-bg: #0d2340;
+      --category-sky-btn: #3b82f6;
+      --category-forest-bg: #0b2620;
+      --category-forest-btn: #34d399;
 
       /* Navbar — layered dark surfaces */
       --navbar-bg: #161229;
@@ -122,6 +134,10 @@
   --category-purple-btn: #7c3aed;
   --category-earth-bg: #3b2420;
   --category-earth-btn: #c4956a;
+  --category-sky-bg: #0d2340;
+  --category-sky-btn: #3b82f6;
+  --category-forest-bg: #0b2620;
+  --category-forest-btn: #34d399;
 
   /* Navbar — layered dark surfaces */
   --navbar-bg: #161229;

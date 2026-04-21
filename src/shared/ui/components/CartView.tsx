@@ -129,7 +129,7 @@ export function CartView({ locale, labels }: CartViewProps) {
                         className="flex h-7 w-7 items-center justify-center rounded-full text-lg leading-none text-foreground-muted transition-colors hover:bg-primary/10 hover:text-primary"
                         aria-label="Decrease quantity"
                       >
-                        −
+                        <Icon name="minus" className="h-3.5 w-3.5" />
                       </button>
                       <span className="min-w-6 text-center text-sm font-semibold text-card-foreground">
                         {item.quantity}
@@ -140,7 +140,7 @@ export function CartView({ locale, labels }: CartViewProps) {
                         className="flex h-7 w-7 items-center justify-center rounded-full text-lg leading-none text-foreground-muted transition-colors hover:bg-primary/10 hover:text-primary"
                         aria-label="Increase quantity"
                       >
-                        +
+                        <Icon name="plus" className="h-3.5 w-3.5" />
                       </button>
                     </div>
 
