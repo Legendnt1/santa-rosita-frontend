@@ -106,3 +106,4 @@ Reusable classes that replace long Tailwind strings. Always prefer these over re
 ## Final Considerations
 * **Using icons**: Use performance-optimized icon component `Icon.tsx` that uses the SVG sprite for all icons. Avoid inline SVGs or external icon libraries.
 * **Running commands**: Do not execute 'build' or 'dev' commands for every change of code.
+* **Important changes**: If you make important changes, like refactoring the architecture or changing the tech stack, update this document to reflect the new standards and guidelines. This ensures that all team members are aligned and can maintain consistency across the project.
