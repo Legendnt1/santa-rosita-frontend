@@ -54,4 +54,11 @@ export interface CatalogRepository {
    * @returns The product if found, or `null` otherwise
    */
   getProductById(id: string): Promise<Product | null>;
+
+  /**
+   * Retrieves all distinct brand names across the entire catalog.
+   * Used to populate the brands section in the navigation mega-menu.
+   * @returns Sorted list of unique brand names
+   */
+  getAllBrands(): Promise<string[]>;
 }

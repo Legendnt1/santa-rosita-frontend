@@ -2,10 +2,12 @@
  * Visual theme identifier for category sections.
  * Maps to a specific color palette applied in the UI layer.
  *
- * - `purple` — Primary brand palette (motors, transmission)
- * - `earth`  — Warm/brownish palette (brakes, suspension)
+ * - `purple` — Brand violet   (engine, transmission, steering)
+ * - `earth`  — Warm terracotta (brakes, suspension, lubrication)
+ * - `sky`    — Steel blue     (electrical, cooling, fuel, lighting)
+ * - `forest` — Sage teal      (body, interior, exhaust, wheels, accessories)
  */
-export type CategoryTheme = 'purple' | 'earth';
+export type CategoryTheme = 'purple' | 'earth' | 'sky' | 'forest';
 
 /**
  * Represents a product category in the catalog.

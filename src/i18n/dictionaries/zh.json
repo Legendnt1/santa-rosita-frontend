@@ -8,16 +8,74 @@
   "navbar": {
     "categories": "类别",
     "newProducts": "新产品",
-    "discounts": "折扣"
+    "discounts": "折扣",
+    "brands": "品牌",
+    "seeAll": "查看全部",
+    "groupPurple": "机械传动",
+    "groupEarth": "磨损维护",
+    "groupSky": "电子系统",
+    "groupForest": "车身结构"
   },
   "catalog": {
-    "motors_and_transmission": {
-      "title": "发动机与变速箱",
-      "description": "活塞、离合器、传动部件..."
+    "engine": {
+      "title": "发动机",
+      "description": "发动机、火花塞、滤清器、皮带、喷油嘴和水泵"
     },
-    "brake_system": {
+    "brakes": {
       "title": "制动系统",
-      "description": "制动液、卡钳"
+      "description": "刹车片、刹车盘、制动液和卡钳"
+    },
+    "suspension": {
+      "title": "悬挂系统",
+      "description": "减震器、弹簧、球头和衬套"
+    },
+    "steering": {
+      "title": "转向系统",
+      "description": "齿条、拉杆、转向柱和助力泵"
+    },
+    "transmission": {
+      "title": "变速箱",
+      "description": "变速箱、离合器、传动轴和差速器"
+    },
+    "electrical_system": {
+      "title": "电气系统",
+      "description": "电池、发电机、保险丝、传感器和 ECU"
+    },
+    "cooling": {
+      "title": "冷却系统",
+      "description": "散热器、节温器、风扇和水管"
+    },
+    "fuel_system": {
+      "title": "燃油系统",
+      "description": "油泵、喷油嘴、滤清器和油箱"
+    },
+    "exterior_body": {
+      "title": "车身外部",
+      "description": "发动机盖、保险杠、车门、翼子板和玻璃"
+    },
+    "interior": {
+      "title": "内饰",
+      "description": "座椅、仪表板、中控台、内饰和门板"
+    },
+    "lighting": {
+      "title": "照明",
+      "description": "大灯、尾灯、转向灯和灯泡"
+    },
+    "exhaust": {
+      "title": "排气系统",
+      "description": "消声器、催化器、排气管和氧传感器"
+    },
+    "wheels_and_tires": {
+      "title": "车轮与轮胎",
+      "description": "轮胎、轮毂、车轮和车轮螺母"
+    },
+    "lubrication_and_filters": {
+      "title": "润滑与滤清器",
+      "description": "机油、滤清器、密封垫和冷却器"
+    },
+    "accessories": {
+      "title": "配件与杂项",
+      "description": "雨刮器、喇叭、饰条、夹子和紧固件"
     }
   },
   "listing": {

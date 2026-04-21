@@ -8,16 +8,74 @@
   "navbar": {
     "categories": "Categories",
     "newProducts": "New products",
-    "discounts": "Discounts"
+    "discounts": "Discounts",
+    "brands": "Brands",
+    "seeAll": "See all",
+    "groupPurple": "Mechanics",
+    "groupEarth": "Wear Parts",
+    "groupSky": "Systems",
+    "groupForest": "Body & Structure"
   },
   "catalog": {
-    "motors_and_transmission": {
-      "title": "Motors & Transmission",
-      "description": "Pistons, clutches, transmission parts..."
+    "engine": {
+      "title": "Engine",
+      "description": "Engines, spark plugs, filters, belts, injectors and pumps"
     },
-    "brake_system": {
-      "title": "Brake System",
-      "description": "Brake fluid, calipers"
+    "brakes": {
+      "title": "Brakes",
+      "description": "Pads, discs, brake fluid and calipers"
+    },
+    "suspension": {
+      "title": "Suspension",
+      "description": "Shocks, springs, ball joints and bushings"
+    },
+    "steering": {
+      "title": "Steering",
+      "description": "Racks, tie rods, columns and power steering pumps"
+    },
+    "transmission": {
+      "title": "Transmission",
+      "description": "Gearboxes, clutches, axles and differentials"
+    },
+    "electrical_system": {
+      "title": "Electrical System",
+      "description": "Batteries, alternators, fuses, sensors and ECUs"
+    },
+    "cooling": {
+      "title": "Cooling",
+      "description": "Radiators, thermostats, fans and hoses"
+    },
+    "fuel_system": {
+      "title": "Fuel System",
+      "description": "Pumps, injectors, filters and fuel tanks"
+    },
+    "exterior_body": {
+      "title": "Exterior Body",
+      "description": "Hoods, bumpers, doors, fenders and glass"
+    },
+    "interior": {
+      "title": "Interior",
+      "description": "Seats, dashboards, consoles, upholstery and panels"
+    },
+    "lighting": {
+      "title": "Lighting",
+      "description": "Headlights, taillights, turn signals and bulbs"
+    },
+    "exhaust": {
+      "title": "Exhaust",
+      "description": "Mufflers, catalytic converters, pipes and oxygen sensors"
+    },
+    "wheels_and_tires": {
+      "title": "Wheels & Tires",
+      "description": "Tires, rims, wheels and lug nuts"
+    },
+    "lubrication_and_filters": {
+      "title": "Lubrication & Filters",
+      "description": "Oils, filters, gaskets and coolers"
+    },
+    "accessories": {
+      "title": "Accessories & Misc",
+      "description": "Wipers, horns, moldings, clips and fasteners"
     }
   },
   "listing": {

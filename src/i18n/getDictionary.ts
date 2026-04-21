@@ -23,6 +23,12 @@ export interface Dictionary {
     categories: string;
     newProducts: string;
     discounts: string;
+    brands: string;
+    seeAll: string;
+    groupPurple: string;
+    groupEarth: string;
+    groupSky: string;
+    groupForest: string;
   };
   catalog: Record<string, CategoryDictionary>;
   listing: {

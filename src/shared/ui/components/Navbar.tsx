@@ -1,13 +1,14 @@
 import type { Dictionary } from "@/i18n/getDictionary";
 import { getAuthToken } from "@/shared/lib/auth";
 import { authRepository } from "@/modules/auth/infrastructure/auth-repository.instance";
+import { catalogRepository } from "@/modules/catalog/infrastructure/catalog-repository.instance";
 import type { User } from "@/modules/auth/domain/entities/User";
 import { SearchBar } from "./SearchBar";
 import { ThemeToggle } from "./ThemeToggle";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { CartButton } from "./CartButton";
 import { UserMenu } from "./UserMenu";
-import { Icon } from "./Icon";
+import { CategoriesNav } from "./CategoriesDropdown";
 
 /**
  * Props for the Navbar server component.
@@ -33,6 +34,11 @@ export async function Navbar({ dict, locale }: NavbarProps) {
   } catch {
     currentUser = null;
   }
+
+  const [categories, brands] = await Promise.all([
+    catalogRepository.getCategories(),
+    catalogRepository.getAllBrands(),
+  ]);
 
   return (
     <header className="sticky top-0 z-50 w-full shadow-sm">
@@ -79,20 +85,25 @@ export async function Navbar({ dict, locale }: NavbarProps) {
       </div>
 
       {/* ── Sub-navigation ─────────────────────────────────── */}
-      <nav className="border-t border-border bg-navbar-sub-bg overflow-x-auto">
-        <div className="mx-auto flex max-w-6xl items-center gap-4 px-3 py-2 text-xs font-medium text-navbar-fg whitespace-nowrap sm:gap-6 sm:px-4 sm:text-sm">
-          <a href="#" className="flex items-center gap-1 transition-colors hover:text-primary">
-            <Icon name="menu-2" className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
-            {dict.navbar.categories}
-          </a>
-          <a href="#" className="transition-colors hover:text-primary">
-            {dict.navbar.newProducts}
-          </a>
-          <a href="#" className="transition-colors hover:text-primary">
-            {dict.navbar.discounts}
-          </a>
-        </div>
-      </nav>
+      <CategoriesNav
+        categories={categories}
+        catalog={dict.catalog}
+        brands={brands}
+        locale={locale}
+        labels={{
+          categories: dict.navbar.categories,
+          newProducts: dict.navbar.newProducts,
+          discounts: dict.navbar.discounts,
+          brands: dict.navbar.brands,
+          seeAll: dict.navbar.seeAll,
+          groupLabels: {
+            purple: dict.navbar.groupPurple,
+            earth: dict.navbar.groupEarth,
+            sky: dict.navbar.groupSky,
+            forest: dict.navbar.groupForest,
+          },
+        }}
+      />
     </header>
   );
 }
