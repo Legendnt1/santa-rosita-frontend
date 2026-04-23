@@ -31,6 +31,7 @@ interface FilterSidebarProps {
     inStockOnly: string;
     apply: string;
     clear: string;
+    close: string;
   };
   /** Localized sort labels */
   sortLabels: {
@@ -408,7 +409,7 @@ export function FilterSidebar({
                 type="button"
                 onClick={() => setMobileOpen(false)}
                 className="flex h-8 w-8 items-center justify-center rounded-full text-foreground-muted transition-colors hover:bg-primary/10"
-                aria-label="Close"
+                aria-label={labels.close}
               >
                 <Icon name="x" className="h-5 w-5" />
               </button>

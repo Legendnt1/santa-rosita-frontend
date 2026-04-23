@@ -58,6 +58,7 @@ export interface Dictionary {
       inStockOnly: string;
       apply: string;
       clear: string;
+      close: string;
     };
     sort: {
       label: string;
@@ -75,6 +76,7 @@ export interface Dictionary {
       ratingLabel: string;
     };
     viewCategory: string;
+    categoriesCount: string;
   };
   pdp: {
     breadcrumbProduct: string;
@@ -99,6 +101,7 @@ export interface Dictionary {
     returnPolicy: string;
     breadcrumbHome: string;
     breadcrumbCatalog: string;
+    viewImage: string;
   };
   cart: {
     title: string;
@@ -116,6 +119,9 @@ export interface Dictionary {
     qty: string;
     items: string;
     addedToCart: string;
+    decreaseQty: string;
+    increaseQty: string;
+    close: string;
   };
   auth: {
     loginTitle: string;

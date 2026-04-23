@@ -104,7 +104,8 @@
       "availability": "库存状态",
       "inStockOnly": "仅显示有货",
       "apply": "应用",
-      "clear": "清除"
+      "clear": "清除",
+      "close": "关闭"
     },
     "sort": {
       "label": "排序方式",

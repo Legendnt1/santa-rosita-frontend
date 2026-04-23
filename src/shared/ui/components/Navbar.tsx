@@ -48,10 +48,10 @@ export async function Navbar({ dict, locale }: NavbarProps) {
       <div className="bg-navbar-bg">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-3 px-3 py-2 sm:px-4 sm:py-3 md:flex-nowrap md:gap-6">
           {/* Logo */}
-          <Link href={`/${locale}`} className="shrink-0" aria-label="Home">
+          <Link href={`/${locale}`} className="shrink-0" aria-label={dict.common.home}>
             <Image
               src="/assets/images/logo.webp"
-              alt="Corporación Santa Rosita"
+              alt={dict.common.logoAlt}
               width={140}
               height={56}
               priority
@@ -62,10 +62,10 @@ export async function Navbar({ dict, locale }: NavbarProps) {
           {/* Action icons — placed after logo on mobile, end on desktop */}
           <nav className="order-2 ml-auto flex items-center gap-1 sm:gap-2 md:order-3 md:ml-0">
             {/* Language switcher (client component) */}
-            <LanguageSwitcher locale={locale} />
+            <LanguageSwitcher locale={locale} labels={{ changeLanguage: dict.navbar.changeLanguage }} />
 
             {/* Theme toggle (client component) */}
-            <ThemeToggle />
+            <ThemeToggle labels={{ lightMode: dict.navbar.themeLight, darkMode: dict.navbar.themeDark }} />
 
             {/* User menu — shows sign in/up or logged-in user with dropdown */}
             <UserMenu
@@ -79,7 +79,7 @@ export async function Navbar({ dict, locale }: NavbarProps) {
             />
 
             {/* Cart */}
-            <CartButton locale={locale} label="Cart" />
+            <CartButton locale={locale} label={dict.common.cart} />
           </nav>
 
           {/* Search — full width below logo on mobile, inline on desktop */}

@@ -32,7 +32,14 @@ function persistTheme(value: "light" | "dark") {
  * (already handled in globals.css). Once the user toggles, the cookie is
  * set and subsequent SSR renders are theme-aware immediately.
  */
-export function ThemeToggle() {
+interface ThemeToggleProps {
+  labels: {
+    lightMode: string;
+    darkMode: string;
+  };
+}
+
+export function ThemeToggle({ labels }: ThemeToggleProps) {
   const [theme, setTheme] = useState<"light" | "dark">("light");
 
   /* Sync local state with cookie / system preference after hydration */
@@ -63,7 +70,7 @@ export function ThemeToggle() {
       type="button"
       onClick={toggle}
       className="btn-icon"
-      aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+      aria-label={theme === "dark" ? labels.lightMode : labels.darkMode}
     >
       {theme === "dark" ? (
         <Icon name="sun" className="h-5 w-5 sm:h-5.5 sm:w-5.5" />

@@ -104,7 +104,8 @@
       "availability": "Availability",
       "inStockOnly": "In stock only",
       "apply": "Apply",
-      "clear": "Clear"
+      "clear": "Clear",
+      "close": "Close"
     },
     "sort": {
       "label": "Sort by",

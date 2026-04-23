@@ -104,7 +104,8 @@
       "availability": "Disponibilidad",
       "inStockOnly": "Solo en stock",
       "apply": "Aplicar",
-      "clear": "Limpiar"
+      "clear": "Limpiar",
+      "close": "Cerrar"
     },
     "sort": {
       "label": "Ordenar por",

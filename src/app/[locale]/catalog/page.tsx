@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { catalogRepository } from "@/modules/catalog/infrastructure/catalog-repository.instance";
@@ -45,7 +46,7 @@ export default async function CatalogIndexPage({ params }: CatalogIndexPageProps
             {dict.listing.breadcrumbCatalog}
           </h1>
           <p className="mt-1 text-sm text-foreground-muted">
-            {categories.length} {categories.length === 1 ? "categoría" : "categorías"}
+            {dict.listing.categoriesCount.replace('{count}', String(categories.length))}
           </p>
         </div>
 
@@ -56,7 +57,7 @@ export default async function CatalogIndexPage({ params }: CatalogIndexPageProps
             const styles = themeStyles[category.theme] ?? themeStyles.purple;
 
             return (
-              <a
+              <Link
                 key={category.id}
                 href={`/${locale}/catalog/${category.slug}`}
                 className={`card-interactive group flex flex-col gap-3 p-5 animate-fade-up ${styles.card}`}
@@ -76,7 +77,7 @@ export default async function CatalogIndexPage({ params }: CatalogIndexPageProps
                   {dict.listing.viewCategory}
                   <Icon name="chevron-right" className="h-3.5 w-3.5" />
                 </div>
-              </a>
+              </Link>
             );
           })}
         </div>

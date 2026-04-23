@@ -27,10 +27,10 @@ export default async function RegisterPage({ params }: RegisterPageProps) {
     <div className="w-full max-w-sm animate-fade-up">
       {/* Logo */}
       <div className="mb-8 flex justify-center">
-        <Link href={`/${locale}`} aria-label="Corporación Santa Rosita">
+        <Link href={`/${locale}`} aria-label={dict.common.home}>
           <Image
             src="/assets/images/logo.webp"
-            alt="Corporación Santa Rosita"
+            alt={dict.common.logoAlt}
             width={160}
             height={56}
             priority

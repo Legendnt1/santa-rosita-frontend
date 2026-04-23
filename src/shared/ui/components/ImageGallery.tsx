@@ -11,6 +11,8 @@ interface ImageGalleryProps {
   images: readonly string[];
   /** Product name used as alt text */
   productName: string;
+  /** Localized label template for thumbnail buttons, e.g. "View image {index}" */
+  viewImageLabel: string;
 }
 
 /**
@@ -23,7 +25,7 @@ interface ImageGalleryProps {
  * Client component — manages selected-image state locally.
  * Main image is marked `priority` because it is the PDP LCP candidate.
  */
-export function ImageGallery({ images, productName }: ImageGalleryProps) {
+export function ImageGallery({ images, productName, viewImageLabel }: ImageGalleryProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const mainImage = images[selectedIndex] ?? images[0];
 
@@ -42,7 +44,7 @@ export function ImageGallery({ images, productName }: ImageGalleryProps) {
                 ? "border-primary shadow-sm shadow-primary/20"
                 : "border-border/40 hover:border-primary/50"
             }`}
-            aria-label={`View image ${index + 1}`}
+            aria-label={viewImageLabel.replace('{index}', String(index + 1))}
           >
             <Image
               src={src}

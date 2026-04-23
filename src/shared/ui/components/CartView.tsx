@@ -26,6 +26,8 @@ interface CartViewProps {
     clear: string;
     qty: string;
     items: string;
+    decreaseQty: string;
+    increaseQty: string;
   };
 }
 
@@ -130,7 +132,7 @@ export function CartView({ locale, labels }: CartViewProps) {
                         type="button"
                         onClick={() => updateQuantity(item.productId, item.quantity - 1)}
                         className="flex h-7 w-7 items-center justify-center rounded-full text-lg leading-none text-foreground-muted transition-colors hover:bg-primary/10 hover:text-primary"
-                        aria-label="Decrease quantity"
+                        aria-label={labels.decreaseQty}
                       >
                         <Icon name="minus" className="h-3.5 w-3.5" />
                       </button>
@@ -141,7 +143,7 @@ export function CartView({ locale, labels }: CartViewProps) {
                         type="button"
                         onClick={() => updateQuantity(item.productId, item.quantity + 1)}
                         className="flex h-7 w-7 items-center justify-center rounded-full text-lg leading-none text-foreground-muted transition-colors hover:bg-primary/10 hover:text-primary"
-                        aria-label="Increase quantity"
+                        aria-label={labels.increaseQty}
                       >
                         <Icon name="plus" className="h-3.5 w-3.5" />
                       </button>

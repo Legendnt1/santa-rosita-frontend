@@ -24,7 +24,7 @@ const LOCALE_META: Record<Locale, { label: string; flag: string }> = {
  * Replaces only the locale segment of the current pathname,
  * preserving nested routes. Closes on outside click or Escape.
  */
-export function LanguageSwitcher({ locale }: { locale: string }) {
+export function LanguageSwitcher({ locale, labels }: { locale: string; labels: { changeLanguage: string } }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -67,7 +67,7 @@ export function LanguageSwitcher({ locale }: { locale: string }) {
         type="button"
         onClick={() => setOpen((prev) => !prev)}
         className="btn-icon"
-        aria-label="Change language"
+        aria-label={labels.changeLanguage}
         aria-expanded={open}
         aria-haspopup="true"
       >

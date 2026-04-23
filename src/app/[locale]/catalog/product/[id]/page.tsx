@@ -82,7 +82,7 @@ export default async function ProductDetailPage({
 
           {/* ─── Left: Image Gallery ───────────────────────── */}
           <div className="w-full lg:w-[42%] xl:w-[45%]">
-            <ImageGallery images={product.images} productName={product.name} />
+            <ImageGallery images={product.images} productName={product.name} viewImageLabel={pdp.viewImage} />
           </div>
 
           {/* ─── Center: Product Info ──────────────────────── */}
