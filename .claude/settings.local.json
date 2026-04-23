@@ -12,7 +12,8 @@
       "Bash(powershell -Command \"Get-Command gh -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Source\")",
       "Bash(cmd /c \"gh --version\")",
       "Bash(cmd /c \"where gh\")",
-      "Bash(npx eslint *)"
+      "Bash(npx eslint *)",
+      "Bash(find /c/Space/Codigos/Next.js/santa-rosita-frontend/src/app/[locale] -name \"page.tsx\" -exec grep -H \"getDictionary\\\\|locale as Locale\\\\|locale: string\" {} \\\\;)"
     ]
   }
 }

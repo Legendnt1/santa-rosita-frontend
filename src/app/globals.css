@@ -342,4 +342,32 @@ body {
     background: var(--status-danger-bg);
     color: var(--status-danger);
   }
+
+  /* ── Form primitives ─────────────────────────────────────── */
+
+  /* Base text/email/select input */
+  .input-base {
+    @apply rounded-lg border border-border bg-background px-3 py-2.5
+           text-sm text-foreground
+           placeholder:text-foreground-muted/60
+           focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20
+           disabled:opacity-60;
+  }
+
+  /* Password input — extra right padding for the show/hide toggle button */
+  .input-password {
+    @apply input-base w-full pr-10;
+  }
+
+  /* Inline error alert (shake-in via animate-fade-in) */
+  .alert-error {
+    @apply flex items-center gap-2 rounded-lg border border-accent/30
+           bg-accent/10 px-3 py-2.5 text-sm text-accent animate-fade-in;
+  }
+
+  /* Small spinner — used inside buttons during pending state */
+  .spinner-sm {
+    @apply h-4 w-4 animate-spin rounded-full border-2
+           border-primary-foreground border-t-transparent;
+  }
 }
