@@ -121,7 +121,7 @@ export function CategoriesNav({
       {isOpen && (
         <>
           <div
-            className="fixed inset-0 z-[35]"
+            className="fixed inset-0 z-35"
             aria-hidden="true"
             onClick={close}
           />
@@ -129,7 +129,7 @@ export function CategoriesNav({
           <div
             role="region"
             aria-label={labels.categories}
-            className="absolute inset-x-0 top-full z-[51] border-t border-border bg-card shadow-2xl animate-fade-in"
+            className="absolute inset-x-0 top-full z-51 border-t border-border bg-card shadow-2xl animate-fade-in"
           >
             <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6">
 
