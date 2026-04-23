@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { locales, type Locale } from "@/i18n/config";
@@ -27,6 +28,16 @@ export function LanguageSwitcher({ locale }: { locale: string }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+
+  /** Reset open state when page is restored from bfcache — otherwise a stale
+   *  dropdown can appear open without working click listeners. */
+  useEffect(() => {
+    const onPageShow = (e: PageTransitionEvent) => {
+      if (e.persisted) setOpen(false);
+    };
+    window.addEventListener("pageshow", onPageShow);
+    return () => window.removeEventListener("pageshow", onPageShow);
+  }, []);
 
   /** Close on outside click */
   useEffect(() => {
@@ -75,10 +86,11 @@ export function LanguageSwitcher({ locale }: { locale: string }) {
             const newPath = pathname.replace(`/${locale}`, `/${loc}`);
 
             return (
-              <a
+              <Link
                 key={loc}
                 href={newPath}
                 role="menuitem"
+                onClick={() => setOpen(false)}
                 className={`flex items-center gap-2.5 px-4 py-2.5 text-sm transition-colors ${
                   isActive
                     ? "bg-primary/10 font-semibold text-primary"
@@ -90,7 +102,7 @@ export function LanguageSwitcher({ locale }: { locale: string }) {
                 {isActive && (
                   <span className="ml-auto text-xs text-primary/70">✓</span>
                 )}
-              </a>
+              </Link>
             );
           })}
         </div>

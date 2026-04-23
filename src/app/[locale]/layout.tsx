@@ -1,8 +1,22 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
+import { Rubik } from 'next/font/google';
 import { locales, type Locale } from '@/i18n/config';
 import { getDictionary } from '@/i18n/getDictionary';
 import '../globals.css';
+
+/**
+ * Rubik variable font, self-hosted by Next.js via `next/font/google`.
+ * Covers every weight the UI consumes (400–800). The `--font-rubik` CSS
+ * variable is wired to Tailwind's `--font-sans` token in globals.css.
+ */
+const rubik = Rubik({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  style: ['normal', 'italic'],
+  variable: '--font-rubik',
+  display: 'swap',
+});
 
 /**
  * Pre-generates routes for every supported locale at build time.
@@ -47,23 +61,8 @@ export default async function LocaleLayout({
   const { locale } = await params;
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={locale} className={rubik.variable} suppressHydrationWarning>
       <head>
-        {/* Preload critical fonts — regular + semibold cover the bulk of UI text */}
-        <link
-          rel="preload"
-          href="/assets/fonts/rubik-regular.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/assets/fonts/rubik-semibold.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
         {/* Inline script to prevent flash of wrong theme (FOUC) */}
         <script
           dangerouslySetInnerHTML={{

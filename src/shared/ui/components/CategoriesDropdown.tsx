@@ -54,6 +54,17 @@ export function CategoriesNav({
     setIsOpen(false);
   }, [pathname]);
 
+  // Reset open state on bfcache restore — without this, a frozen-open panel
+  // leaves a full-viewport backdrop (z-[35]) that silently blocks clicks on
+  // language/theme/logo controls after hitting the browser back button.
+  useEffect(() => {
+    const onPageShow = (e: PageTransitionEvent) => {
+      if (e.persisted) setIsOpen(false);
+    };
+    window.addEventListener('pageshow', onPageShow);
+    return () => window.removeEventListener('pageshow', onPageShow);
+  }, []);
+
   // Close on Escape key
   useEffect(() => {
     if (!isOpen) return;

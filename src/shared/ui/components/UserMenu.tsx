@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/shared/stores/auth-store";
@@ -38,6 +39,16 @@ export function UserMenu({ initialUser, locale, labels }: UserMenuProps) {
   // Server-read user (cookie) takes precedence; store user hydrates after client login.
   const user = storeUser ?? initialUser;
 
+  // Reset open state on bfcache restore — prevents a stale-open dropdown
+  // with dead click listeners after hitting the browser back button.
+  useEffect(() => {
+    const onPageShow = (e: PageTransitionEvent) => {
+      if (e.persisted) setIsOpen(false);
+    };
+    window.addEventListener("pageshow", onPageShow);
+    return () => window.removeEventListener("pageshow", onPageShow);
+  }, []);
+
   // Close on outside click — only while the dropdown is open
   useEffect(() => {
     if (!isOpen) return;
@@ -61,19 +72,19 @@ export function UserMenu({ initialUser, locale, labels }: UserMenuProps) {
   if (!user) {
     return (
       <div className="flex items-center gap-1">
-        <a
+        <Link
           href={`/${locale}/auth/login`}
           className="btn-icon text-xs font-semibold"
           aria-label={labels.signIn}
         >
           <Icon name="user" className="h-5 w-5 sm:h-5.5 sm:w-5.5" />
-        </a>
-        <a
+        </Link>
+        <Link
           href={`/${locale}/auth/register`}
           className="hidden rounded-full border border-primary/60 px-3 py-1 text-xs font-semibold text-primary transition-all hover:bg-primary hover:text-primary-foreground sm:block"
         >
           {labels.signUp}
-        </a>
+        </Link>
       </div>
     );
   }

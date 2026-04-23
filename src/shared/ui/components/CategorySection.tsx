@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type {
   Category,
   CategoryTheme,
@@ -79,12 +80,12 @@ export function CategorySection({
           <p className="text-sm leading-relaxed text-foreground/75">
             {labels.description}
           </p>
-          <a
+          <Link
             href={`/${locale}/catalog/${category.slug}`}
             className={`${styles.button} mt-1 inline-block w-fit rounded-full px-6 py-2.5 text-sm font-semibold transition-all duration-200 hover:opacity-90 hover:shadow-md active:scale-[0.98] sm:mt-2`}
           >
             {labels.searchButton}
-          </a>
+          </Link>
         </div>
 
         {/* ── Product cards ──────────────────────────────── */}

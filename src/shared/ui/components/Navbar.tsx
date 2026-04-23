@@ -1,3 +1,5 @@
+import Image from "next/image";
+import Link from "next/link";
 import type { Dictionary } from "@/i18n/getDictionary";
 import { getAuthToken } from "@/shared/lib/auth";
 import { authRepository } from "@/modules/auth/infrastructure/auth-repository.instance";
@@ -46,13 +48,16 @@ export async function Navbar({ dict, locale }: NavbarProps) {
       <div className="bg-navbar-bg">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-3 px-3 py-2 sm:px-4 sm:py-3 md:flex-nowrap md:gap-6">
           {/* Logo */}
-          <a href={`/${locale}`} className="shrink-0" aria-label="Home">
-            <img
+          <Link href={`/${locale}`} className="shrink-0" aria-label="Home">
+            <Image
               src="/assets/images/logo.webp"
               alt="Corporación Santa Rosita"
+              width={140}
+              height={56}
+              priority
               className="h-10 w-auto sm:h-14"
             />
-          </a>
+          </Link>
 
           {/* Action icons — placed after logo on mobile, end on desktop */}
           <nav className="order-2 ml-auto flex items-center gap-1 sm:gap-2 md:order-3 md:ml-0">
