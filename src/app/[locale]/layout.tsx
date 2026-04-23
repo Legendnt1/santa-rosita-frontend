@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import { Rubik } from 'next/font/google';
+import { cookies } from 'next/headers';
 import { locales, type Locale } from '@/i18n/config';
 import { getDictionary } from '@/i18n/getDictionary';
 import '../globals.css';
@@ -60,16 +61,20 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params;
 
+  // Read the theme cookie server-side so the correct class is applied to
+  // <html> on the very first byte — no inline script, no FOUC.
+  // Falls back to an empty string (no forced class) on first visit;
+  // globals.css `prefers-color-scheme` media query then picks the palette.
+  const jar = await cookies();
+  const themeCookie = jar.get('theme')?.value;
+  const themeClass = themeCookie === 'dark' ? 'dark' : themeCookie === 'light' ? 'light' : '';
+
   return (
-    <html lang={locale} className={rubik.variable} suppressHydrationWarning>
-      <head>
-        {/* Inline script to prevent flash of wrong theme (FOUC) */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.classList.add('dark');else if(t==='light')document.documentElement.classList.add('light')}catch(e){}})()`,
-          }}
-        />
-      </head>
+    <html
+      lang={locale}
+      className={[rubik.variable, themeClass].filter(Boolean).join(' ')}
+      suppressHydrationWarning
+    >
       <body className="min-h-screen bg-background font-sans text-foreground antialiased">
         {children}
       </body>
