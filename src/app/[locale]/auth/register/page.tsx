@@ -1,3 +1,5 @@
+import Image from "next/image";
+import Link from "next/link";
 import type { Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { RegisterForm } from "@/shared/ui/components/RegisterForm";
@@ -25,13 +27,16 @@ export default async function RegisterPage({ params }: RegisterPageProps) {
     <div className="w-full max-w-sm animate-fade-up">
       {/* Logo */}
       <div className="mb-8 flex justify-center">
-        <a href={`/${locale}`}>
-          <img
+        <Link href={`/${locale}`} aria-label="Corporación Santa Rosita">
+          <Image
             src="/assets/images/logo.webp"
             alt="Corporación Santa Rosita"
+            width={160}
+            height={56}
+            priority
             className="h-14 w-auto"
           />
-        </a>
+        </Link>
       </div>
 
       {/* Card */}

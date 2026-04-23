@@ -88,7 +88,18 @@ export const useCartStore = create<CartStore>()(
 
       clearCart: () => set({ items: [] }),
     }),
-    { name: 'cart-storage' }
+    {
+      name: 'cart-storage',
+      version: 1,
+      migrate: (persisted, fromVersion) => {
+        // Older unversioned payloads may not match the current CartItem shape.
+        // Drop them rather than risk runtime errors in the UI. Actions are
+        // re-attached by Zustand after rehydration, so returning only state
+        // is safe — cast via `unknown` to satisfy the store-typed signature.
+        if (fromVersion < 1) return { items: [] } as unknown as CartStore;
+        return persisted as CartStore;
+      },
+    }
   )
 );
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState, useTransition } from "react";
 import type { FilterCriteria } from "@/modules/catalog/domain/entities/FilterCriteria";
 import { QP, SORT_VALUES } from "@/shared/config/catalog-query-params";
 import { Icon } from "./Icon";
@@ -95,6 +95,7 @@ export function FilterSidebar({
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
+  const [isPending, startTransition] = useTransition();
 
   // ── Local state for price inputs (debounced) ────────────
   const [minPrice, setMinPrice] = useState(
@@ -112,6 +113,8 @@ export function FilterSidebar({
 
   /**
    * Builds a new URL with updated query params and navigates to it.
+   * Wraps navigation in startTransition so the current UI stays responsive
+   * while the server re-renders the filtered listing.
    */
   const updateParams = useCallback(
     (updates: Record<string, string | null>) => {
@@ -126,7 +129,9 @@ export function FilterSidebar({
       }
 
       const query = params.toString();
-      router.push(`${pathname}${query ? `?${query}` : ""}`, { scroll: false });
+      startTransition(() => {
+        router.push(`${pathname}${query ? `?${query}` : ""}`, { scroll: false });
+      });
     },
     [searchParams, router, pathname],
   );
@@ -165,12 +170,33 @@ export function FilterSidebar({
     });
   };
 
-  const applyPriceFilter = () => {
+  const applyPriceFilter = useCallback(() => {
     updateParams({
       [QP.MIN_PRICE]: minPrice || null,
       [QP.MAX_PRICE]: maxPrice || null,
     });
-  };
+  }, [minPrice, maxPrice, updateParams]);
+
+  // Debounce price inputs: auto-apply 500ms after the user stops typing.
+  // Skips the initial mount so URL-seeded values don't re-trigger navigation.
+  const isFirstPriceEffect = useRef(true);
+  useEffect(() => {
+    if (isFirstPriceEffect.current) {
+      isFirstPriceEffect.current = false;
+      return;
+    }
+    const urlMin = currentFilters.minPrice?.toString() ?? "";
+    const urlMax = currentFilters.maxPrice?.toString() ?? "";
+    if (minPrice === urlMin && maxPrice === urlMax) return;
+
+    const t = setTimeout(() => {
+      updateParams({
+        [QP.MIN_PRICE]: minPrice || null,
+        [QP.MAX_PRICE]: maxPrice || null,
+      });
+    }, 500);
+    return () => clearTimeout(t);
+  }, [minPrice, maxPrice, currentFilters.minPrice, currentFilters.maxPrice, updateParams]);
 
   /**
    * Clears all filters.
@@ -190,7 +216,12 @@ export function FilterSidebar({
     currentFilters.inStockOnly;
 
   const sidebarContent = (
-    <div className="flex flex-col gap-3">
+    <div
+      aria-busy={isPending}
+      className={`flex flex-col gap-3 transition-opacity duration-200 ${
+        isPending ? "opacity-60" : "opacity-100"
+      }`}
+    >
       {/* ── Sort ─────────────────────────────────────────── */}
       <FilterSection title={sortLabels.label}>
         <div className="flex flex-col gap-1">

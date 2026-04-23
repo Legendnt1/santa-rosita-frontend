@@ -79,7 +79,11 @@ export async function Navbar({ dict, locale }: NavbarProps) {
 
           {/* Search — full width below logo on mobile, inline on desktop */}
           <div className="order-3 w-full md:order-2 md:flex-1">
-            <SearchBar placeholder={dict.common.searchPlaceholder} />
+            <SearchBar
+              placeholder={dict.common.searchPlaceholder}
+              locale={locale}
+              submitLabel={dict.common.searchPlaceholder}
+            />
           </div>
         </div>
       </div>

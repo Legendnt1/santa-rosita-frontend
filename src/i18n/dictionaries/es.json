@@ -109,7 +109,8 @@
       "reviews": "{count} reseñas",
       "delivery": "Entrega el {date}",
       "outOfStock": "Agotado",
-      "viewProduct": "Ver producto"
+      "viewProduct": "Ver producto",
+      "ratingLabel": "{rating} de 5 estrellas"
     },
     "viewCategory": "Ver productos"
   },
@@ -117,6 +118,7 @@
     "breadcrumbProduct": "Detalle del producto",
     "aboutThisItem": "Acerca de este producto",
     "reviews": "{count} valoraciones",
+    "ratingLabel": "{rating} de 5 estrellas",
     "inStock": "En stock",
     "outOfStock": "No disponible actualmente",
     "onlyXLeft": "Solo quedan {count} — pide pronto.",
@@ -170,6 +172,12 @@
     "signIn": "Ingresar",
     "signUp": "Registrarse",
     "logout": "Cerrar sesión",
+    "placeholders": {
+      "name": "Juan Pérez",
+      "email": "correo@ejemplo.com",
+      "password": "••••••••"
+    },
+    "togglePassword": "Mostrar u ocultar contraseña",
     "errors": {
       "invalidCredentials": "Correo o contraseña incorrectos.",
       "emailTaken": "Este correo ya está registrado.",

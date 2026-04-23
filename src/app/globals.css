@@ -77,72 +77,89 @@
 
 /* ───────────────────────────────────────────────────────────
    Dark Theme Overrides
-   Uses `.dark` class on <html> so it can be toggled via JS.
-   Falls back to system preference when no class is set.
+   Single palette, applied via CSS variable indirection:
+   — `.dark` class → forces dark (set by inline theme script).
+   — `.light` class → forces light (overrides system preference).
+   — No class → follows `prefers-color-scheme`.
    ─────────────────────────────────────────────────────────── */
-:root.dark,
-:root:not(.light):not(.dark) {
-  @media (prefers-color-scheme: dark) {
-    & {
-      /* Base surfaces */
-      --background: #0f0d1a;
-      --background-search-bar: #1a1550;
-      --foreground: #e8e4f0;
-      --foreground-muted: #9d98ac;
-      --primary: #a78bfa;
-      --primary-foreground: #ffffff;
-      --accent: #ef4444;
-      --accent-foreground: #ffffff;
-      --card: #1c1933;
-      --card-foreground: #e8e4f0;
-      --border: #2a2245;
-
-      /* Category sections — deep, rich tones */
-      --category-purple-bg: #1f1554;
-      --category-purple-btn: #7c3aed;
-      --category-earth-bg: #3b2420;
-      --category-earth-btn: #c4956a;
-      --category-sky-bg: #0d2340;
-      --category-sky-btn: #3b82f6;
-      --category-forest-bg: #0b2620;
-      --category-forest-btn: #34d399;
-
-      /* Navbar — layered dark surfaces */
-      --navbar-bg: #161229;
-      --navbar-sub-bg: #2a1f5e;
-      --navbar-fg: #e8e4f0;
-    }
-  }
+:root {
+  /* Dark-mode palette tokens. Only referenced — never applied directly. */
+  --dark-background: #0f0d1a;
+  --dark-background-search-bar: #1a1550;
+  --dark-foreground: #e8e4f0;
+  --dark-foreground-muted: #9d98ac;
+  --dark-primary: #a78bfa;
+  --dark-primary-foreground: #ffffff;
+  --dark-accent: #ef4444;
+  --dark-accent-foreground: #ffffff;
+  --dark-card: #1c1933;
+  --dark-card-foreground: #e8e4f0;
+  --dark-border: #2a2245;
+  --dark-category-purple-bg: #1f1554;
+  --dark-category-purple-btn: #7c3aed;
+  --dark-category-earth-bg: #3b2420;
+  --dark-category-earth-btn: #c4956a;
+  --dark-category-sky-bg: #0d2340;
+  --dark-category-sky-btn: #3b82f6;
+  --dark-category-forest-bg: #0b2620;
+  --dark-category-forest-btn: #34d399;
+  --dark-navbar-bg: #161229;
+  --dark-navbar-sub-bg: #2a1f5e;
+  --dark-navbar-fg: #e8e4f0;
 }
 
+/* Shared mapping: whenever this block matches, light tokens are overridden
+   by their dark counterparts. Declarations live once. */
 :root.dark {
-  /* Base surfaces */
-  --background: #0f0d1a;
-  --background-search-bar: #1a1550;
-  --foreground: #e8e4f0;
-  --foreground-muted: #9d98ac;
-  --primary: #a78bfa;
-  --primary-foreground: #ffffff;
-  --accent: #ef4444;
-  --accent-foreground: #ffffff;
-  --card: #1c1933;
-  --card-foreground: #e8e4f0;
-  --border: #2a2245;
+  --background: var(--dark-background);
+  --background-search-bar: var(--dark-background-search-bar);
+  --foreground: var(--dark-foreground);
+  --foreground-muted: var(--dark-foreground-muted);
+  --primary: var(--dark-primary);
+  --primary-foreground: var(--dark-primary-foreground);
+  --accent: var(--dark-accent);
+  --accent-foreground: var(--dark-accent-foreground);
+  --card: var(--dark-card);
+  --card-foreground: var(--dark-card-foreground);
+  --border: var(--dark-border);
+  --category-purple-bg: var(--dark-category-purple-bg);
+  --category-purple-btn: var(--dark-category-purple-btn);
+  --category-earth-bg: var(--dark-category-earth-bg);
+  --category-earth-btn: var(--dark-category-earth-btn);
+  --category-sky-bg: var(--dark-category-sky-bg);
+  --category-sky-btn: var(--dark-category-sky-btn);
+  --category-forest-bg: var(--dark-category-forest-bg);
+  --category-forest-btn: var(--dark-category-forest-btn);
+  --navbar-bg: var(--dark-navbar-bg);
+  --navbar-sub-bg: var(--dark-navbar-sub-bg);
+  --navbar-fg: var(--dark-navbar-fg);
+}
 
-  /* Category sections — deep, rich tones */
-  --category-purple-bg: #1f1554;
-  --category-purple-btn: #7c3aed;
-  --category-earth-bg: #3b2420;
-  --category-earth-btn: #c4956a;
-  --category-sky-bg: #0d2340;
-  --category-sky-btn: #3b82f6;
-  --category-forest-bg: #0b2620;
-  --category-forest-btn: #34d399;
-
-  /* Navbar — layered dark surfaces */
-  --navbar-bg: #161229;
-  --navbar-sub-bg: #2a1f5e;
-  --navbar-fg: #e8e4f0;
+@media (prefers-color-scheme: dark) {
+  :root:not(.light):not(.dark) {
+    --background: var(--dark-background);
+    --background-search-bar: var(--dark-background-search-bar);
+    --foreground: var(--dark-foreground);
+    --foreground-muted: var(--dark-foreground-muted);
+    --primary: var(--dark-primary);
+    --primary-foreground: var(--dark-primary-foreground);
+    --accent: var(--dark-accent);
+    --accent-foreground: var(--dark-accent-foreground);
+    --card: var(--dark-card);
+    --card-foreground: var(--dark-card-foreground);
+    --border: var(--dark-border);
+    --category-purple-bg: var(--dark-category-purple-bg);
+    --category-purple-btn: var(--dark-category-purple-btn);
+    --category-earth-bg: var(--dark-category-earth-bg);
+    --category-earth-btn: var(--dark-category-earth-btn);
+    --category-sky-bg: var(--dark-category-sky-bg);
+    --category-sky-btn: var(--dark-category-sky-btn);
+    --category-forest-bg: var(--dark-category-forest-bg);
+    --category-forest-btn: var(--dark-category-forest-btn);
+    --navbar-bg: var(--dark-navbar-bg);
+    --navbar-sub-bg: var(--dark-navbar-sub-bg);
+    --navbar-fg: var(--dark-navbar-fg);
+  }
 }
 
 /* ───────────────────────────────────────────────────────────

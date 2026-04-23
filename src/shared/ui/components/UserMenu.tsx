@@ -38,8 +38,9 @@ export function UserMenu({ initialUser, locale, labels }: UserMenuProps) {
   // Server-read user (cookie) takes precedence; store user hydrates after client login.
   const user = storeUser ?? initialUser;
 
-  // Close on outside click
+  // Close on outside click — only while the dropdown is open
   useEffect(() => {
+    if (!isOpen) return;
     function handleClickOutside(e: MouseEvent) {
       if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
         setIsOpen(false);
@@ -47,7 +48,7 @@ export function UserMenu({ initialUser, locale, labels }: UserMenuProps) {
     }
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  }, [isOpen]);
 
   const handleLogout = async () => {
     await logoutAction();

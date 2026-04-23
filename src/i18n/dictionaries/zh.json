@@ -109,7 +109,8 @@
       "reviews": "{count} 条评论",
       "delivery": "预计 {date} 送达",
       "outOfStock": "缺货",
-      "viewProduct": "查看产品"
+      "viewProduct": "查看产品",
+      "ratingLabel": "5 星中的 {rating} 星"
     },
     "viewCategory": "查看产品"
   },
@@ -117,6 +118,7 @@
     "breadcrumbProduct": "产品详情",
     "aboutThisItem": "关于此商品",
     "reviews": "{count} 条评价",
+    "ratingLabel": "5 星中的 {rating} 星",
     "inStock": "有货",
     "outOfStock": "暂时无货",
     "onlyXLeft": "仅剩 {count} 件 — 请尽快订购。",
@@ -170,6 +172,12 @@
     "signIn": "登录",
     "signUp": "注册",
     "logout": "退出登录",
+    "placeholders": {
+      "name": "张伟",
+      "email": "name@example.com",
+      "password": "••••••••"
+    },
+    "togglePassword": "显示或隐藏密码",
     "errors": {
       "invalidCredentials": "邮箱或密码不正确。",
       "emailTaken": "此邮箱已被注册。",

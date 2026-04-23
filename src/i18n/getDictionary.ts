@@ -63,6 +63,7 @@ export interface Dictionary {
       delivery: string;
       outOfStock: string;
       viewProduct: string;
+      ratingLabel: string;
     };
     viewCategory: string;
   };
@@ -70,6 +71,7 @@ export interface Dictionary {
     breadcrumbProduct: string;
     aboutThisItem: string;
     reviews: string;
+    ratingLabel: string;
     inStock: string;
     outOfStock: string;
     onlyXLeft: string;
@@ -123,6 +125,12 @@ export interface Dictionary {
     signIn: string;
     signUp: string;
     logout: string;
+    togglePassword: string;
+    placeholders: {
+      name: string;
+      email: string;
+      password: string;
+    };
     errors: {
       invalidCredentials: string;
       emailTaken: string;

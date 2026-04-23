@@ -109,7 +109,8 @@
       "reviews": "{count} reviews",
       "delivery": "Delivery by {date}",
       "outOfStock": "Out of stock",
-      "viewProduct": "View product"
+      "viewProduct": "View product",
+      "ratingLabel": "{rating} out of 5 stars"
     },
     "viewCategory": "View products"
   },
@@ -117,6 +118,7 @@
     "breadcrumbProduct": "Product Detail",
     "aboutThisItem": "About this item",
     "reviews": "{count} ratings",
+    "ratingLabel": "{rating} out of 5 stars",
     "inStock": "In Stock",
     "outOfStock": "Currently unavailable",
     "onlyXLeft": "Only {count} left in stock — order soon.",
@@ -170,6 +172,12 @@
     "signIn": "Sign in",
     "signUp": "Sign up",
     "logout": "Sign out",
+    "placeholders": {
+      "name": "Jane Doe",
+      "email": "name@example.com",
+      "password": "••••••••"
+    },
+    "togglePassword": "Show or hide password",
     "errors": {
       "invalidCredentials": "Invalid email or password.",
       "emailTaken": "This email is already registered.",

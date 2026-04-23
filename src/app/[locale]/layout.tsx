@@ -49,6 +49,21 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
+        {/* Preload critical fonts — regular + semibold cover the bulk of UI text */}
+        <link
+          rel="preload"
+          href="/assets/fonts/rubik-regular.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/assets/fonts/rubik-semibold.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
         {/* Inline script to prevent flash of wrong theme (FOUC) */}
         <script
           dangerouslySetInnerHTML={{

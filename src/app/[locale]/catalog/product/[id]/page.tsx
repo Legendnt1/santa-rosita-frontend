@@ -106,6 +106,7 @@ export default async function ProductDetailPage({
                 rating={product.rating}
                 reviewCount={product.reviewCount}
                 reviewsLabel={pdp.reviews}
+                ratingLabel={pdp.ratingLabel}
               />
             </div>
 

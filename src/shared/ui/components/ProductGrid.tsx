@@ -6,6 +6,7 @@ import {
   formatPrice,
   formatDeliveryText,
 } from "@/shared/utils/price";
+import Image from "next/image";
 import Link from "next/link";
 import { Icon } from "./Icon";
 import { StarRating } from "./StarRating";
@@ -25,6 +26,7 @@ interface ProductGridProps {
     outOfStock: string;
     viewProduct: string;
     stock: string;
+    ratingLabel: string;
   };
   /** Current locale */
   locale: string;
@@ -55,11 +57,12 @@ function ListingProductCard({
       {/* Product image */}
       <Link href={`/${locale}/catalog/product/${product.id}`} tabIndex={-1} aria-hidden>
         <div className="relative flex aspect-square items-center justify-center bg-white p-4">
-          <img
+          <Image
             src={product.imageUrl}
             alt={product.name}
-            className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-105"
-            loading="lazy"
+            fill
+            sizes="(min-width: 1280px) 240px, (min-width: 1024px) 32vw, (min-width: 768px) 33vw, 50vw"
+            className="object-contain p-4 transition-transform duration-300 group-hover:scale-105"
           />
 
           {/* Discount badge */}
@@ -103,6 +106,7 @@ function ListingProductCard({
             rating={product.rating}
             reviewCount={product.reviewCount}
             reviewsLabel={labels.reviews}
+            ratingLabel={labels.ratingLabel}
           />
         </div>
 

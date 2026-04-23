@@ -20,6 +20,11 @@ interface LoginFormProps {
     submit: string;
     forgotPassword: string;
     switchToRegister: string;
+    togglePassword: string;
+    placeholders: {
+      email: string;
+      password: string;
+    };
     errors: {
       required: string;
       invalidEmail: string;
@@ -97,7 +102,7 @@ export function LoginForm({ locale, labels }: LoginFormProps) {
           onChange={(e) => setEmail(e.target.value)}
           disabled={isPending}
           className="rounded-lg border border-border bg-background px-3 py-2.5 text-sm text-foreground placeholder:text-foreground-muted/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 disabled:opacity-60"
-          placeholder="demo@santarosita.pe"
+          placeholder={labels.placeholders.email}
         />
       </div>
 
@@ -123,13 +128,14 @@ export function LoginForm({ locale, labels }: LoginFormProps) {
             onChange={(e) => setPassword(e.target.value)}
             disabled={isPending}
             className="w-full rounded-lg border border-border bg-background px-3 py-2.5 pr-10 text-sm text-foreground placeholder:text-foreground-muted/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 disabled:opacity-60"
-            placeholder="••••••••"
+            placeholder={labels.placeholders.password}
           />
           <button
             type="button"
             onClick={() => setShowPassword((v) => !v)}
             className="absolute right-2.5 top-1/2 -translate-y-1/2 text-foreground-muted hover:text-foreground transition-colors"
-            aria-label="Toggle password visibility"
+            aria-label={labels.togglePassword}
+            aria-pressed={showPassword}
           >
             <Icon name={showPassword ? "moon" : "sun"} className="h-4 w-4" />
           </button>

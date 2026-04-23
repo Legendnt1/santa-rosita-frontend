@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useCartStore, selectTotalPrice } from "@/shared/stores/cart-store";
 import { formatPrice } from "@/shared/utils/price";
@@ -91,10 +92,12 @@ export function CartView({ locale, labels }: CartViewProps) {
               <div key={item.productId} className="card flex gap-3 p-3 sm:gap-4 sm:p-4 animate-fade-up">
                 {/* Image */}
                 <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg border border-border/40 bg-white sm:h-24 sm:w-24">
-                  <img
+                  <Image
                     src={item.imageUrl}
                     alt={item.name}
-                    className="h-full w-full object-contain p-1"
+                    fill
+                    sizes="96px"
+                    className="object-contain p-1"
                   />
                 </div>
 

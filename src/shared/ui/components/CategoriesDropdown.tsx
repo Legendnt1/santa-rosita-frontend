@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type { Category, CategoryTheme } from '@/modules/catalog/domain/entities/Category';
 import type { CategoryDictionary } from '@/i18n/getDictionary';
@@ -109,15 +110,15 @@ export function CategoriesNav({
       {isOpen && (
         <>
           <div
-            className="fixed inset-0 z-35"
+            className="fixed inset-0 z-[35]"
             aria-hidden="true"
             onClick={close}
           />
 
           <div
-            role="dialog"
-            aria-modal="false"
-            className="absolute inset-x-0 top-full z-51 border-t border-border bg-card shadow-2xl animate-fade-in"
+            role="region"
+            aria-label={labels.categories}
+            className="absolute inset-x-0 top-full z-[51] border-t border-border bg-card shadow-2xl animate-fade-in"
           >
             <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6">
 
@@ -134,23 +135,23 @@ export function CategoriesNav({
                       <ul className="mt-2.5 space-y-2">
                         {cats.map((cat) => (
                           <li key={cat.id}>
-                            <a
+                            <Link
                               href={`/${locale}/catalog/${cat.slug}`}
-                              className="text-sm text-foreground transition-colors hover:text-primary"
+                              className="rounded text-sm text-foreground transition-colors hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
                               onClick={close}
                             >
                               {catalog[cat.slug]?.title ?? cat.slug}
-                            </a>
+                            </Link>
                           </li>
                         ))}
                       </ul>
-                      <a
+                      <Link
                         href={`/${locale}/catalog`}
-                        className="mt-3 inline-block text-xs font-semibold text-primary hover:underline"
+                        className="mt-3 inline-block rounded text-xs font-semibold text-primary hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
                         onClick={close}
                       >
                         {labels.seeAll} →
-                      </a>
+                      </Link>
                     </div>
                   );
                 })}
@@ -166,14 +167,14 @@ export function CategoriesNav({
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {brands.map((brand) => (
-                    <a
+                    <Link
                       key={brand}
                       href={`/${locale}/catalog?brand=${encodeURIComponent(brand)}`}
-                      className="rounded-full border border-border px-3 py-1 text-xs font-medium text-foreground transition-colors hover:border-primary hover:text-primary"
+                      className="rounded-full border border-border px-3 py-1 text-xs font-medium text-foreground transition-colors hover:border-primary hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
                       onClick={close}
                     >
                       {brand}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>

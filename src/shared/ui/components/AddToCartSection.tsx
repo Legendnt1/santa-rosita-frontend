@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useCartStore } from "@/shared/stores/cart-store";
 import type { CartableProduct } from "@/modules/cart/domain/entities/CartItem";
 import { Icon } from "./Icon";
@@ -30,11 +30,19 @@ export function AddToCartSection({ product, labels }: AddToCartSectionProps) {
   const [justAdded, setJustAdded] = useState(false);
   const addItem = useCartStore((s) => s.addItem);
   const isOutOfStock = product.stock <= 0;
+  const feedbackTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (feedbackTimerRef.current) clearTimeout(feedbackTimerRef.current);
+    };
+  }, []);
 
   const handleAdd = () => {
     addItem(product, qty);
     setJustAdded(true);
-    setTimeout(() => setJustAdded(false), 2000);
+    if (feedbackTimerRef.current) clearTimeout(feedbackTimerRef.current);
+    feedbackTimerRef.current = setTimeout(() => setJustAdded(false), 2000);
   };
 
   return (

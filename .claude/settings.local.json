@@ -11,7 +11,8 @@
       "Bash(powershell -Command \"& 'C:\\\\Program Files\\\\GitHub CLI\\\\gh.exe' --version\")",
       "Bash(powershell -Command \"Get-Command gh -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Source\")",
       "Bash(cmd /c \"gh --version\")",
-      "Bash(cmd /c \"where gh\")"
+      "Bash(cmd /c \"where gh\")",
+      "Bash(npx eslint *)"
     ]
   }
 }

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import type { Product } from '@/modules/catalog/domain/entities/Product';
 import { formatPrice } from '@/shared/utils/price';
 
@@ -27,12 +28,13 @@ export function ProductCard({ product, labels }: ProductCardProps) {
   return (
     <article className="group flex w-full shrink-0 flex-col overflow-hidden sm:w-44 md:w-48">
       {/* Product image */}
-      <div className="flex aspect-square items-center justify-center rounded-lg bg-white p-3 shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-md sm:rounded-xl sm:p-4">
-        <img
+      <div className="relative flex aspect-square items-center justify-center rounded-lg bg-white p-3 shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-md sm:rounded-xl sm:p-4">
+        <Image
           src={product.imageUrl}
           alt={product.name}
-          className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-105"
-          loading="lazy"
+          fill
+          sizes="(min-width: 768px) 192px, (min-width: 640px) 176px, 50vw"
+          className="object-contain p-3 transition-transform duration-300 group-hover:scale-105 sm:p-4"
         />
       </div>
 

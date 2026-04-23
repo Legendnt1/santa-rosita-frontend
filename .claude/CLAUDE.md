@@ -43,6 +43,11 @@ Within each module:
 * **Font Optimization**: Use `font-display: swap` and preload critical fonts for performance.
 * **Icon Optimization**: Use SVG sprites to minimize HTTP requests and optimize rendering.
 
+### 4. Scalability & Maintainability
+* **Inicial Considerations**: This project is designed to be scalable and maintainable, with clear separation of concerns and modular architecture. As the project grows, we can easily add new features or modules without affecting existing functionality.
+* **Future plans**: In future phases, we will integrate user accounts, delivery logistics, and financial transactions. The current architecture allows for seamless integration of these features without major refactoring.
+* **Integration with a real managament system**: When integrating with a real management system, we will create new infrastructure adapters to connect to the external APIs. The domain and application layers will remain unchanged, ensuring that our core business logic is not affected by changes in the external systems.
+
 ## Coding Standards
 * **Language**: All code, variable names, and JSDoc documentation must be in **ENGLISH**.
 * **Naming Conventions**:

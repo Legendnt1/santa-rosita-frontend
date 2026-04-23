@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 
 /**
@@ -20,7 +21,7 @@ interface ImageGalleryProps {
  *
  * @remarks
  * Client component — manages selected-image state locally.
- * No external dependencies; uses only Tailwind 4 utilities.
+ * Main image is marked `priority` because it is the PDP LCP candidate.
  */
 export function ImageGallery({ images, productName }: ImageGalleryProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -43,23 +44,28 @@ export function ImageGallery({ images, productName }: ImageGalleryProps) {
             }`}
             aria-label={`View image ${index + 1}`}
           >
-            <img
+            <Image
               src={src}
               alt={`${productName} — view ${index + 1}`}
+              width={64}
+              height={64}
               className="h-14 w-14 object-contain sm:h-16 sm:w-16"
-              loading="lazy"
+              loading={index === 0 ? "eager" : "lazy"}
             />
           </button>
         ))}
       </div>
 
       {/* ── Main image ───────────────────────────────────── */}
-      <div className="flex flex-1 items-center justify-center rounded-xl border border-border/30 bg-white p-4 sm:p-8">
-        <img
+      <div className="relative flex flex-1 items-center justify-center rounded-xl border border-border/30 bg-white p-4 sm:p-8 min-h-85 sm:min-h-110">
+        <Image
           key={mainImage}
           src={mainImage}
           alt={productName}
-          className="max-h-85 w-full animate-fade-in object-contain sm:max-h-110"
+          fill
+          priority
+          sizes="(min-width: 1280px) 560px, (min-width: 1024px) 42vw, 100vw"
+          className="animate-fade-in object-contain p-4 sm:p-8"
         />
       </div>
     </div>
