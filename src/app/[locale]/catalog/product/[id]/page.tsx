@@ -29,18 +29,18 @@ import { StarRating } from '@/shared/ui/components/StarRating';
  * - Desktop (lg+): 3-column — Gallery | Info | BuyBox
  * - Mobile: stacked — Gallery → Info → BuyBox
  */
-export default async function ProductDetailPage({
-  params,
-}: {
-  params: Promise<{ locale: string; id: string }>;
-}) {
+interface ProductDetailPageProps {
+  params: Promise<{ locale: Locale; id: string }>;
+}
+
+export default async function ProductDetailPage({ params }: ProductDetailPageProps) {
   const { locale, id } = await params;
 
   // ── Parallel data fetching ────────────────────────────────
   const useCase = new GetProductById(catalogRepository);
 
   const [dict, product] = await Promise.all([
-    getDictionary(locale as Locale),
+    getDictionary(locale),
     useCase.execute(id),
   ]);
 

@@ -83,7 +83,7 @@ async function FilteredCatalog({
   filters,
   dict,
 }: {
-  locale: string;
+  locale: Locale;
   categorySlug: string;
   filters: FilterCriteria;
   dict: Awaited<ReturnType<typeof getDictionary>>;
@@ -150,17 +150,16 @@ async function FilteredCatalog({
  * Suspense boundary so slow data sources do not block the shell.
  * All filter state lives in URL search params, enabling deep-linking.
  */
-export default async function ProductListingPage({
-  params,
-  searchParams,
-}: {
-  params: Promise<{ locale: string; categorySlug: string }>;
+interface ProductListingPageProps {
+  params: Promise<{ locale: Locale; categorySlug: string }>;
   searchParams: Promise<Record<string, string | string[] | undefined>>;
-}) {
+}
+
+export default async function ProductListingPage({ params, searchParams }: ProductListingPageProps) {
   const { locale, categorySlug } = await params;
   const resolvedSearchParams = await searchParams;
 
-  const dict = await getDictionary(locale as Locale);
+  const dict = await getDictionary(locale);
 
   const category = await catalogRepository.getCategoryBySlug(categorySlug);
   if (!category) notFound();

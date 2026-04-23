@@ -14,13 +14,13 @@ import { CategorySection } from '@/shared/ui/components/CategorySection';
  * waterfalls. The repository adapter can be swapped without
  * touching this page (Hexagonal Architecture).
  */
-export default async function ShopHomePage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+interface ShopHomePageProps {
+  params: Promise<{ locale: Locale }>;
+}
+
+export default async function ShopHomePage({ params }: ShopHomePageProps) {
   const { locale } = await params;
-  const dict = await getDictionary(locale as Locale);
+  const dict = await getDictionary(locale);
 
   // ── Data fetching (adapter can be swapped via DI) ───────
   const categories = await catalogRepository.getCategories();
