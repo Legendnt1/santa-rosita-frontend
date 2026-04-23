@@ -32,7 +32,7 @@ import { StarRating } from '@/shared/ui/components/StarRating';
 export default async function ProductDetailPage({
   params,
 }: {
-  params: Promise<{ locale: Locale; id: string }>;
+  params: Promise<{ locale: string; id: string }>;
 }) {
   const { locale, id } = await params;
 
@@ -40,7 +40,7 @@ export default async function ProductDetailPage({
   const useCase = new GetProductById(catalogRepository);
 
   const [dict, product] = await Promise.all([
-    getDictionary(locale),
+    getDictionary(locale as Locale),
     useCase.execute(id),
   ]);
 

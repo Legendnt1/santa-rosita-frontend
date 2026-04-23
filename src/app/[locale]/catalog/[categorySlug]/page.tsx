@@ -83,7 +83,7 @@ async function FilteredCatalog({
   filters,
   dict,
 }: {
-  locale: Locale;
+  locale: string;
   categorySlug: string;
   filters: FilterCriteria;
   dict: Awaited<ReturnType<typeof getDictionary>>;
@@ -154,13 +154,13 @@ export default async function ProductListingPage({
   params,
   searchParams,
 }: {
-  params: Promise<{ locale: Locale; categorySlug: string }>;
+  params: Promise<{ locale: string; categorySlug: string }>;
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const { locale, categorySlug } = await params;
   const resolvedSearchParams = await searchParams;
 
-  const dict = await getDictionary(locale);
+  const dict = await getDictionary(locale as Locale);
 
   const category = await catalogRepository.getCategoryBySlug(categorySlug);
   if (!category) notFound();

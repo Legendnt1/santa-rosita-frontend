@@ -17,10 +17,10 @@ import { CategorySection } from '@/shared/ui/components/CategorySection';
 export default async function ShopHomePage({
   params,
 }: {
-  params: Promise<{ locale: Locale }>;
+  params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const dict = await getDictionary(locale);
+  const dict = await getDictionary(locale as Locale);
 
   // ── Data fetching (adapter can be swapped via DI) ───────
   const categories = await catalogRepository.getCategories();
