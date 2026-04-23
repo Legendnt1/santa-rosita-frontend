@@ -3,6 +3,9 @@
     "searchPlaceholder": "Buscar repuestos...",
     "searchButton": "Buscar",
     "stock": "C",
+    "inStock": "Disponible",
+    "lowStock": "Quedan {count}",
+    "outOfStock": "Agotado",
     "currency": "PEN"
   },
   "navbar": {

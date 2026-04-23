@@ -3,6 +3,9 @@
     "searchPlaceholder": "搜索零件...",
     "searchButton": "搜索",
     "stock": "数量",
+    "inStock": "有货",
+    "lowStock": "仅剩 {count} 件",
+    "outOfStock": "缺货",
     "currency": "PEN"
   },
   "navbar": {

@@ -3,6 +3,9 @@
     "searchPlaceholder": "Search parts...",
     "searchButton": "Search",
     "stock": "Qty",
+    "inStock": "In stock",
+    "lowStock": "{count} left",
+    "outOfStock": "Out of stock",
     "currency": "PEN"
   },
   "navbar": {

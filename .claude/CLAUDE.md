@@ -70,6 +70,9 @@ Within each module:
 ## Structure
 src/
   app/[locale]/             # Presentation
+    /(shop)/                # Main shopping routes
+    /auth/                  # Login/Register pages
+    /cart/                  # Cart page
     /catalog/[slug]/        # Listing
     /catalog/product/[id]/  # Detail Page (PDP)
   modules/catalog/          # Business Logic

@@ -156,16 +156,21 @@ export function CategoriesNav({
                           </li>
                         ))}
                       </ul>
-                      <Link
-                        href={`/${locale}/catalog`}
-                        className="mt-3 inline-block rounded text-xs font-semibold text-primary hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
-                        onClick={close}
-                      >
-                        {labels.seeAll} →
-                      </Link>
                     </div>
                   );
                 })}
+              </div>
+
+              {/* Single catalog-wide CTA — replaces the per-column "See all"
+                  links which duplicated the same destination four times. */}
+              <div className="mt-5 flex justify-end">
+                <Link
+                  href={`/${locale}/catalog`}
+                  className="inline-flex items-center gap-1 rounded text-sm font-semibold text-primary hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
+                  onClick={close}
+                >
+                  {labels.seeAll} →
+                </Link>
               </div>
 
               {/* ── Divider ───────────────────────────────── */}

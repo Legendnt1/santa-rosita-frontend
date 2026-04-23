@@ -17,6 +17,9 @@ export interface Dictionary {
     searchPlaceholder: string;
     searchButton: string;
     stock: string;
+    inStock: string;
+    lowStock: string;
+    outOfStock: string;
     currency: string;
   };
   navbar: {

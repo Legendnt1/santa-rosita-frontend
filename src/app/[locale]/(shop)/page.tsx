@@ -50,7 +50,9 @@ export default async function ShopHomePage({
                 title: catalogEntry?.title ?? category.slug,
                 description: catalogEntry?.description ?? '',
                 searchButton: dict.common.searchButton,
-                stock: dict.common.stock,
+                inStock: dict.common.inStock,
+                lowStock: dict.common.lowStock,
+                outOfStock: dict.common.outOfStock,
               }}
             />
           );

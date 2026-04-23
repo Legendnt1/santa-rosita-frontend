@@ -9,27 +9,39 @@
   --font-sans: var(--font-rubik), Arial, Helvetica, sans-serif;
 
   /* Palette — Light theme */
-  --background: #f4f2ff;
-  --background-search-bar: #e9d5ff;
-  --foreground: #1e1b2e;
-  --foreground-muted: #767579;
-  --primary: #7c3aed;
+  --background: #f7f6fb;
+  --background-search-bar: #efeafe;
+  --foreground: #171427;
+  --foreground-muted: #6b6880;
+  --primary: #6d28d9;
   --primary-foreground: #ffffff;
-  --accent: #ef4444;
+  --accent: #e11d48;
   --accent-foreground: #ffffff;
   --card: #ffffff;
-  --card-foreground: #1e1b2e;
-  --border: #ddd6fe;
+  --card-foreground: #171427;
+  --border: #e4e0f2;
 
-  /* Category section palettes */
-  --category-purple-bg: #9c7eff;
-  --category-purple-btn: #430fa3;
-  --category-earth-bg: #dec3c3;
-  --category-earth-btn: #845151;
-  --category-sky-bg: #b8d9f8;
-  --category-sky-btn: #1a56a8;
-  --category-forest-bg: #bfe0d7;
-  --category-forest-btn: #1f6b54;
+  /* Semantic status tokens */
+  --status-success: #15803d;
+  --status-success-bg: #dcfce7;
+  --status-warning: #b45309;
+  --status-warning-bg: #fef3c7;
+  --status-danger: #b91c1c;
+  --status-danger-bg: #fee2e2;
+
+  /* Category section palettes — soft tinted surfaces + strong accent color */
+  --category-purple-bg: #efeafe;
+  --category-purple-btn: #5b21b6;
+  --category-purple-accent: #7c3aed;
+  --category-earth-bg: #f8ecea;
+  --category-earth-btn: #7c3d3d;
+  --category-earth-accent: #b45353;
+  --category-sky-bg: #e6f0fb;
+  --category-sky-btn: #1e3a8a;
+  --category-sky-accent: #2563eb;
+  --category-forest-bg: #e4f2ec;
+  --category-forest-btn: #14532d;
+  --category-forest-accent: #059669;
 
   /* Navbar */
   --navbar-bg: #d8d1ff;
@@ -55,12 +67,22 @@
   --color-navbar-fg: var(--navbar-fg);
   --color-category-purple-bg: var(--category-purple-bg);
   --color-category-purple-btn: var(--category-purple-btn);
+  --color-category-purple-accent: var(--category-purple-accent);
   --color-category-earth-bg: var(--category-earth-bg);
   --color-category-earth-btn: var(--category-earth-btn);
+  --color-category-earth-accent: var(--category-earth-accent);
   --color-category-sky-bg: var(--category-sky-bg);
   --color-category-sky-btn: var(--category-sky-btn);
+  --color-category-sky-accent: var(--category-sky-accent);
   --color-category-forest-bg: var(--category-forest-bg);
   --color-category-forest-btn: var(--category-forest-btn);
+  --color-category-forest-accent: var(--category-forest-accent);
+  --color-status-success: var(--status-success);
+  --color-status-success-bg: var(--status-success-bg);
+  --color-status-warning: var(--status-warning);
+  --color-status-warning-bg: var(--status-warning-bg);
+  --color-status-danger: var(--status-danger);
+  --color-status-danger-bg: var(--status-danger-bg);
 
   /* Font family token — Tailwind `font-sans` resolves to the Rubik stack. */
   --font-sans: var(--font-sans);
@@ -75,28 +97,44 @@
    ─────────────────────────────────────────────────────────── */
 :root {
   /* Dark-mode palette tokens. Only referenced — never applied directly. */
-  --dark-background: #0f0d1a;
-  --dark-background-search-bar: #1a1550;
-  --dark-foreground: #e8e4f0;
-  --dark-foreground-muted: #9d98ac;
+  --dark-background: #0b0916;
+  --dark-background-search-bar: #1e1a3a;
+  --dark-foreground: #ece8f5;
+  --dark-foreground-muted: #a9a3bd;
   --dark-primary: #a78bfa;
-  --dark-primary-foreground: #ffffff;
-  --dark-accent: #ef4444;
+  --dark-primary-foreground: #0b0916;
+  --dark-accent: #f43f5e;
   --dark-accent-foreground: #ffffff;
-  --dark-card: #1c1933;
-  --dark-card-foreground: #e8e4f0;
-  --dark-border: #2a2245;
-  --dark-category-purple-bg: #1f1554;
-  --dark-category-purple-btn: #7c3aed;
-  --dark-category-earth-bg: #3b2420;
-  --dark-category-earth-btn: #c4956a;
-  --dark-category-sky-bg: #0d2340;
-  --dark-category-sky-btn: #3b82f6;
-  --dark-category-forest-bg: #0b2620;
+  --dark-card: #161329;
+  --dark-card-foreground: #ece8f5;
+  --dark-border: #2b2548;
+
+  /* Semantic status tokens — dark */
+  --dark-status-success: #4ade80;
+  --dark-status-success-bg: #052e1a;
+  --dark-status-warning: #fbbf24;
+  --dark-status-warning-bg: #2d1c05;
+  --dark-status-danger: #fb7185;
+  --dark-status-danger-bg: #2c0b13;
+
+  /* Dark category surfaces: subtle tint of card, not a full wash. Keeps product
+     photos readable and avoids muddy saturated blocks. */
+  --dark-category-purple-bg: #1c1636;
+  --dark-category-purple-btn: #8b5cf6;
+  --dark-category-purple-accent: #a78bfa;
+  --dark-category-earth-bg: #2a1e1c;
+  --dark-category-earth-btn: #d4a574;
+  --dark-category-earth-accent: #e8b88c;
+  --dark-category-sky-bg: #13213a;
+  --dark-category-sky-btn: #60a5fa;
+  --dark-category-sky-accent: #93c5fd;
+  --dark-category-forest-bg: #12241f;
   --dark-category-forest-btn: #34d399;
-  --dark-navbar-bg: #161229;
-  --dark-navbar-sub-bg: #2a1f5e;
-  --dark-navbar-fg: #e8e4f0;
+  --dark-category-forest-accent: #6ee7b7;
+
+  --dark-navbar-bg: #100d22;
+  --dark-navbar-sub-bg: #1a1540;
+  --dark-navbar-fg: #ece8f5;
 }
 
 /* Shared mapping: whenever this block matches, light tokens are overridden
@@ -113,14 +151,24 @@
   --card: var(--dark-card);
   --card-foreground: var(--dark-card-foreground);
   --border: var(--dark-border);
+  --status-success: var(--dark-status-success);
+  --status-success-bg: var(--dark-status-success-bg);
+  --status-warning: var(--dark-status-warning);
+  --status-warning-bg: var(--dark-status-warning-bg);
+  --status-danger: var(--dark-status-danger);
+  --status-danger-bg: var(--dark-status-danger-bg);
   --category-purple-bg: var(--dark-category-purple-bg);
   --category-purple-btn: var(--dark-category-purple-btn);
+  --category-purple-accent: var(--dark-category-purple-accent);
   --category-earth-bg: var(--dark-category-earth-bg);
   --category-earth-btn: var(--dark-category-earth-btn);
+  --category-earth-accent: var(--dark-category-earth-accent);
   --category-sky-bg: var(--dark-category-sky-bg);
   --category-sky-btn: var(--dark-category-sky-btn);
+  --category-sky-accent: var(--dark-category-sky-accent);
   --category-forest-bg: var(--dark-category-forest-bg);
   --category-forest-btn: var(--dark-category-forest-btn);
+  --category-forest-accent: var(--dark-category-forest-accent);
   --navbar-bg: var(--dark-navbar-bg);
   --navbar-sub-bg: var(--dark-navbar-sub-bg);
   --navbar-fg: var(--dark-navbar-fg);
@@ -139,14 +187,24 @@
     --card: var(--dark-card);
     --card-foreground: var(--dark-card-foreground);
     --border: var(--dark-border);
+    --status-success: var(--dark-status-success);
+    --status-success-bg: var(--dark-status-success-bg);
+    --status-warning: var(--dark-status-warning);
+    --status-warning-bg: var(--dark-status-warning-bg);
+    --status-danger: var(--dark-status-danger);
+    --status-danger-bg: var(--dark-status-danger-bg);
     --category-purple-bg: var(--dark-category-purple-bg);
     --category-purple-btn: var(--dark-category-purple-btn);
+    --category-purple-accent: var(--dark-category-purple-accent);
     --category-earth-bg: var(--dark-category-earth-bg);
     --category-earth-btn: var(--dark-category-earth-btn);
+    --category-earth-accent: var(--dark-category-earth-accent);
     --category-sky-bg: var(--dark-category-sky-bg);
     --category-sky-btn: var(--dark-category-sky-btn);
+    --category-sky-accent: var(--dark-category-sky-accent);
     --category-forest-bg: var(--dark-category-forest-bg);
     --category-forest-btn: var(--dark-category-forest-btn);
+    --category-forest-accent: var(--dark-category-forest-accent);
     --navbar-bg: var(--dark-navbar-bg);
     --navbar-sub-bg: var(--dark-navbar-sub-bg);
     --navbar-fg: var(--dark-navbar-fg);
@@ -254,5 +312,34 @@ body {
   /* Static card surface — no hover effects (order summary, cart rows) */
   .card {
     @apply rounded-xl border border-border/40 bg-card shadow-sm;
+  }
+
+  /* Product image tile — theme-aware surface instead of hardcoded white.
+     Keeps white photographs readable in both light and dark modes. */
+  .product-image-tile {
+    @apply relative flex aspect-square items-center justify-center
+           overflow-hidden rounded-xl bg-card ring-1 ring-border/60
+           transition-all duration-300
+           group-hover:-translate-y-0.5 group-hover:shadow-lg
+           group-hover:ring-primary/40;
+  }
+
+  /* Stock pill — semantic status surface. Uses status tokens so dark mode
+     stays legible without re-declaring color per component. */
+  .stock-pill {
+    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5
+           text-[11px] font-semibold leading-5 sm:text-xs;
+  }
+  .stock-pill-ok {
+    background: var(--status-success-bg);
+    color: var(--status-success);
+  }
+  .stock-pill-low {
+    background: var(--status-warning-bg);
+    color: var(--status-warning);
+  }
+  .stock-pill-out {
+    background: var(--status-danger-bg);
+    color: var(--status-danger);
   }
 }

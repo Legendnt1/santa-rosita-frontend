@@ -30,8 +30,8 @@
 
 ## <a id="security-notice"></a>Important Security Notice: Mock Authentication
 
-> **CRITICAL WARNING:**
-> **DO NOT USE THE CURRENT AUTHENTICATION IMPLEMENTATION IN PRODUCTION.**
+> [!WARNING]
+> DO NOT USE THE CURRENT AUTHENTICATION IMPLEMENTATION IN PRODUCTION.
 
 As this project is currently in **Phase 1**, the authentication system is entirely *simulated*:
 
@@ -39,6 +39,7 @@ As this project is currently in **Phase 1**, the authentication system is entire
 - The `isAuthenticated` function only checks for the presence of a token and **does not validate the signature**.
 - Hardcoded user credentials exist natively within the codebase.
 
+> [!NOTE]
 > *This layer is intentionally mock-only and MUST be replaced with a real Identity Provider (like `Supabase`, `Firebase`, or your own secure backend) before utilizing this codebase for any real-world application or enterprise environment.*
 
 ---
@@ -65,8 +66,8 @@ As this project is currently in **Phase 1**, the authentication system is entire
 
 This repository strictly separates domain logic from infrastructure and frameworks:
 
-> *"The architecture should scream the intent of the system, not the frameworks being used."* <br>
-> — **Uncle Bob (Robert C. Martin)** on Screaming Architecture.
+> [!NOTE]
+> The architecture is inspired by Clean Architecture and Domain-Driven Design (DDD) principles, ensuring that the core business logic remains independent of external frameworks and can be easily tested and maintained.
 
 - **Domain Layer:** Pure TypeScript entities and repository interfaces. *Zero dependencies.*
 - **Application Layer:** Use cases and orchestration.
@@ -83,6 +84,9 @@ This repository strictly separates domain logic from infrastructure and framewor
 - **Language:** TypeScript `5.9` (Strict Mode)
 - **State Management:** Zustand
 - **Package Manager:** `pnpm`
+
+> [!NOTE]
+> It's recommended to use the latest version of Node.js (18 or above) for optimal performance and compatibility with Next.js 16.
 
 ---
 
@@ -101,6 +105,9 @@ pnpm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the running instance.
+
+> [!TIP]
+> It's already configured with AI skills for Claude Code, and the [CLAUDE.md](.claude/CLAUDE.md) file contains detailed instructions on how to leverage AI for code generation, refactoring, and documentation within this codebase. This can significantly speed up development and ensure consistency across the project.
 
 ---
 
