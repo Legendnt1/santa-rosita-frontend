@@ -1,4 +1,5 @@
 import type { Locale } from '@/i18n/config';
+import type { Metadata } from 'next';
 import type { FilterCriteria, SortOption } from '@/modules/catalog/domain/entities/FilterCriteria';
 import { getDictionary } from '@/i18n/getDictionary';
 import { catalogRepository } from '@/modules/catalog/infrastructure/catalog-repository.instance';
@@ -6,6 +7,7 @@ import { QP, VALID_SORTS } from '@/shared/config/catalog-query-params';
 import { ResultsHeader } from '@/shared/ui/components/ResultsHeader';
 import { FilterSidebar } from '@/shared/ui/components/FilterSidebar';
 import { ProductGrid } from '@/shared/ui/components/ProductGrid';
+import { interpolate } from '@/shared/utils/template';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 
@@ -104,7 +106,7 @@ async function FilteredCatalog({
         }}
       />
 
-      <div className="mt-4 flex flex-col gap-4 lg:flex-row lg:gap-6">
+      <div className="flex flex-col gap-4 lg:flex-row lg:gap-6">
         <aside className="w-full shrink-0 lg:w-64 xl:w-72">
           <FilterSidebar
             locale={locale}
@@ -154,6 +156,103 @@ interface ProductListingPageProps {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }
 
+/**
+ * Summarizes the active query params into a human-readable filter label
+ * used in the metadata title/description. Returns `null` when no
+ * SEO-relevant filters are active — callers fall back to the unfiltered
+ * category template in that case.
+ *
+ * @remarks
+ * Sort order is intentionally excluded: it changes result ordering but not
+ * the set of results, so indexing every sort variant separately would
+ * dilute SEO signal without adding value.
+ */
+function buildFilterLabel(
+  searchParams: Record<string, string | string[] | undefined>,
+  filtersDict: Awaited<ReturnType<typeof getDictionary>>["listing"]["filters"],
+): string | null {
+  const parts: string[] = [];
+
+  const brandsRaw = searchParams[QP.BRANDS];
+  const brands =
+    typeof brandsRaw === "string"
+      ? brandsRaw.split(",").filter(Boolean)
+      : Array.isArray(brandsRaw)
+        ? brandsRaw.filter(Boolean)
+        : [];
+  if (brands.length > 0) parts.push(brands.join(", "));
+
+  const min = Number(searchParams[QP.MIN_PRICE]);
+  const max = Number(searchParams[QP.MAX_PRICE]);
+  if (Number.isFinite(min) && min > 0) parts.push(`${filtersDict.priceMin} ${min}`);
+  if (Number.isFinite(max) && max > 0) parts.push(`${filtersDict.priceMax} ${max}`);
+
+  const rating = Number(searchParams[QP.MIN_RATING]);
+  if (Number.isFinite(rating) && rating >= 1 && rating <= 5) {
+    parts.push(`${rating}★ ${filtersDict.ratingUp}`);
+  }
+
+  if (searchParams[QP.IN_STOCK] === "1") parts.push(filtersDict.inStockOnly);
+
+  return parts.length > 0 ? parts.join(" · ") : null;
+}
+
+/**
+ * Metadata for a category listing. When the URL carries SEO-relevant
+ * filters (brands, price, rating, availability) we switch to the
+ * `categoryFiltered` template so the tab title and OG card reflect the
+ * active narrowing. Unfiltered views use the canonical category template.
+ *
+ * @remarks
+ * Category lookup + dictionary are fetched in parallel. Both calls hit
+ * `React.cache`, so the page component re-uses the same resolved values
+ * downstream — no duplicate I/O.
+ */
+export async function generateMetadata({
+  params,
+  searchParams,
+}: ProductListingPageProps): Promise<Metadata> {
+  const { locale, categorySlug } = await params;
+  const [dict, category, resolvedSearchParams] = await Promise.all([
+    getDictionary(locale),
+    catalogRepository.getCategoryBySlug(categorySlug),
+    searchParams,
+  ]);
+
+  if (!category) return {};
+
+  const catalogEntry = dict.catalog[categorySlug];
+  const categoryTitle = catalogEntry?.title ?? categorySlug;
+  const categoryDescription = catalogEntry?.description ?? "";
+  const filterLabel = buildFilterLabel(
+    resolvedSearchParams,
+    dict.listing.filters,
+  );
+
+  const base = {
+    store: dict.pdp.storeName,
+    category: categoryTitle,
+    description: categoryDescription,
+  };
+
+  const tpl = filterLabel ? dict.meta.categoryFiltered : dict.meta.category;
+  const values = filterLabel ? { ...base, filters: filterLabel } : base;
+
+  const title = interpolate(tpl.title, values);
+  const description = interpolate(tpl.description, values);
+
+  return {
+    title,
+    description,
+    // Canonical always points to the unfiltered listing so filter variants
+    // don't fragment link equity across thousands of URL combinations.
+    alternates: { canonical: `/${locale}/catalog/${categorySlug}` },
+    // De-index filtered variants: they're useful for users, not for search.
+    robots: filterLabel ? { index: false, follow: true } : undefined,
+    openGraph: { title, description, type: "website", locale },
+  };
+}
+
 export default async function ProductListingPage({ params, searchParams }: ProductListingPageProps) {
   const { locale, categorySlug } = await params;
   const resolvedSearchParams = await searchParams;
@@ -166,15 +265,13 @@ export default async function ProductListingPage({ params, searchParams }: Produ
   const filters = parseSearchParams(resolvedSearchParams, categorySlug);
 
   return (
-    <main className="mx-auto max-w-7xl px-3 py-4 sm:px-4 sm:py-6 lg:px-6">
-      <Suspense fallback={<ProductGridSkeleton />}>
-        <FilteredCatalog
-          locale={locale}
-          categorySlug={categorySlug}
-          filters={filters}
-          dict={dict}
-        />
-      </Suspense>
-    </main>
+    <Suspense fallback={<ProductGridSkeleton />}>
+      <FilteredCatalog
+        locale={locale}
+        categorySlug={categorySlug}
+        filters={filters}
+        dict={dict}
+      />
+    </Suspense>
   );
 }

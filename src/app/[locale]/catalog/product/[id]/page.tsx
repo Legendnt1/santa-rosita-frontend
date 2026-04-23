@@ -1,18 +1,18 @@
 import type { Locale } from '@/i18n/config';
+import type { Metadata } from 'next';
 import { getDictionary } from '@/i18n/getDictionary';
 import { GetProductById } from '@/modules/catalog/application/get-product-by-id.use-case';
 import { catalogRepository } from '@/modules/catalog/infrastructure/catalog-repository.instance';
 import { ImageGallery } from '@/shared/ui/components/ImageGallery';
 import { BuyBox } from '@/shared/ui/components/BuyBox';
-import { Breadcrumb } from '@/shared/ui/components/Breadcrumb';
-import { BreadcrumbSetter } from '@/shared/ui/components/BreadcrumbSetter';
-import type { BreadcrumbItem } from '@/shared/stores/breadcrumb-store';
+import { Breadcrumb, type BreadcrumbItem } from '@/shared/ui/components/Breadcrumb';
 import {
   getEffectivePrice,
   hasDiscount as checkDiscount,
   getDiscountPercent,
   formatPrice,
 } from '@/shared/utils/price';
+import { interpolate } from '@/shared/utils/template';
 import { notFound } from 'next/navigation';
 import { StarRating } from '@/shared/ui/components/StarRating';
 
@@ -30,6 +30,55 @@ import { StarRating } from '@/shared/ui/components/StarRating';
  */
 interface ProductDetailPageProps {
   params: Promise<{ locale: Locale; id: string }>;
+}
+
+/**
+ * Metadata for a product detail page.
+ *
+ * @remarks
+ * Fetches the product and dictionary in parallel. When the product does
+ * not exist we return an empty object so the page's `notFound()` path
+ * takes over without Next.js rendering a misleading stale title. The
+ * primary image is surfaced via `openGraph.images` so social shares
+ * render a proper product card.
+ */
+export async function generateMetadata({
+  params,
+}: ProductDetailPageProps): Promise<Metadata> {
+  const { locale, id } = await params;
+  const useCase = new GetProductById(catalogRepository);
+
+  const [dict, product] = await Promise.all([
+    getDictionary(locale),
+    useCase.execute(id),
+  ]);
+
+  if (!product) return {};
+
+  const values = {
+    name: product.name,
+    brand: product.brand,
+    store: dict.pdp.storeName,
+    feature: product.features[0] ?? "",
+  };
+  const title = interpolate(dict.meta.product.title, values);
+  const description = interpolate(dict.meta.product.description, values);
+  const ogAlt = interpolate(dict.meta.product.ogAlt, { name: product.name });
+
+  return {
+    title,
+    description,
+    alternates: { canonical: `/${locale}/catalog/product/${product.id}` },
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      locale,
+      images: product.imageUrl
+        ? [{ url: product.imageUrl, alt: ogAlt }]
+        : undefined,
+    },
+  };
 }
 
 export default async function ProductDetailPage({ params }: ProductDetailPageProps) {
@@ -66,15 +115,14 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
   ];
 
   return (
-    <main className="mx-auto max-w-7xl px-3 py-4 sm:px-4 sm:py-6 lg:px-6">
-        {/* ── Breadcrumbs ──────────────────────────────────── */}
-        <div className="mb-4">
-          <BreadcrumbSetter items={breadcrumbItems} />
-          <Breadcrumb />
-        </div>
+    <>
+      {/* ── Breadcrumbs ──────────────────────────────────── */}
+      <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <Breadcrumb items={breadcrumbItems} />
+      </div>
 
-        {/* ── 3-column PDP layout ─────────────────────────── */}
-        <div className="flex flex-col gap-6 lg:flex-row lg:gap-8">
+      {/* ── 3-column PDP layout ─────────────────────────── */}
+      <div className="flex flex-col gap-6 lg:flex-row lg:gap-8">
 
           {/* ─── Left: Image Gallery ───────────────────────── */}
           <div className="w-full lg:w-[42%] xl:w-[45%]">
@@ -176,7 +224,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
               }}
             />
           </div>
-        </div>
-      </main>
+      </div>
+    </>
   );
 }

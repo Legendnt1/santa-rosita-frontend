@@ -1,16 +1,28 @@
-"use client";
-
-import { useBreadcrumbStore } from "@/shared/stores/breadcrumb-store";
+import Link from "next/link";
 import { Icon } from "./Icon";
+
+export interface BreadcrumbItem {
+  /** Display label */
+  label: string;
+  /** Link URL — omit for the current/last item */
+  href?: string;
+}
+
+interface BreadcrumbProps {
+  /** Ordered trail; the last item renders as plain text (current page). */
+  items: BreadcrumbItem[];
+}
 
 /**
  * Accessible breadcrumb navigation with chevron separators.
- * Reads its trail from the global Zustand breadcrumb store.
- * The last item is rendered as plain text (current page).
+ *
+ * @remarks
+ * Pure server component — items are passed directly as props so the trail
+ * is part of the initial HTML. Rendering on the server avoids the hydration
+ * flash / CLS that a client-store-driven breadcrumb produces when the
+ * initial render has no items, and keeps the trail available to crawlers.
  */
-export function Breadcrumb() {
-  const items = useBreadcrumbStore((s) => s.items);
-
+export function Breadcrumb({ items }: BreadcrumbProps) {
   if (items.length === 0) return null;
 
   return (
@@ -28,12 +40,12 @@ export function Breadcrumb() {
                 />
               )}
               {item.href && !isLast ? (
-                <a
+                <Link
                   href={item.href}
                   className="transition-colors hover:text-primary"
                 >
                   {item.label}
-                </a>
+                </Link>
               ) : (
                 <span className={isLast ? "font-medium text-foreground" : ""}>
                   {item.label}

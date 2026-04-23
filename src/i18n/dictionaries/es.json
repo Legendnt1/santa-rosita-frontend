@@ -204,7 +204,24 @@
   },
   "meta": {
     "title": "Corporación Santa Rosita — Repuestos Multimarca",
-    "description": "Tienda de repuestos automotrices multimarca"
+    "description": "Tienda de repuestos automotrices multimarca",
+    "catalog": {
+      "title": "Catálogo completo | {store}",
+      "description": "Explora {count} categorías de repuestos automotrices multimarca con envío a todo el Perú."
+    },
+    "category": {
+      "title": "{category} | {store}",
+      "description": "Compra repuestos de {category} al mejor precio. {description}"
+    },
+    "categoryFiltered": {
+      "title": "{category} · {filters} | {store}",
+      "description": "Repuestos de {category} filtrados por {filters} — disponibles con envío a todo el Perú."
+    },
+    "product": {
+      "title": "{name} — {brand} | {store}",
+      "description": "{name} de {brand}. {feature}",
+      "ogAlt": "Imagen del producto {name}"
+    }
   },
   "footer": {
     "tagline": "Repuestos automotrices multimarca, entrega en todo el Perú.",

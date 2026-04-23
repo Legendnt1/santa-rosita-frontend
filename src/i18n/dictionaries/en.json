@@ -204,7 +204,24 @@
   },
   "meta": {
     "title": "Corporación Santa Rosita — Multi-brand Auto Parts",
-    "description": "Multi-brand automotive parts store"
+    "description": "Multi-brand automotive parts store",
+    "catalog": {
+      "title": "Full catalog | {store}",
+      "description": "Browse {count} categories of multi-brand automotive parts, shipped across Peru."
+    },
+    "category": {
+      "title": "{category} | {store}",
+      "description": "Shop {category} parts at the best price. {description}"
+    },
+    "categoryFiltered": {
+      "title": "{category} · {filters} | {store}",
+      "description": "{category} parts filtered by {filters} — in stock and shipped across Peru."
+    },
+    "product": {
+      "title": "{name} — {brand} | {store}",
+      "description": "{name} by {brand}. {feature}",
+      "ogAlt": "Product image of {name}"
+    }
   },
   "footer": {
     "tagline": "Multi-brand automotive parts, shipped across Peru.",

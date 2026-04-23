@@ -204,7 +204,24 @@
   },
   "meta": {
     "title": "Corporación Santa Rosita — 多品牌汽车零件",
-    "description": "多品牌汽车零件商店"
+    "description": "多品牌汽车零件商店",
+    "catalog": {
+      "title": "完整目录 | {store}",
+      "description": "浏览 {count} 个多品牌汽车零部件类别,配送至秘鲁全境。"
+    },
+    "category": {
+      "title": "{category} | {store}",
+      "description": "以最优价格选购 {category} 零部件。{description}"
+    },
+    "categoryFiltered": {
+      "title": "{category} · {filters} | {store}",
+      "description": "按 {filters} 筛选的 {category} 零部件 — 现货供应,配送至秘鲁全境。"
+    },
+    "product": {
+      "title": "{name} — {brand} | {store}",
+      "description": "{brand} 出品的 {name}。{feature}",
+      "ogAlt": "产品图片 {name}"
+    }
   },
   "footer": {
     "tagline": "多品牌汽车零部件,配送至秘鲁全境。",

@@ -159,6 +159,27 @@ export interface Dictionary {
   meta: {
     title: string;
     description: string;
+    /** Catalog index page (`/catalog`) */
+    catalog: {
+      title: string;
+      description: string;
+    };
+    /** Category listing page — unfiltered (`/catalog/[slug]`) */
+    category: {
+      title: string;
+      description: string;
+    };
+    /** Category listing with active filters (e.g. ?brands=…) */
+    categoryFiltered: {
+      title: string;
+      description: string;
+    };
+    /** Product detail page (`/catalog/product/[id]`) */
+    product: {
+      title: string;
+      description: string;
+      ogAlt: string;
+    };
   };
   footer: {
     tagline: string;

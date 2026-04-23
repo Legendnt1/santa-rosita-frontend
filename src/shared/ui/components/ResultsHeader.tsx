@@ -1,10 +1,13 @@
-import { Breadcrumb } from "./Breadcrumb";
-import { BreadcrumbSetter } from "./BreadcrumbSetter";
+import { Breadcrumb, type BreadcrumbItem } from "./Breadcrumb";
 
 /**
  * Renders the breadcrumb navigation and result count header
  * for the product listing page.
- * React 19 Server Component.
+ *
+ * @remarks
+ * Server component — the breadcrumb trail is built from props and rendered
+ * inline, so the initial HTML already carries the nav. No client store,
+ * no hydration flash.
  */
 interface ResultsHeaderProps {
   /** Current locale code */
@@ -27,24 +30,21 @@ export function ResultsHeader({
   labels,
 }: ResultsHeaderProps) {
   const resultsText = labels.resultsCount.replace(
-    '{count}',
-    String(totalResults)
+    "{count}",
+    String(totalResults),
   );
 
+  const breadcrumbItems: BreadcrumbItem[] = [
+    { label: labels.home, href: `/${locale}` },
+    { label: categoryTitle },
+  ];
+
   return (
-    <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-      <BreadcrumbSetter
-        items={[
-          { label: labels.home, href: `/${locale}` },
-          { label: categoryTitle },
-        ]}
-      />
-      <Breadcrumb />
+    <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+      <Breadcrumb items={breadcrumbItems} />
 
       {/* Result count */}
-      <p className="text-xs text-foreground-muted sm:text-sm">
-        {resultsText}
-      </p>
+      <p className="text-xs text-foreground-muted sm:text-sm">{resultsText}</p>
     </div>
   );
 }
