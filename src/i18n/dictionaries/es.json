@@ -6,7 +6,10 @@
     "inStock": "Disponible",
     "lowStock": "Quedan {count}",
     "outOfStock": "Agotado",
-    "currency": "PEN"
+    "currency": "PEN",
+    "logoAlt": "Corporación Santa Rosita",
+    "home": "Inicio",
+    "cart": "Carrito"
   },
   "navbar": {
     "categories": "Categorías",
@@ -17,7 +20,10 @@
     "groupPurple": "Mecánica",
     "groupEarth": "Desgaste",
     "groupSky": "Sistemas",
-    "groupForest": "Carrocería"
+    "groupForest": "Carrocería",
+    "themeLight": "Cambiar a modo claro",
+    "themeDark": "Cambiar a modo oscuro",
+    "changeLanguage": "Cambiar idioma"
   },
   "catalog": {
     "engine": {
@@ -115,7 +121,8 @@
       "viewProduct": "Ver producto",
       "ratingLabel": "{rating} de 5 estrellas"
     },
-    "viewCategory": "Ver productos"
+    "viewCategory": "Ver productos",
+    "categoriesCount": "{count} categorías"
   },
   "pdp": {
     "breadcrumbProduct": "Detalle del producto",
@@ -139,7 +146,8 @@
     "brand": "Marca",
     "returnPolicy": "Devoluciones gratis por 30 días",
     "breadcrumbHome": "Inicio",
-    "breadcrumbCatalog": "Catálogo"
+    "breadcrumbCatalog": "Catálogo",
+    "viewImage": "Ver imagen {index}"
   },
   "cart": {
     "title": "Carrito",
@@ -156,7 +164,10 @@
     "clear": "Vaciar carrito",
     "qty": "Cant",
     "items": "{count} artículos",
-    "addedToCart": "¡Agregado!"
+    "addedToCart": "¡Agregado!",
+    "decreaseQty": "Disminuir cantidad",
+    "increaseQty": "Aumentar cantidad",
+    "close": "Cerrar"
   },
   "auth": {
     "loginTitle": "Iniciar sesión",

@@ -21,6 +21,9 @@ export interface Dictionary {
     lowStock: string;
     outOfStock: string;
     currency: string;
+    logoAlt: string;
+    home: string;
+    cart: string;
   };
   navbar: {
     categories: string;
@@ -32,6 +35,9 @@ export interface Dictionary {
     groupEarth: string;
     groupSky: string;
     groupForest: string;
+    themeLight: string;
+    themeDark: string;
+    changeLanguage: string;
   };
   catalog: Record<string, CategoryDictionary>;
   listing: {

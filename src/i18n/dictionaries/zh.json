@@ -6,7 +6,10 @@
     "inStock": "有货",
     "lowStock": "仅剩 {count} 件",
     "outOfStock": "缺货",
-    "currency": "PEN"
+    "currency": "PEN",
+    "logoAlt": "Corporación Santa Rosita",
+    "home": "首页",
+    "cart": "购物车"
   },
   "navbar": {
     "categories": "类别",
@@ -17,7 +20,10 @@
     "groupPurple": "机械传动",
     "groupEarth": "磨损维护",
     "groupSky": "电子系统",
-    "groupForest": "车身结构"
+    "groupForest": "车身结构",
+    "themeLight": "切换到亮色模式",
+    "themeDark": "切换到暗色模式",
+    "changeLanguage": "切换语言"
   },
   "catalog": {
     "engine": {
@@ -115,7 +121,8 @@
       "viewProduct": "查看产品",
       "ratingLabel": "5 星中的 {rating} 星"
     },
-    "viewCategory": "查看产品"
+    "viewCategory": "查看产品",
+    "categoriesCount": "{count} 个类别"
   },
   "pdp": {
     "breadcrumbProduct": "产品详情",
@@ -139,7 +146,8 @@
     "brand": "品牌",
     "returnPolicy": "30天免费退货",
     "breadcrumbHome": "首页",
-    "breadcrumbCatalog": "目录"
+    "breadcrumbCatalog": "目录",
+    "viewImage": "查看图片 {index}"
   },
   "cart": {
     "title": "购物车",
@@ -156,7 +164,10 @@
     "clear": "清空购物车",
     "qty": "数量",
     "items": "{count} 件商品",
-    "addedToCart": "已添加！"
+    "addedToCart": "已添加！",
+    "decreaseQty": "减少数量",
+    "increaseQty": "增加数量",
+    "close": "关闭"
   },
   "auth": {
     "loginTitle": "登录",

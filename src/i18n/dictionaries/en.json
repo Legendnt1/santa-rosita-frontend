@@ -6,7 +6,10 @@
     "inStock": "In stock",
     "lowStock": "{count} left",
     "outOfStock": "Out of stock",
-    "currency": "PEN"
+    "currency": "PEN",
+    "logoAlt": "Corporación Santa Rosita",
+    "home": "Home",
+    "cart": "Cart"
   },
   "navbar": {
     "categories": "Categories",
@@ -17,7 +20,10 @@
     "groupPurple": "Mechanics",
     "groupEarth": "Wear Parts",
     "groupSky": "Systems",
-    "groupForest": "Body & Structure"
+    "groupForest": "Body & Structure",
+    "themeLight": "Switch to light mode",
+    "themeDark": "Switch to dark mode",
+    "changeLanguage": "Change language"
   },
   "catalog": {
     "engine": {
@@ -115,7 +121,8 @@
       "viewProduct": "View product",
       "ratingLabel": "{rating} out of 5 stars"
     },
-    "viewCategory": "View products"
+    "viewCategory": "View products",
+    "categoriesCount": "{count} categories"
   },
   "pdp": {
     "breadcrumbProduct": "Product Detail",
@@ -139,7 +146,8 @@
     "brand": "Brand",
     "returnPolicy": "Free 30-day returns",
     "breadcrumbHome": "Home",
-    "breadcrumbCatalog": "Catalog"
+    "breadcrumbCatalog": "Catalog",
+    "viewImage": "View image {index}"
   },
   "cart": {
     "title": "Cart",
@@ -156,7 +164,10 @@
     "clear": "Clear cart",
     "qty": "Qty",
     "items": "{count} items",
-    "addedToCart": "Added!"
+    "addedToCart": "Added!",
+    "decreaseQty": "Decrease quantity",
+    "increaseQty": "Increase quantity",
+    "close": "Close"
   },
   "auth": {
     "loginTitle": "Sign in",
