@@ -58,12 +58,12 @@ function ProductGridSkeleton() {
         <div className="h-4 w-24 animate-pulse rounded bg-card/40" />
       </div>
       <div className="flex flex-col gap-4 lg:flex-row lg:gap-6">
-        <div className="h-[480px] w-full shrink-0 animate-pulse rounded-xl bg-card/40 lg:w-64 xl:w-72" />
+        <div className="h-120 w-full shrink-0 animate-pulse rounded-xl bg-card/40 lg:w-64 xl:w-72" />
         <div className="grid flex-1 grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-4">
           {Array.from({ length: 8 }).map((_, i) => (
             <div
               key={i}
-              className="h-[320px] animate-pulse rounded-xl bg-card/40"
+              className="h-80 animate-pulse rounded-xl bg-card/40"
             />
           ))}
         </div>

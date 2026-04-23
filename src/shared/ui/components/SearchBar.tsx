@@ -1,7 +1,10 @@
-import { Icon } from "./Icon";
+'use client';
+
+import { useRouter } from 'next/navigation';
+import { Icon } from './Icon';
 
 /**
- * Props for the SearchBar server component.
+ * Props for the SearchBar component.
  */
 interface SearchBarProps {
   /** Localized placeholder text */
@@ -13,17 +16,37 @@ interface SearchBarProps {
 }
 
 /**
- * Search input with a magnifying-glass button.
+ * Search input that navigates via `router.push()` instead of a native GET
+ * form submission.
  *
- * Native GET form that navigates to `/[locale]/catalog?q=…`.
- * Keeping it as a `<form method="get">` means it works without JS, stays a
- * Server Component, and browser history/back behaviour comes for free.
+ * @remarks
+ * Using `router.push()` keeps the navigation inside the SPA history stack
+ * so the source page is never put in bfcache. A native `<form method="get">`
+ * triggers a full page reload, which suspends React's event listeners on the
+ * previous page — causing the theme toggle, language switcher, and categories
+ * dropdown to stop responding after the user presses the browser back button.
+ *
+ * The `role="search"` landmark and keyboard submit (Enter) are preserved.
+ * Progressive enhancement (no-JS) is intentionally traded for bfcache safety.
+ *
+ * The React 19 `action` function prop receives a `FormData` directly —
+ * no `FormEvent`, no `e.preventDefault()` needed.
  */
-export function SearchBar({ placeholder, locale, submitLabel = "Search" }: SearchBarProps) {
+export function SearchBar({ placeholder, locale, submitLabel = 'Search' }: SearchBarProps) {
+  const router = useRouter();
+
+  function handleAction(formData: FormData) {
+    const q = ((formData.get('q') as string) ?? '').trim();
+    router.push(
+      q
+        ? `/${locale}/catalog?q=${encodeURIComponent(q)}`
+        : `/${locale}/catalog`
+    );
+  }
+
   return (
     <form
-      method="get"
-      action={`/${locale}/catalog`}
+      action={handleAction}
       role="search"
       className="flex w-full overflow-hidden rounded-full bg-card ring-1 ring-border transition-shadow focus-within:ring-2 focus-within:ring-primary/70"
     >
