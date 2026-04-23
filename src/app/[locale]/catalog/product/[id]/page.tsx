@@ -2,7 +2,6 @@ import type { Locale } from '@/i18n/config';
 import { getDictionary } from '@/i18n/getDictionary';
 import { GetProductById } from '@/modules/catalog/application/get-product-by-id.use-case';
 import { catalogRepository } from '@/modules/catalog/infrastructure/catalog-repository.instance';
-import { Navbar } from '@/shared/ui/components/Navbar';
 import { ImageGallery } from '@/shared/ui/components/ImageGallery';
 import { BuyBox } from '@/shared/ui/components/BuyBox';
 import { Breadcrumb } from '@/shared/ui/components/Breadcrumb';
@@ -67,10 +66,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
   ];
 
   return (
-    <>
-      <Navbar dict={dict} locale={locale} />
-
-      <main className="mx-auto max-w-7xl px-3 py-4 sm:px-4 sm:py-6 lg:px-6">
+    <main className="mx-auto max-w-7xl px-3 py-4 sm:px-4 sm:py-6 lg:px-6">
         {/* ── Breadcrumbs ──────────────────────────────────── */}
         <div className="mb-4">
           <BreadcrumbSetter items={breadcrumbItems} />
@@ -182,6 +178,5 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
           </div>
         </div>
       </main>
-    </>
   );
 }

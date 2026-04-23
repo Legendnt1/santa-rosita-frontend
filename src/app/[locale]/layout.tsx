@@ -5,6 +5,7 @@ import { cookies } from 'next/headers';
 import { locales, type Locale } from '@/i18n/config';
 import { getDictionary } from '@/i18n/getDictionary';
 import { Footer } from '@/shared/ui/components/Footer';
+import { Navbar } from '@/shared/ui/components/Navbar';
 import '../globals.css';
 
 /**
@@ -78,7 +79,8 @@ export default async function LocaleLayout({
       suppressHydrationWarning
     >
       <body className="flex min-h-screen flex-col bg-background font-sans text-foreground antialiased">
-        <div className="flex-1">{children}</div>
+        <Navbar dict={dict} locale={locale} />
+        <div className="flex flex-1 flex-col">{children}</div>
         <Footer locale={locale} dict={dict.footer} storeName={dict.pdp.storeName} />
       </body>
     </html>

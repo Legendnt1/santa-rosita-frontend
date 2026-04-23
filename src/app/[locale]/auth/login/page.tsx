@@ -1,5 +1,3 @@
-import Image from "next/image";
-import Link from "next/link";
 import type { Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { LoginForm } from "@/shared/ui/components/LoginForm";
@@ -25,21 +23,6 @@ export default async function LoginPage({ params }: LoginPageProps) {
 
   return (
     <div className="w-full max-w-sm animate-fade-up">
-      {/* Logo */}
-      <div className="mb-8 flex justify-center">
-        <Link href={`/${locale}`} aria-label={dict.common.home}>
-          <Image
-            src="/assets/images/logo.webp"
-            alt={dict.common.logoAlt}
-            width={160}
-            height={56}
-            priority
-            className="h-14 w-auto"
-          />
-        </Link>
-      </div>
-
-      {/* Card */}
       <div className="card p-6 sm:p-8">
         <div className="mb-6 text-center">
           <h1 className="text-xl font-extrabold text-card-foreground sm:text-2xl">

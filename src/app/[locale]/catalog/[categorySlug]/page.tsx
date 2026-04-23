@@ -3,7 +3,6 @@ import type { FilterCriteria, SortOption } from '@/modules/catalog/domain/entiti
 import { getDictionary } from '@/i18n/getDictionary';
 import { catalogRepository } from '@/modules/catalog/infrastructure/catalog-repository.instance';
 import { QP, VALID_SORTS } from '@/shared/config/catalog-query-params';
-import { Navbar } from '@/shared/ui/components/Navbar';
 import { ResultsHeader } from '@/shared/ui/components/ResultsHeader';
 import { FilterSidebar } from '@/shared/ui/components/FilterSidebar';
 import { ProductGrid } from '@/shared/ui/components/ProductGrid';
@@ -167,19 +166,15 @@ export default async function ProductListingPage({ params, searchParams }: Produ
   const filters = parseSearchParams(resolvedSearchParams, categorySlug);
 
   return (
-    <>
-      <Navbar dict={dict} locale={locale} />
-
-      <main className="mx-auto max-w-7xl px-3 py-4 sm:px-4 sm:py-6 lg:px-6">
-        <Suspense fallback={<ProductGridSkeleton />}>
-          <FilteredCatalog
-            locale={locale}
-            categorySlug={categorySlug}
-            filters={filters}
-            dict={dict}
-          />
-        </Suspense>
-      </main>
-    </>
+    <main className="mx-auto max-w-7xl px-3 py-4 sm:px-4 sm:py-6 lg:px-6">
+      <Suspense fallback={<ProductGridSkeleton />}>
+        <FilteredCatalog
+          locale={locale}
+          categorySlug={categorySlug}
+          filters={filters}
+          dict={dict}
+        />
+      </Suspense>
+    </main>
   );
 }

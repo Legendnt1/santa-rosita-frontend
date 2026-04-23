@@ -2,7 +2,6 @@ import Link from "next/link";
 import type { Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { catalogRepository } from "@/modules/catalog/infrastructure/catalog-repository.instance";
-import { Navbar } from "@/shared/ui/components/Navbar";
 import { Icon } from "@/shared/ui/components/Icon";
 
 interface CatalogIndexPageProps {
@@ -36,10 +35,7 @@ export default async function CatalogIndexPage({ params }: CatalogIndexPageProps
   ]);
 
   return (
-    <>
-      <Navbar dict={dict} locale={locale} />
-
-      <main className="mx-auto max-w-6xl px-3 py-6 sm:px-4 sm:py-8">
+    <main className="mx-auto max-w-6xl px-3 py-6 sm:px-4 sm:py-8">
         {/* Header */}
         <div className="mb-6 sm:mb-8">
           <h1 className="text-2xl font-extrabold text-foreground sm:text-3xl">
@@ -82,6 +78,5 @@ export default async function CatalogIndexPage({ params }: CatalogIndexPageProps
           })}
         </div>
       </main>
-    </>
   );
 }

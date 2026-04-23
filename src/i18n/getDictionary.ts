@@ -1,3 +1,4 @@
+import { cache } from 'react';
 import type { Locale } from './config';
 
 /**
@@ -194,9 +195,13 @@ const dictionaries: Record<Locale, () => Promise<Dictionary>> = {
  * Loads the translation dictionary for the specified locale.
  * Uses dynamic imports so only the requested locale bundle is loaded.
  *
+ * Wrapped in `React.cache` so that multiple Server Components in the same
+ * request tree (e.g. layout + page) share a single resolved dictionary
+ * without redundant dynamic imports.
+ *
  * @param locale - A valid locale code (es | en | zh)
  * @returns The fully resolved dictionary object
  */
-export async function getDictionary(locale: Locale): Promise<Dictionary> {
+export const getDictionary = cache(async (locale: Locale): Promise<Dictionary> => {
   return dictionaries[locale]();
-}
+});
