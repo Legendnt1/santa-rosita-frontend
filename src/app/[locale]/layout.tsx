@@ -4,6 +4,7 @@ import { Rubik } from 'next/font/google';
 import { cookies } from 'next/headers';
 import { locales, type Locale } from '@/i18n/config';
 import { getDictionary } from '@/i18n/getDictionary';
+import { Footer } from '@/shared/ui/components/Footer';
 import '../globals.css';
 
 /**
@@ -60,6 +61,7 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const dict = await getDictionary(locale as Locale);
 
   // Read the theme cookie server-side so the correct class is applied to
   // <html> on the very first byte — no inline script, no FOUC.
@@ -75,8 +77,9 @@ export default async function LocaleLayout({
       className={[rubik.variable, themeClass].filter(Boolean).join(' ')}
       suppressHydrationWarning
     >
-      <body className="min-h-screen bg-background font-sans text-foreground antialiased">
-        {children}
+      <body className="flex min-h-screen flex-col bg-background font-sans text-foreground antialiased">
+        <div className="flex-1">{children}</div>
+        <Footer locale={locale} dict={dict.footer} storeName={dict.pdp.storeName} />
       </body>
     </html>
   );

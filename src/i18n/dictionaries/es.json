@@ -205,5 +205,21 @@
   "meta": {
     "title": "Corporación Santa Rosita — Repuestos Multimarca",
     "description": "Tienda de repuestos automotrices multimarca"
+  },
+  "footer": {
+    "tagline": "Repuestos automotrices multimarca, entrega en todo el Perú.",
+    "legalHeading": "Legal",
+    "privacy": "Política de Privacidad",
+    "terms": "Términos y Condiciones",
+    "dataProtection": "Protección de Datos",
+    "contactHeading": "Contacto",
+    "followUs": "Síguenos",
+    "social": {
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "whatsapp": "WhatsApp",
+      "twitter": "X (Twitter)"
+    },
+    "rights": "© {year} Corporación Santa Rosita. Todos los derechos reservados."
   }
 }

@@ -205,5 +205,21 @@
   "meta": {
     "title": "Corporación Santa Rosita — 多品牌汽车零件",
     "description": "多品牌汽车零件商店"
+  },
+  "footer": {
+    "tagline": "多品牌汽车零部件,配送至秘鲁全境。",
+    "legalHeading": "法律",
+    "privacy": "隐私政策",
+    "terms": "条款和条件",
+    "dataProtection": "数据保护",
+    "contactHeading": "联系",
+    "followUs": "关注我们",
+    "social": {
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "whatsapp": "WhatsApp",
+      "twitter": "X (Twitter)"
+    },
+    "rights": "© {year} Corporación Santa Rosita。保留所有权利。"
   }
 }

@@ -36,7 +36,11 @@ export type IconName =
   | "world"
   | "x"
   | "minus"
-  | "plus";
+  | "plus"
+  | "brand-whatsapp"
+  | "brand-instagram"
+  | "brand-x-twitter"
+  | "brand-facebook"
 
 interface IconProps extends Omit<SVGProps<SVGSVGElement>, "name"> {
   /** Icon ID from the SVG sprite. Ensures developers only use existing icons. */

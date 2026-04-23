@@ -159,6 +159,22 @@ export interface Dictionary {
     title: string;
     description: string;
   };
+  footer: {
+    tagline: string;
+    legalHeading: string;
+    privacy: string;
+    terms: string;
+    dataProtection: string;
+    contactHeading: string;
+    followUs: string;
+    social: {
+      facebook: string;
+      instagram: string;
+      whatsapp: string;
+      twitter: string;
+    };
+    rights: string;
+  };
 }
 
 /**
