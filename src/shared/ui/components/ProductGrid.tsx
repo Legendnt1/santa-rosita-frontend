@@ -53,43 +53,38 @@ function ListingProductCard({
   const isOutOfStock = product.stock <= 0;
   const deliveryText = formatDeliveryText(labels.delivery, product.deliveryDate);
 
+  const productHref = `/${locale}/catalog/product/${product.id}`;
+
   return (
-    <article className="card-interactive group flex flex-col overflow-hidden animate-fade-in-up">
-      {/* Product image */}
-      <Link
-        href={`/${locale}/catalog/product/${product.id}`}
-        transitionTypes={["nav-forward"]}
-        tabIndex={-1}
-        aria-hidden
-      >
-        <ViewTransition name={`product-image-${product.id}`} share="morph" default="none">
-          <div className="relative flex aspect-square items-center justify-center bg-white p-4">
-            <Image
-              src={product.imageUrl}
-              alt={product.name}
-              fill
-              sizes="(min-width: 1280px) 240px, (min-width: 1024px) 32vw, (min-width: 768px) 33vw, 50vw"
-              className="object-contain p-4 transition-transform duration-300 group-hover:scale-105"
-            />
+    <article className="card-interactive group relative flex flex-col overflow-hidden animate-fade-in-up">
+      {/* Product image — decorative; whole card is clickable via the stretched title link below */}
+      <ViewTransition name={`product-image-${product.id}`} share="morph" default="none">
+        <div className="relative flex aspect-square items-center justify-center bg-white p-4">
+          <Image
+            src={product.imageUrl}
+            alt={product.name}
+            fill
+            sizes="(min-width: 1280px) 240px, (min-width: 1024px) 32vw, (min-width: 768px) 33vw, 50vw"
+            className="object-contain p-4 transition-transform duration-300 group-hover:scale-105"
+          />
 
-            {/* Discount badge */}
-            {productHasDiscount && (
-              <span className="absolute left-2 top-2 rounded-md bg-accent px-2 py-0.5 text-[10px] font-bold text-accent-foreground">
-                -{getDiscountPercent(product)}%
+          {/* Discount badge */}
+          {productHasDiscount && (
+            <span className="absolute left-2 top-2 rounded-md bg-accent px-2 py-0.5 text-[10px] font-bold text-accent-foreground">
+              -{getDiscountPercent(product)}%
+            </span>
+          )}
+
+          {/* Out of stock overlay */}
+          {isOutOfStock && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-[1px]">
+              <span className="rounded-md bg-foreground/80 px-3 py-1 text-xs font-bold text-white">
+                {labels.outOfStock}
               </span>
-            )}
-
-            {/* Out of stock overlay */}
-            {isOutOfStock && (
-              <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-[1px]">
-                <span className="rounded-md bg-foreground/80 px-3 py-1 text-xs font-bold text-white">
-                  {labels.outOfStock}
-                </span>
-              </div>
-            )}
-          </div>
-        </ViewTransition>
-      </Link>
+            </div>
+          )}
+        </div>
+      </ViewTransition>
 
       {/* Product details */}
       <div className="flex flex-1 flex-col gap-1 p-3">
@@ -98,12 +93,12 @@ function ListingProductCard({
           {product.brand}
         </span>
 
-        {/* Name */}
+        {/* Name — stretched link makes the entire card a single accessible target */}
         <h3 className="line-clamp-2 text-sm font-semibold leading-snug text-card-foreground">
           <Link
-            href={`/${locale}/catalog/product/${product.id}`}
+            href={productHref}
             transitionTypes={["nav-forward"]}
-            className="transition-colors hover:text-primary"
+            className="transition-colors hover:text-primary before:absolute before:inset-0 before:content-['']"
           >
             {product.name}
           </Link>
@@ -139,11 +134,11 @@ function ListingProductCard({
           </p>
         )}
 
-        {/* View product link — primary CTA */}
+        {/* View product link — primary CTA. `relative z-10` keeps it clickable above the stretched-link overlay. */}
         <Link
-          href={`/${locale}/catalog/product/${product.id}`}
+          href={productHref}
           transitionTypes={["nav-forward"]}
-          className="btn-outline-primary mt-2.5"
+          className="btn-outline-primary relative z-10 mt-2.5"
         >
           {labels.viewProduct}
         </Link>

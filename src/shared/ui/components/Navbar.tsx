@@ -55,7 +55,7 @@ export async function Navbar({ dict, locale }: NavbarProps) {
             <Image
               src="/assets/images/logo.webp"
               alt={dict.common.logoAlt}
-              width={140}
+              width={56}
               height={56}
               priority
               className="h-10 w-auto sm:h-14"

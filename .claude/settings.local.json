@@ -12,7 +12,8 @@
       "Bash(powershell -Command \"Get-Command gh -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Source\")",
       "Bash(cmd /c \"gh --version\")",
       "Bash(cmd /c \"where gh\")",
-      "Bash(npx eslint *)"
+      "Bash(npx eslint *)",
+      "Bash(identify 'C:/Space/Codigos/Next.js/santa-rosita-frontend/public/assets/images/logo.webp')"
     ]
   }
 }
