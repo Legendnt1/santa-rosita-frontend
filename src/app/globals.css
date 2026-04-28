@@ -51,6 +51,18 @@
 }
 
 @theme inline {
+  /* ── Animation token overrides ───────────────────────────────
+     `tailwind-animations` ships defaults at 0.6s. Our UI prefers
+     shorter, sharper motion. Overriding these tokens keeps every
+     `animate-*` utility on-brand without redefining keyframes. */
+  --animate-fade-in-up: fade-in-up 0.35s ease-out both;
+  --animate-fade-in: fade-in 0.25s ease-out both;
+  --animate-slide-in-left: slide-in-left 0.28s cubic-bezier(0.32, 0.72, 0, 1) both;
+
+  /* Local-only animation: subtle scale used by dropdowns/badges.
+     The plugin's `zoom-in` (scale 0.5→1) is too aggressive for popovers. */
+  --animate-scale-in: scale-in 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+
   /* Map CSS variables to Tailwind 4 design tokens */
   --color-background: var(--background);
   --color-background-search-bar: var(--background-search-bar);
@@ -224,37 +236,18 @@ body {
 }
 
 /* ───────────────────────────────────────────────────────────
-   Keyframe Animations
+   Local Keyframes
+   Most entrance animations come from `tailwind-animations`.
+   Only keyframes without a suitable plugin equivalent live here.
    ─────────────────────────────────────────────────────────── */
-@keyframes fade-up {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes fade-in {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
 @keyframes scale-in {
   from { opacity: 0; transform: scale(0.95) translateY(-6px); }
   to   { opacity: 1; transform: scale(1)    translateY(0); }
 }
-@keyframes slide-in-left {
-  from { transform: translateX(-100%); }
-  to   { transform: translateX(0); }
-}
-
-/* ───────────────────────────────────────────────────────────
-   Animation Utilities
-   ─────────────────────────────────────────────────────────── */
-@layer utilities {
-  .animate-fade-up       { animation: fade-up       0.35s ease-out both; }
-  .animate-fade-in       { animation: fade-in       0.25s ease-out both; }
-  .animate-scale-in      { animation: scale-in      0.2s  cubic-bezier(0.16, 1, 0.3, 1) both; }
-  .animate-slide-in-left { animation: slide-in-left 0.28s cubic-bezier(0.32, 0.72, 0, 1) both; }
-}
 
 /* ───────────────────────────────────────────────────────────
    Product grid — entrance stagger by position
+   Targets the plugin's `animate-fade-in-up` utility.
    ─────────────────────────────────────────────────────────── */
 .product-grid > article:nth-child(1) { animation-delay:   0ms; }
 .product-grid > article:nth-child(2) { animation-delay:  55ms; }
@@ -342,5 +335,102 @@ body {
   .stock-pill-out {
     background: var(--status-danger-bg);
     color: var(--status-danger);
+  }
+}
+
+/* ───────────────────────────────────────────────────────────
+   View Transitions
+   Recipes used by <ViewTransition> wrappers across the app.
+   Activated by `experimental.viewTransition` in next.config.ts.
+   ─────────────────────────────────────────────────────────── */
+:root {
+  --duration-exit: 150ms;
+  --duration-enter: 210ms;
+  --duration-move: 400ms;
+}
+
+@keyframes vt-fade {
+  from { filter: blur(3px); opacity: 0; }
+  to   { filter: blur(0);   opacity: 1; }
+}
+@keyframes vt-slide {
+  from { translate: var(--slide-offset); }
+  to   { translate: 0; }
+}
+@keyframes vt-slide-y {
+  from { transform: translateY(var(--slide-y-offset, 10px)); }
+  to   { transform: translateY(0); }
+}
+@keyframes vt-via-blur {
+  30% { filter: blur(3px); }
+}
+
+/* Cross-fade — used by Suspense reveals & generic enter/exit */
+::view-transition-old(.fade-out) {
+  animation: var(--duration-exit) ease-in vt-fade reverse;
+}
+::view-transition-new(.fade-in) {
+  animation: var(--duration-enter) ease-out var(--duration-exit) both vt-fade;
+}
+
+/* Vertical slide — Suspense skeleton → content reveal */
+::view-transition-old(.slide-down) {
+  animation:
+    var(--duration-exit) ease-out both vt-fade reverse,
+    var(--duration-exit) ease-out both vt-slide-y reverse;
+}
+::view-transition-new(.slide-up) {
+  animation:
+    var(--duration-enter) ease-in var(--duration-exit) both vt-fade,
+    var(--duration-move) ease-in both vt-slide-y;
+}
+
+/* Directional navigation — list ↔ detail */
+::view-transition-old(.nav-forward) {
+  --slide-offset: -60px;
+  animation:
+    var(--duration-exit) ease-in both vt-fade reverse,
+    var(--duration-move) ease-in-out both vt-slide reverse;
+}
+::view-transition-new(.nav-forward) {
+  --slide-offset: 60px;
+  animation:
+    var(--duration-enter) ease-out var(--duration-exit) both vt-fade,
+    var(--duration-move) ease-in-out both vt-slide;
+}
+::view-transition-old(.nav-back) {
+  --slide-offset: 60px;
+  animation:
+    var(--duration-exit) ease-in both vt-fade reverse,
+    var(--duration-move) ease-in-out both vt-slide reverse;
+}
+::view-transition-new(.nav-back) {
+  --slide-offset: -60px;
+  animation:
+    var(--duration-enter) ease-out var(--duration-exit) both vt-fade,
+    var(--duration-move) ease-in-out both vt-slide;
+}
+
+/* Shared element morph — product image grid → PDP */
+::view-transition-group(.morph) {
+  animation-duration: var(--duration-move);
+}
+::view-transition-image-pair(.morph) {
+  animation-name: vt-via-blur;
+}
+
+/* Persistent navbar — opt out of the page snapshot */
+::view-transition-group(persistent-nav) {
+  animation: none;
+  z-index: 100;
+}
+
+/* Reduced motion — flatten every transition */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
   }
 }

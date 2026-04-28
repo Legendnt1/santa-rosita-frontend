@@ -82,27 +82,45 @@ src/
   shared/ui/                # Atomic components (BuyBox, Gallery, StarRating)
   i18n/                     # es.json, en.json, zh.json
 
-## Animation System (`globals.css`)
-All animations are defined in `globals.css` via `@keyframes` + `@layer utilities`. Do **not** use external animation plugins (e.g. `tailwindcss-animate`).
+## Animation System
+The app combines two layers, each with a clearly-bounded responsibility:
 
-### Animation utility classes
-| Class | Keyframe | Duration | Use case |
+1. **`tailwind-animations` plugin** — utility-class entrance animations (`animate-*`). Imported once in `globals.css`. Default durations are overridden in `@theme inline` so every utility runs on-brand timing.
+2. **Local `globals.css`** — only animations the plugin doesn't ship (currently just `scale-in` for dropdowns), plus the product-grid stagger and the View Transitions recipes.
+
+> Do **not** add a second animation plugin (e.g. `tailwindcss-animate`). One source of utility classes only.
+
+### Animation utility classes (currently used)
+| Class | Source | Duration override | Use case |
 |---|---|---|---|
-| `.animate-fade-up` | `fade-up` | 350ms ease-out | Card/section entrance from below |
-| `.animate-fade-in` | `fade-in` | 250ms ease-out | Image crossfade, backdrop overlay |
-| `.animate-scale-in` | `scale-in` | 200ms cubic-bezier(0.16,1,0.3,1) | Dropdown menus, popups |
-| `.animate-slide-in-left` | `slide-in-left` | 280ms cubic-bezier(0.32,0.72,0,1) | Mobile drawer/sidebar |
+| `.animate-fade-in-up` | plugin | 350ms ease-out | Card/section entrance from below |
+| `.animate-fade-in` | plugin | 250ms ease-out | Image crossfade, backdrop overlay |
+| `.animate-slide-in-left` | plugin | 280ms cubic-bezier(0.32,0.72,0,1) | Mobile drawer/sidebar |
+| `.animate-scale-in` | local | 200ms cubic-bezier(0.16,1,0.3,1) | Dropdown menus, popups |
+
+When you need a new entrance animation, **first** check the [`tailwind-animations` reference](https://github.com/midudev/tailwind-animations) — adopt the existing utility and override its `--animate-*` token in `@theme inline` if the default timing is too long. Only add a local `@keyframes` block when no plugin utility comes close (as with `scale-in`).
 
 ### Product grid stagger
 Add the `.product-grid` class to the grid container. CSS `nth-child` selectors automatically delay each `article` child by 55ms increments (up to 8 items), creating a cascading entrance with zero JS.
 
 ```html
 <div class="product-grid grid grid-cols-2 ...">
-  <article class="animate-fade-up">...</article>  <!-- delay 0ms   -->
-  <article class="animate-fade-up">...</article>  <!-- delay 55ms  -->
-  <article class="animate-fade-up">...</article>  <!-- delay 110ms -->
+  <article class="animate-fade-in-up">...</article>  <!-- delay 0ms   -->
+  <article class="animate-fade-in-up">...</article>  <!-- delay 55ms  -->
+  <article class="animate-fade-in-up">...</article>  <!-- delay 110ms -->
 </div>
 ```
+
+## View Transitions
+The app uses React's `<ViewTransition>` to animate App Router navigations. The `experimental.viewTransition` flag in `next.config.ts` wraps every `<Link>` click in `document.startViewTransition`.
+
+* **Reusable wrapper**: `DirectionalTransition` in `src/shared/ui/components/DirectionalTransition.tsx` handles `nav-forward` / `nav-back` slides via `addTransitionType`. Wrap each page (not the layout) with it; layouts persist across navigations and never trigger enter/exit.
+* **Shared element morph**: product images use `<ViewTransition name="product-image-{id}" share="morph">` on both the grid card and the PDP gallery so the image visually morphs between routes.
+* **Suspense reveals**: data-heavy sections wrap their `<Suspense fallback={…}>` skeleton and content in separate `<ViewTransition>`s with simple string props (`enter="slide-up"` / `exit="slide-down"`) — never type maps, since Suspense reveals fire as separate transitions with no type.
+* **Persistent Navbar**: the `<header>` carries `style={{ viewTransitionName: 'persistent-nav' }}` to opt out of the page snapshot; CSS in `globals.css` (`::view-transition-group(persistent-nav)`) suppresses its animation so the bar stays static during route changes.
+* **CSS recipes**: every animation class (`fade-in`, `fade-out`, `slide-up`, `slide-down`, `nav-forward`, `nav-back`, `morph`) lives at the bottom of `globals.css`. Never write per-component VT CSS — use a recipe.
+* **Reduced motion**: a global `@media (prefers-reduced-motion: reduce)` block flattens every VT to 0s. Don't bypass it.
+* **`router.back()`**: it triggers a synchronous `popstate` and skips view transitions. For animated back navigation, prefer `router.push()` with an explicit URL plus `addTransitionType('nav-back')`.
 
 ### Shared component classes (`@layer components`)
 Reusable classes that replace long Tailwind strings. Always prefer these over repeating the utility chain.
@@ -132,7 +150,11 @@ Reusable classes that replace long Tailwind strings. Always prefer these over re
 * **Streaming**: Data-heavy page sections should be split into an async child component wrapped in `<Suspense fallback={...}>`, with the Navbar and shell rendering immediately outside the boundary. Skeletons must mirror the responsive column structure of the real grid.
 * **Persisted stores**: Zustand stores persisted to `localStorage` must declare `version` and a `migrate` function. Drop incompatible payloads via `return { ...default } as unknown as Store` — actions are re-attached by Zustand after rehydration.
 
+## Static Asset Caching
+* **SVG icon sprite**: `public/assets/icons/icons.svg` is **inlined** at the top of `<body>` by [`SpriteSheet`](src/shared/ui/components/SpriteSheet.tsx) (a server component that reads the file via `fs.readFile` + `React.cache`). Every `<Icon>` references a `<symbol>` through a same-document fragment (`<use href="#name">`), so **no HTTP request is ever made for icons** — not even a 304 revalidation. Do not revert this to a URL-based `<use>`; it caused dozens of redundant fetches per SPA navigation.
+* **Static assets in `/public/assets`**: long-term cached in production via `headers()` in `next.config.ts` (`Cache-Control: public, max-age=31536000, must-revalidate`). Use `must-revalidate` (not `immutable`) because filenames are not fingerprinted — on redeploy the browser revalidates with ETag (304) but never serves stale assets. The dev server ignores this and emits `no-store` so HMR works; that's expected.
+* **`next/image`**: `minimumCacheTTL` is set to 30 days. When the real backend ships and product images come from a CDN, just add the host(s) to `images.remotePatterns` in `next.config.ts` — no other change is needed; the 30-day TTL applies automatically to `/_next/image` responses. Always render product photos through `<Image>` (never raw `<img>`) so they go through the optimizer and inherit this cache policy.
+
 ## Final Considerations
-* **Using icons**: Use performance-optimized icon component `Icon.tsx` that uses the SVG sprite for all icons. Avoid inline SVGs or external icon libraries.
 * **Running commands**: Do not execute 'build' or 'dev' commands for every change of code.
 * **Important changes**: If you make important changes, like refactoring the architecture or changing the tech stack, update this document to reflect the new standards and guidelines. This ensures that all team members are aligned and can maintain consistency across the project.

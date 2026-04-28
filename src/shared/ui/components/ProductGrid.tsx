@@ -8,6 +8,7 @@ import {
 } from "@/shared/utils/price";
 import Image from "next/image";
 import Link from "next/link";
+import { ViewTransition } from "react";
 import { Icon } from "./Icon";
 import { StarRating } from "./StarRating";
 
@@ -53,34 +54,41 @@ function ListingProductCard({
   const deliveryText = formatDeliveryText(labels.delivery, product.deliveryDate);
 
   return (
-    <article className="card-interactive group flex flex-col overflow-hidden animate-fade-up">
+    <article className="card-interactive group flex flex-col overflow-hidden animate-fade-in-up">
       {/* Product image */}
-      <Link href={`/${locale}/catalog/product/${product.id}`} tabIndex={-1} aria-hidden>
-        <div className="relative flex aspect-square items-center justify-center bg-white p-4">
-          <Image
-            src={product.imageUrl}
-            alt={product.name}
-            fill
-            sizes="(min-width: 1280px) 240px, (min-width: 1024px) 32vw, (min-width: 768px) 33vw, 50vw"
-            className="object-contain p-4 transition-transform duration-300 group-hover:scale-105"
-          />
+      <Link
+        href={`/${locale}/catalog/product/${product.id}`}
+        transitionTypes={["nav-forward"]}
+        tabIndex={-1}
+        aria-hidden
+      >
+        <ViewTransition name={`product-image-${product.id}`} share="morph" default="none">
+          <div className="relative flex aspect-square items-center justify-center bg-white p-4">
+            <Image
+              src={product.imageUrl}
+              alt={product.name}
+              fill
+              sizes="(min-width: 1280px) 240px, (min-width: 1024px) 32vw, (min-width: 768px) 33vw, 50vw"
+              className="object-contain p-4 transition-transform duration-300 group-hover:scale-105"
+            />
 
-          {/* Discount badge */}
-          {productHasDiscount && (
-            <span className="absolute left-2 top-2 rounded-md bg-accent px-2 py-0.5 text-[10px] font-bold text-accent-foreground">
-              -{getDiscountPercent(product)}%
-            </span>
-          )}
-
-          {/* Out of stock overlay */}
-          {isOutOfStock && (
-            <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-[1px]">
-              <span className="rounded-md bg-foreground/80 px-3 py-1 text-xs font-bold text-white">
-                {labels.outOfStock}
+            {/* Discount badge */}
+            {productHasDiscount && (
+              <span className="absolute left-2 top-2 rounded-md bg-accent px-2 py-0.5 text-[10px] font-bold text-accent-foreground">
+                -{getDiscountPercent(product)}%
               </span>
-            </div>
-          )}
-        </div>
+            )}
+
+            {/* Out of stock overlay */}
+            {isOutOfStock && (
+              <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-[1px]">
+                <span className="rounded-md bg-foreground/80 px-3 py-1 text-xs font-bold text-white">
+                  {labels.outOfStock}
+                </span>
+              </div>
+            )}
+          </div>
+        </ViewTransition>
       </Link>
 
       {/* Product details */}
@@ -94,6 +102,7 @@ function ListingProductCard({
         <h3 className="line-clamp-2 text-sm font-semibold leading-snug text-card-foreground">
           <Link
             href={`/${locale}/catalog/product/${product.id}`}
+            transitionTypes={["nav-forward"]}
             className="transition-colors hover:text-primary"
           >
             {product.name}
@@ -131,7 +140,11 @@ function ListingProductCard({
         )}
 
         {/* View product link — primary CTA */}
-        <Link href={`/${locale}/catalog/product/${product.id}`} className="btn-outline-primary mt-2.5">
+        <Link
+          href={`/${locale}/catalog/product/${product.id}`}
+          transitionTypes={["nav-forward"]}
+          className="btn-outline-primary mt-2.5"
+        >
           {labels.viewProduct}
         </Link>
       </div>

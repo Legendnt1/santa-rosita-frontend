@@ -99,6 +99,7 @@ export function CategorySection({
 
           <Link
             href={`/${locale}/catalog/${category.slug}`}
+            transitionTypes={["nav-forward"]}
             className={`${styles.button} group/btn inline-flex w-fit items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold shadow-sm transition-all duration-200 hover:shadow-md active:scale-[0.98]`}
           >
             <span>{labels.searchButton}</span>

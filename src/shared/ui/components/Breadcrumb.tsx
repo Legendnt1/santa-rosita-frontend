@@ -42,6 +42,7 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
               {item.href && !isLast ? (
                 <Link
                   href={item.href}
+                  transitionTypes={["nav-back"]}
                   className="transition-colors hover:text-primary"
                 >
                   {item.label}

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import type { Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { catalogRepository } from "@/modules/catalog/infrastructure/catalog-repository.instance";
+import { DirectionalTransition } from "@/shared/ui/components/DirectionalTransition";
 import { Icon } from "@/shared/ui/components/Icon";
 import { interpolate } from "@/shared/utils/template";
 
@@ -66,7 +67,7 @@ export default async function CatalogIndexPage({ params }: CatalogIndexPageProps
   ]);
 
   return (
-    <>
+    <DirectionalTransition>
       {/* Header */}
       <div className="mb-6 sm:mb-8">
         <h1 className="text-2xl font-extrabold text-foreground sm:text-3xl">
@@ -87,7 +88,8 @@ export default async function CatalogIndexPage({ params }: CatalogIndexPageProps
             <Link
               key={category.id}
               href={`/${locale}/catalog/${category.slug}`}
-              className={`card-interactive group flex flex-col gap-3 p-5 animate-fade-up ${styles.card}`}
+              transitionTypes={["nav-forward"]}
+              className={`card-interactive group flex flex-col gap-3 p-5 animate-fade-in-up ${styles.card}`}
             >
               {/* Content */}
               <div className="flex flex-1 flex-col gap-1.5">
@@ -108,6 +110,6 @@ export default async function CatalogIndexPage({ params }: CatalogIndexPageProps
           );
         })}
       </div>
-    </>
+    </DirectionalTransition>
   );
 }

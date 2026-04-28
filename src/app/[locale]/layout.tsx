@@ -6,6 +6,7 @@ import { locales, type Locale } from '@/i18n/config';
 import { getDictionary } from '@/i18n/getDictionary';
 import { Footer } from '@/shared/ui/components/Footer';
 import { Navbar } from '@/shared/ui/components/Navbar';
+import { SpriteSheet } from '@/shared/ui/components/SpriteSheet';
 import '../globals.css';
 
 /**
@@ -79,6 +80,10 @@ export default async function LocaleLayout({
       suppressHydrationWarning
     >
       <body className="flex min-h-screen flex-col bg-background font-sans text-foreground antialiased">
+        {/* Inlined icon sprite — every <Icon> references symbols via a
+            same-document fragment, so no HTTP request is ever made for
+            icons.svg, even on the very first navigation. */}
+        <SpriteSheet />
         <Navbar dict={dict} locale={locale} />
         <div className="flex flex-1 flex-col">{children}</div>
         <Footer locale={locale} dict={dict.footer} storeName={dict.pdp.storeName} />

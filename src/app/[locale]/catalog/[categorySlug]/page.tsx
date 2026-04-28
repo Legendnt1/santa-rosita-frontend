@@ -7,9 +7,10 @@ import { QP, VALID_SORTS } from '@/shared/config/catalog-query-params';
 import { ResultsHeader } from '@/shared/ui/components/ResultsHeader';
 import { FilterSidebar } from '@/shared/ui/components/FilterSidebar';
 import { ProductGrid } from '@/shared/ui/components/ProductGrid';
+import { DirectionalTransition } from '@/shared/ui/components/DirectionalTransition';
 import { interpolate } from '@/shared/utils/template';
 import { notFound } from 'next/navigation';
-import { Suspense } from 'react';
+import { Suspense, ViewTransition } from 'react';
 
 /**
  * Parses and validates the URL search params into a strongly-typed FilterCriteria.
@@ -265,13 +266,23 @@ export default async function ProductListingPage({ params, searchParams }: Produ
   const filters = parseSearchParams(resolvedSearchParams, categorySlug);
 
   return (
-    <Suspense fallback={<ProductGridSkeleton />}>
-      <FilteredCatalog
-        locale={locale}
-        categorySlug={categorySlug}
-        filters={filters}
-        dict={dict}
-      />
-    </Suspense>
+    <DirectionalTransition>
+      <Suspense
+        fallback={
+          <ViewTransition exit="slide-down">
+            <ProductGridSkeleton />
+          </ViewTransition>
+        }
+      >
+        <ViewTransition enter="slide-up" default="none">
+          <FilteredCatalog
+            locale={locale}
+            categorySlug={categorySlug}
+            filters={filters}
+            dict={dict}
+          />
+        </ViewTransition>
+      </Suspense>
+    </DirectionalTransition>
   );
 }

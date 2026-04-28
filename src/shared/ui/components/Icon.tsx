@@ -1,5 +1,4 @@
 import { forwardRef, memo, SVGProps } from "react";
-import { SPRITE_ICONS_PATH } from "@/shared/utils/paths";
 
 /** Union type of all available icons in public/assets/icons/icons.svg 
  * Add new icon IDs here to maintain strict type safety across the app.
@@ -52,9 +51,15 @@ interface IconProps extends Omit<SVGProps<SVGSVGElement>, "name"> {
 }
 
 /**
- * Performance-optimized Icon component using SVG sprites.
- * Memoized to prevent re-renders in large product lists.
- * * @example
+ * Performance-optimized Icon component referencing the inline SVG sprite.
+ *
+ * @remarks
+ * The sprite is rendered once at the top of `<body>` by `<SpriteSheet />`
+ * in the root layout. Each `<use href="#name">` resolves to a same-document
+ * `<symbol>`, so no HTTP request is ever made for icons — not even a
+ * 304-revalidation. Memoized to prevent re-renders in large product lists.
+ *
+ * @example
  * <Icon name="star-full" className="size-4 text-accent" label="4 stars" />
  */
 export const Icon = memo(
@@ -71,9 +76,9 @@ export const Icon = memo(
           aria-label={label}
           role={isDecorative ? undefined : "img"}
           // Ensures the icon inherits the current text color by default
-          fill="currentColor" 
+          fill="currentColor"
         >
-          <use href={`${SPRITE_ICONS_PATH}#${name}`} />
+          <use href={`#${name}`} />
         </svg>
       );
     }

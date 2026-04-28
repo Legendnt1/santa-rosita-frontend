@@ -22,7 +22,7 @@ export default async function LoginPage({ params }: LoginPageProps) {
   const t = dict.auth;
 
   return (
-    <div className="w-full max-w-sm animate-fade-up">
+    <div className="w-full max-w-sm animate-fade-in-up">
       <div className="card p-6 sm:p-8">
         <div className="mb-6 text-center">
           <h1 className="text-xl font-extrabold text-card-foreground sm:text-2xl">

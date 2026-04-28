@@ -2,6 +2,7 @@ import type { Locale } from '@/i18n/config';
 import { getDictionary } from '@/i18n/getDictionary';
 import { catalogRepository } from '@/modules/catalog/infrastructure/catalog-repository.instance';
 import { CategorySection } from '@/shared/ui/components/CategorySection';
+import { DirectionalTransition } from '@/shared/ui/components/DirectionalTransition';
 
 /**
  * Home page for the shop.
@@ -32,27 +33,29 @@ export default async function ShopHomePage({ params }: ShopHomePageProps) {
   );
 
   return (
-    <main className="px-3 pb-8 sm:px-4 sm:pb-12">
-      {categoryProducts.map(({ category, products }) => {
-        const catalogEntry = dict.catalog[category.slug];
+    <DirectionalTransition>
+      <main className="px-3 pb-8 sm:px-4 sm:pb-12">
+        {categoryProducts.map(({ category, products }) => {
+          const catalogEntry = dict.catalog[category.slug];
 
-        return (
-          <CategorySection
-            key={category.id}
-            category={category}
-            products={products}
-            locale={locale}
-            labels={{
-              title: catalogEntry?.title ?? category.slug,
-              description: catalogEntry?.description ?? '',
-              searchButton: dict.common.searchButton,
-              inStock: dict.common.inStock,
-              lowStock: dict.common.lowStock,
-              outOfStock: dict.common.outOfStock,
-            }}
-          />
-        );
-      })}
-    </main>
+          return (
+            <CategorySection
+              key={category.id}
+              category={category}
+              products={products}
+              locale={locale}
+              labels={{
+                title: catalogEntry?.title ?? category.slug,
+                description: catalogEntry?.description ?? '',
+                searchButton: dict.common.searchButton,
+                inStock: dict.common.inStock,
+                lowStock: dict.common.lowStock,
+                outOfStock: dict.common.outOfStock,
+              }}
+            />
+          );
+        })}
+      </main>
+    </DirectionalTransition>
   );
 }

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ViewTransition } from "react";
 import type { Product } from "@/modules/catalog/domain/entities/Product";
 import { formatPrice } from "@/shared/utils/price";
 
@@ -58,17 +59,20 @@ export function ProductCard({ product, locale, labels }: ProductCardProps) {
   return (
     <Link
       href={`/${locale}/catalog/product/${product.id}`}
-      className="group animate-fade-up flex w-full shrink-0 flex-col rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:w-44 md:w-48"
+      transitionTypes={["nav-forward"]}
+      className="group animate-fade-in-up flex w-full shrink-0 flex-col rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:w-44 md:w-48"
     >
-      <div className="product-image-tile p-3 sm:p-4">
-        <Image
-          src={product.imageUrl}
-          alt={product.name}
-          fill
-          sizes="(min-width: 768px) 192px, (min-width: 640px) 176px, 50vw"
-          className="object-contain p-3 transition-transform duration-300 group-hover:scale-[1.04] sm:p-4"
-        />
-      </div>
+      <ViewTransition name={`product-image-${product.id}`} share="morph" default="none">
+        <div className="product-image-tile p-3 sm:p-4">
+          <Image
+            src={product.imageUrl}
+            alt={product.name}
+            fill
+            sizes="(min-width: 768px) 192px, (min-width: 640px) 176px, 50vw"
+            className="object-contain p-3 transition-transform duration-300 group-hover:scale-[1.04] sm:p-4"
+          />
+        </div>
+      </ViewTransition>
 
       <div className="mt-2.5 flex flex-1 flex-col gap-1.5 px-0.5 sm:px-1">
         <p className="line-clamp-2 min-h-[2.5em] text-xs font-semibold leading-snug text-foreground sm:text-[13px]">

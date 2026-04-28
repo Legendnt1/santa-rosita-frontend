@@ -6,6 +6,7 @@ import { catalogRepository } from '@/modules/catalog/infrastructure/catalog-repo
 import { ImageGallery } from '@/shared/ui/components/ImageGallery';
 import { BuyBox } from '@/shared/ui/components/BuyBox';
 import { Breadcrumb, type BreadcrumbItem } from '@/shared/ui/components/Breadcrumb';
+import { DirectionalTransition } from '@/shared/ui/components/DirectionalTransition';
 import {
   getEffectivePrice,
   hasDiscount as checkDiscount,
@@ -115,7 +116,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
   ];
 
   return (
-    <>
+    <DirectionalTransition>
       {/* ── Breadcrumbs ──────────────────────────────────── */}
       <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <Breadcrumb items={breadcrumbItems} />
@@ -126,7 +127,12 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
 
           {/* ─── Left: Image Gallery ───────────────────────── */}
           <div className="w-full lg:w-[42%] xl:w-[45%]">
-            <ImageGallery images={product.images} productName={product.name} viewImageLabel={pdp.viewImage} />
+            <ImageGallery
+              images={product.images}
+              productName={product.name}
+              productId={product.id}
+              viewImageLabel={pdp.viewImage}
+            />
           </div>
 
           {/* ─── Center: Product Info ──────────────────────── */}
@@ -225,6 +231,6 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
             />
           </div>
       </div>
-    </>
+    </DirectionalTransition>
   );
 }

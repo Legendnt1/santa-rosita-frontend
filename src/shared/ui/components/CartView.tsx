@@ -50,7 +50,7 @@ export function CartView({ locale, labels }: CartViewProps) {
 
   if (items.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center gap-5 py-24 text-center animate-fade-up">
+      <div className="flex flex-col items-center justify-center gap-5 py-24 text-center animate-fade-in-up">
         <Icon name="shopping-cart" className="h-16 w-16 text-foreground-muted/40" />
         <div>
           <p className="text-xl font-bold text-card-foreground">{labels.empty}</p>
@@ -91,7 +91,7 @@ export function CartView({ locale, labels }: CartViewProps) {
             const effectivePrice = item.discountPrice ?? item.price;
             const itemTotal = effectivePrice * item.quantity;
             return (
-              <div key={item.productId} className="card flex gap-3 p-3 sm:gap-4 sm:p-4 animate-fade-up">
+              <div key={item.productId} className="card flex gap-3 p-3 sm:gap-4 sm:p-4 animate-fade-in-up">
                 {/* Image */}
                 <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg border border-border/40 bg-white sm:h-24 sm:w-24">
                   <Image
@@ -172,7 +172,7 @@ export function CartView({ locale, labels }: CartViewProps) {
         </div>
 
         {/* ── Order summary ──────────────────────────────── */}
-        <div className="card p-4 sm:p-5 lg:w-72 lg:shrink-0 xl:w-80 animate-fade-up">
+        <div className="card p-4 sm:p-5 lg:w-72 lg:shrink-0 xl:w-80 animate-fade-in-up">
           <h2 className="mb-4 text-base font-bold text-card-foreground">
             {labels.orderSummary}
           </h2>

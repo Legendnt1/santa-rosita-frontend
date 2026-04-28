@@ -43,7 +43,10 @@ export async function Navbar({ dict, locale }: NavbarProps) {
   ]);
 
   return (
-    <header className="sticky top-0 z-50 w-full shadow-sm">
+    <header
+      className="sticky top-0 z-50 w-full shadow-sm"
+      style={{ viewTransitionName: "persistent-nav" }}
+    >
       {/* ── Upper bar ──────────────────────────────────────── */}
       <div className="bg-navbar-bg">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-3 px-3 py-2 sm:px-4 sm:py-3 md:flex-nowrap md:gap-6">

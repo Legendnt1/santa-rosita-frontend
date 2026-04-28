@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, ViewTransition } from "react";
 
 /**
  * Props for the ImageGallery client component.
@@ -11,6 +11,9 @@ interface ImageGalleryProps {
   images: readonly string[];
   /** Product name used as alt text */
   productName: string;
+  /** Product id — used to build the shared `view-transition-name` so the
+   *  grid card image morphs into the PDP main image during navigation. */
+  productId: string;
   /** Localized label template for thumbnail buttons, e.g. "View image {index}" */
   viewImageLabel: string;
 }
@@ -25,7 +28,12 @@ interface ImageGalleryProps {
  * Client component — manages selected-image state locally.
  * Main image is marked `priority` because it is the PDP LCP candidate.
  */
-export function ImageGallery({ images, productName, viewImageLabel }: ImageGalleryProps) {
+export function ImageGallery({
+  images,
+  productName,
+  productId,
+  viewImageLabel,
+}: ImageGalleryProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const mainImage = images[selectedIndex] ?? images[0];
 
@@ -59,17 +67,19 @@ export function ImageGallery({ images, productName, viewImageLabel }: ImageGalle
       </div>
 
       {/* ── Main image ───────────────────────────────────── */}
-      <div className="relative flex flex-1 items-center justify-center rounded-xl border border-border/30 bg-white p-4 sm:p-8 min-h-85 sm:min-h-110">
-        <Image
-          key={mainImage}
-          src={mainImage}
-          alt={productName}
-          fill
-          priority
-          sizes="(min-width: 1280px) 560px, (min-width: 1024px) 42vw, 100vw"
-          className="animate-fade-in object-contain p-4 sm:p-8"
-        />
-      </div>
+      <ViewTransition name={`product-image-${productId}`} share="morph">
+        <div className="relative flex flex-1 items-center justify-center rounded-xl border border-border/30 bg-white p-4 sm:p-8 min-h-85 sm:min-h-110">
+          <Image
+            key={mainImage}
+            src={mainImage}
+            alt={productName}
+            fill
+            priority
+            sizes="(min-width: 1280px) 560px, (min-width: 1024px) 42vw, 100vw"
+            className="animate-fade-in object-contain p-4 sm:p-8"
+          />
+        </div>
+      </ViewTransition>
     </div>
   );
 }
