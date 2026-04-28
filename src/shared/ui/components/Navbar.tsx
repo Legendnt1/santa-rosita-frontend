@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { cookies } from "next/headers";
 import type { Dictionary } from "@/i18n/getDictionary";
 import { getAuthToken } from "@/shared/lib/auth";
 import { authRepository } from "@/modules/auth/infrastructure/auth-repository.instance";
@@ -37,6 +38,14 @@ export async function Navbar({ dict, locale }: NavbarProps) {
     currentUser = null;
   }
 
+  // Theme cookie — passed to <ThemeToggle> as initial state so its rendered
+  // icon/aria-label match the html class applied in the layout. Without this,
+  // the toggle starts as "light" on the client and flickers to "dark" after
+  // the first effect when the user actually has a dark cookie.
+  const jar = await cookies();
+  const themeCookie = jar.get("theme")?.value;
+  const initialTheme: "light" | "dark" = themeCookie === "dark" ? "dark" : "light";
+
   const [categories, brands] = await Promise.all([
     catalogRepository.getCategories(),
     catalogRepository.getAllBrands(),
@@ -68,7 +77,10 @@ export async function Navbar({ dict, locale }: NavbarProps) {
             <LanguageSwitcher locale={locale} labels={{ changeLanguage: dict.navbar.changeLanguage }} />
 
             {/* Theme toggle (client component) */}
-            <ThemeToggle labels={{ lightMode: dict.navbar.themeLight, darkMode: dict.navbar.themeDark }} />
+            <ThemeToggle
+              initialTheme={initialTheme}
+              labels={{ lightMode: dict.navbar.themeLight, darkMode: dict.navbar.themeDark }}
+            />
 
             {/* User menu — shows sign in/up or logged-in user with dropdown */}
             <UserMenu

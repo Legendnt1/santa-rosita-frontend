@@ -112,6 +112,17 @@ export function FilterSidebar({
   // Hover state for the interactive star rating
   const [hoverRating, setHoverRating] = useState(0);
 
+  // Reset open state on bfcache restore — without this, hitting browser back
+  // can leave the full-viewport mobile overlay frozen open, with its `inset-0`
+  // backdrop silently swallowing every click on the page below.
+  useEffect(() => {
+    const onPageShow = (e: PageTransitionEvent) => {
+      if (e.persisted) setMobileOpen(false);
+    };
+    window.addEventListener("pageshow", onPageShow);
+    return () => window.removeEventListener("pageshow", onPageShow);
+  }, []);
+
   /**
    * Builds a new URL with updated query params and navigates to it.
    * Wraps navigation in startTransition so the current UI stays responsive

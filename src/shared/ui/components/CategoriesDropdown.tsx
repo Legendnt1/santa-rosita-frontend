@@ -103,12 +103,16 @@ export function CategoriesNav({
           />
         </button>
 
-        <a href="#" className="shrink-0 transition-colors hover:text-primary">
+        {/* Placeholders until the "new products" / "discounts" routes ship.
+            Rendered as inert <span>s instead of `<a href="#">` — the latter
+            would scroll to top and (worse) push a no-op history entry that
+            puts the page into bfcache, killing live React event listeners. */}
+        <span className="shrink-0 cursor-not-allowed opacity-60">
           {labels.newProducts}
-        </a>
-        <a href="#" className="shrink-0 transition-colors hover:text-primary">
+        </span>
+        <span className="shrink-0 cursor-not-allowed opacity-60">
           {labels.discounts}
-        </a>
+        </span>
       </div>
 
       {/* ── Mega-menu panel + backdrop ────────────────────────

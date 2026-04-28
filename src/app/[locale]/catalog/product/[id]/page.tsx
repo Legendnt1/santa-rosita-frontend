@@ -86,17 +86,22 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
   const { locale, id } = await params;
 
   // ── Parallel data fetching ────────────────────────────────
+  // All three calls fan out in parallel: dictionary load, product lookup, and
+  // category list (needed for the breadcrumb). `getCategories` was previously
+  // awaited sequentially after the Promise.all, adding one round-trip to TTFB
+  // for no reason — every read goes through React.cache so duplicate requests
+  // from the Navbar de-dupe automatically.
   const useCase = new GetProductById(catalogRepository);
 
-  const [dict, product] = await Promise.all([
+  const [dict, product, categories] = await Promise.all([
     getDictionary(locale),
     useCase.execute(id),
+    catalogRepository.getCategories(),
   ]);
 
   if (!product) notFound();
 
   // ── Resolve category for breadcrumb ───────────────────────
-  const categories = await catalogRepository.getCategories();
   const category = categories.find((c: { id: string }) => c.id === product.categoryId);
   const categoryTitle = category
     ? (dict.catalog[category.slug]?.title ?? category.slug)
@@ -142,12 +147,13 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
               {product.name}
             </h1>
 
-            {/* Brand */}
+            {/* Brand — rendered as text until the brand landing page lands.
+                Using `<a href="#">` would trigger a full page reload (the URL
+                changes, bfcache freezes the page, React event listeners die),
+                so we keep it as a non-navigating styled span for now. */}
             <p className="mt-1 text-sm text-foreground-muted">
               <span>{pdp.brand}: </span>
-              <a href="#" className="text-primary hover:underline">
-                {product.brand}
-              </a>
+              <span className="font-medium text-primary">{product.brand}</span>
             </p>
 
             {/* Rating */}

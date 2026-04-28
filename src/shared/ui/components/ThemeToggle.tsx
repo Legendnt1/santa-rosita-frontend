@@ -33,21 +33,25 @@ function persistTheme(value: "light" | "dark") {
  * set and subsequent SSR renders are theme-aware immediately.
  */
 interface ThemeToggleProps {
+  /** Theme resolved server-side from the cookie. Used as the initial state so
+   *  the icon and aria-label match the SSR-applied html class on first paint —
+   *  no hydration flicker between the moon and sun glyphs. */
+  initialTheme: "light" | "dark";
   labels: {
     lightMode: string;
     darkMode: string;
   };
 }
 
-export function ThemeToggle({ labels }: ThemeToggleProps) {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+export function ThemeToggle({ initialTheme, labels }: ThemeToggleProps) {
+  const [theme, setTheme] = useState<"light" | "dark">(initialTheme);
 
-  /* Sync local state with cookie / system preference after hydration */
+  /* On first-visit (no cookie sent to server) the server falls back to "light"
+     while CSS may still resolve dark via `prefers-color-scheme`. Sync once
+     after hydration so the icon matches what the user actually sees. */
   useEffect(() => {
-    const stored = readThemeCookie() ?? localStorage.getItem(THEME_COOKIE);
-    if (stored === "dark" || stored === "light") {
-      setTheme(stored);
-    } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    if (readThemeCookie()) return; // server already had ground truth
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
       setTheme("dark");
     }
   }, []);
